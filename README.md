@@ -1,6 +1,6 @@
 <div align="center">
 
-<!-- Ganti dengan logo aplikasi -->
+<!-- Ganti placeholder dengan logo resmi SustainAI -->
 <img src="https://placehold.co/180x180/16a34a/ffffff?text=SustainAI" alt="SustainAI Logo" width="180">
 
 # 🌿 SustainAI
@@ -11,7 +11,7 @@
 
 Platform asisten keberlanjutan berbasis AI untuk membantu masyarakat mengenali sampah, memahami indikasi penyakit tanaman, dan mengambil tindakan yang lebih ramah lingkungan.
 
-<!-- PLACEHOLDER DEMO APLIKASI: ganti DEMO_URL dengan URL demo -->
+<!-- Ganti DEMO_URL dengan URL aplikasi yang telah dipublikasikan -->
 
 <a href="DEMO_URL"><img src="https://placehold.co/960x540/14532d/ffffff?text=SustainAI+Application+Demo" alt="SustainAI Demo" width="90%"></a>
 
@@ -29,78 +29,98 @@ Platform asisten keberlanjutan berbasis AI untuk membantu masyarakat mengenali s
 
 ---
 
-## 📌 Tentang Proyek
+## 📌 Tentang SustainAI
 
-**SustainAI** adalah aplikasi web yang memanfaatkan AI multimodal untuk menganalisis gambar sampah dan tanaman yang menunjukkan gejala gangguan. Hasil analisis disajikan secara terstruktur agar pengguna memahami objek dan memperoleh rekomendasi tindakan.
+**SustainAI** adalah aplikasi web yang memanfaatkan AI multimodal untuk menganalisis gambar sampah dan tanaman yang menunjukkan indikasi gangguan. Hasil analisis disajikan secara terstruktur agar pengguna dapat memahami objek yang dianalisis dan memperoleh rekomendasi tindakan.
 
-SustainAI memiliki dua modul:
+SustainAI memiliki dua modul utama:
 
-- **Waste Analyzer** — mengenali dan mengklasifikasikan sampah, menjelaskan dampak lingkungan, serta memberikan tips daur ulang dan informasi bank sampah.
-- **Plant Disease Analyzer** — mengidentifikasi tanaman dan indikasi hama atau penyakit berdasarkan gambar, disertai gejala, kemungkinan penyebab, rekomendasi perawatan, dan pencegahan.
+- **Waste Analyzer** — Mengidentifikasi dan mengklasifikasikan sampah, menjelaskan dampak lingkungannya, serta memberikan tips daur ulang dan informasi bank sampah.
+- **Plant Disease Analyzer** — Mengidentifikasi tanaman dan indikasi hama atau penyakit berdasarkan gambar, disertai informasi gejala, kemungkinan penyebab, rekomendasi perawatan, dan pencegahan.
 
-SustainAI menghubungkan proses **identifikasi → pemahaman → rekomendasi → tindakan**. Informasi harga dan lokasi bank sampah untuk demo dapat menggunakan dataset contoh, bukan data real-time.
+Alur yang ingin dihadirkan SustainAI adalah **identifikasi → pemahaman → rekomendasi → tindakan**. Informasi harga dan lokasi bank sampah pada versi demo dapat menggunakan dataset contoh dan bukan merupakan data real-time.
 
-## 💡 Filosofi Nama
+### Filosofi Nama
 
-**SustainAI** menggabungkan kata **Sustain** (keberlanjutan dan pelestarian lingkungan) dengan **AI** (_Artificial Intelligence_). Nama ini merepresentasikan pemanfaatan kecerdasan buatan untuk membantu masyarakat mengambil keputusan yang lebih berkelanjutan. SustainAI bukan sekadar pengenal gambar, melainkan asisten yang mengarahkan pengguna menuju tindakan lingkungan yang tepat.
+Nama **SustainAI** menggabungkan kata _Sustain_ (keberlanjutan dan pelestarian lingkungan) dengan _AI_ (_Artificial Intelligence_). Nama ini merepresentasikan pemanfaatan kecerdasan buatan untuk membantu masyarakat mengambil keputusan yang lebih berkelanjutan. SustainAI bukan sekadar pengenal gambar, tetapi juga asisten yang mengarahkan pengguna untuk memahami hasil identifikasi dan menentukan tindakan selanjutnya.
 
-## 🎯 Masalah yang Diangkat
+## 💡 Latar Belakang dan Permasalahan
 
-Informasi pengelolaan sampah dan kesehatan tanaman tersebar di berbagai sumber. Masyarakat dapat kesulitan untuk:
+Informasi mengenai pengelolaan sampah dan kesehatan tanaman tersebar di berbagai sumber. Masyarakat dapat mengalami kesulitan untuk:
 
-- Mengidentifikasi jenis sampah dan menentukan pengelolaan yang tepat.
-- Mengetahui sampah yang dapat didaur ulang atau disalurkan ke bank sampah.
+- Mengidentifikasi jenis sampah dan menentukan cara pengelolaan yang tepat.
+- Mengetahui sampah yang berpotensi didaur ulang atau disalurkan ke bank sampah.
 - Menemukan informasi harga dan lokasi bank sampah yang relevan.
-- Mengenali gejala awal hama atau penyakit tanaman.
+- Mengenali indikasi awal hama atau penyakit tanaman.
 - Menentukan langkah perawatan awal berdasarkan kondisi tanaman.
 
-Akibatnya, sampah yang masih berpotensi dimanfaatkan dapat tercampur atau berakhir sebagai limbah, sementara gangguan tanaman dapat terlambat ditangani.
+Kondisi tersebut dapat menyebabkan sampah yang masih berpotensi dimanfaatkan tercampur atau berakhir sebagai limbah. Di sisi lain, gangguan tanaman berisiko terlambat ditangani karena kurangnya informasi awal yang mudah diakses.
 
-## 🧭 Solusi yang Ditawarkan
+## 🎯 Solusi
 
-SustainAI menyediakan analisis gambar melalui antarmuka web sederhana. Pengguna mengambil foto atau mengunggah gambar, memilih modul, lalu melihat hasil dalam tampilan terstruktur.
+SustainAI menyediakan analisis gambar melalui antarmuka web. Pengguna dapat mengambil foto atau mengunggah gambar, memilih modul analisis, kemudian melihat hasilnya dalam tampilan terstruktur.
 
-Backend menggunakan instruksi khusus (_hardcoded prompt_) untuk mengarahkan model menghasilkan JSON sesuai skema modul. Respons divalidasi sebelum dikirim ke frontend untuk ditampilkan sebagai informasi yang mudah dipahami.
+Backend menggunakan instruksi khusus (_hardcoded prompt_) sesuai modul untuk mengarahkan Gemini API menghasilkan respons JSON. Backend kemudian memvalidasi struktur respons sebelum mengirimkan hasil kepada frontend untuk ditampilkan.
 
-> **Catatan:** Analisis AI bersifat indikatif dan dapat keliru. Hasil analisis tanaman bukan pengganti diagnosis ahli. Harga dan lokasi bank sampah perlu dikonfirmasi kepada pengelola terkait.
+> **Batasan informasi:** Hasil analisis AI bersifat indikatif dan dapat keliru. Analisis tanaman bukan pengganti diagnosis ahli. Informasi harga dan lokasi bank sampah pada versi demo perlu dikonfirmasi kepada pengelola terkait.
 
 ## 👥 Target Pengguna
 
-| Pengguna              | Kebutuhan                                           |
+| Target pengguna       | Kebutuhan                                           |
 | --------------------- | --------------------------------------------------- |
 | Masyarakat umum       | Memilah dan mengelola sampah rumah tangga.          |
 | Pengguna bank sampah  | Mengetahui jenis sampah yang berpotensi disalurkan. |
 | Petani                | Mendapatkan indikasi awal gangguan tanaman.         |
 | Pelajar dan mahasiswa | Mengakses edukasi lingkungan berbasis teknologi.    |
 
-## ✨ Fitur Utama
-
-### 🌱 Plant Disease Analyzer
-
-- Upload atau mengambil foto tanaman.
-- Analisis Gambar sampah berbasis AI.
-- Menampilkan nama tanaman.
-- Menampilkan indikasi hama atau penyakit.
-- Menjelaskan gejala visual dan kemungkinan penyebab.
-- Memberikan rekomendasi perawatan dan tips pencegahan.
-- Menampilkan potensi dampak terhadap tanaman.
+## ✨ Fitur
 
 ### ♻️ Waste Analyzer
 
-- Upload atau mengambil foto sampah.
-- Analisis dan klasifikasi sampah berbasis AI.
+- Mengunggah gambar atau mengambil foto sampah secara langsung.
+- Menganalisis dan mengklasifikasikan sampah menggunakan AI.
 - Menampilkan nama dan kategori sampah.
 - Menjelaskan dampak lingkungan.
-- Memberikan _recycling tips_.
-- Menampilkan harga sampah berdasarkan dataset yang tersedia.
-- Menampilkan lokasi bank sampah.
+- Memberikan _recycling tips_ atau saran daur ulang.
+- Menampilkan informasi harga berdasarkan dataset yang tersedia.
+- Menampilkan informasi lokasi bank sampah.
+
+### 🌱 Plant Disease Analyzer
+
+- Mengunggah gambar atau mengambil foto tanaman secara langsung.
+- Mengidentifikasi tanaman menggunakan AI.
+- Menampilkan indikasi hama atau penyakit.
+- Menjelaskan gejala visual dan kemungkinan penyebab.
+- Memberikan rekomendasi perawatan dan tips pencegahan.
+- Menampilkan potensi dampak gangguan terhadap tanaman.
+
+### 📊 Dashboard dan Manajemen Akun
+
+Dashboard menyediakan lima halaman yang dapat diakses melalui sidebar:
+
+| Halaman            | Fungsi                                                                     |
+| ------------------ | -------------------------------------------------------------------------- |
+| **Overview**       | Menampilkan ringkasan aktivitas, statistik analisis, dan visualisasi data. |
+| **Waste Analyzer** | Menjalankan analisis gambar sampah.                                        |
+| **Plant Analyzer** | Menjalankan analisis gambar tanaman.                                       |
+| **Riwayat Saya**   | Menampilkan catatan hasil analisis yang tersimpan.                         |
+| **Setting**        | Mengelola nama, email, foto profil, dan password akun.                     |
+
+Informasi yang ditampilkan pada halaman **Overview** meliputi:
+
+- Total Analisis.
+- Sampah Dianalisis.
+- Tanaman Dianalisis.
+- Sampah Berpotensi Didaur Ulang.
+- Grafik garis **Fluktuasi Harga Sampah Berdasarkan Jenis**.
+- Grafik lingkaran **Komposisi Jenis Sampah yang Dianalisis**.
 
 ## 🚀 Rencana Pengembangan
 
 - Integrasi harga bank sampah secara real-time.
 - Pencarian bank sampah berdasarkan lokasi pengguna dan jarak.
-- Verifikasi berkala jenis sampah yang diterima dan harga.
-- Riwayat analisis sampah dan tanaman.
+- Verifikasi berkala terhadap jenis sampah yang diterima dan harga.
+- Pengembangan riwayat analisis sampah dan tanaman.
 - Dashboard statistik aktivitas pengelolaan sampah.
 - Estimasi jejak karbon dengan metodologi dan faktor emisi tervalidasi.
 - Dukungan lebih banyak jenis sampah, tanaman, dan bahasa.
@@ -109,7 +129,7 @@ Backend menggunakan instruksi khusus (_hardcoded prompt_) untuk mengarahkan mode
 
 ## 🖼️ Tampilan Aplikasi
 
-<!-- Ganti placeholder dengan screenshot aplikasi, misalnya:
+<!-- Ganti gambar placeholder dengan screenshot aktual, misalnya:
 <img src="docs/images/homepage.png" alt="SustainAI Homepage" width="85%">
 -->
 
@@ -118,19 +138,19 @@ Backend menggunakan instruksi khusus (_hardcoded prompt_) untuk mengarahkan mode
 |                                                        Homepage                                                         |                                                           Waste Analyzer                                                            |
 | :---------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------: |
 | <img src="https://placehold.co/600x340/f0fdf4/166534?text=Homepage+Screenshot" alt="Homepage placeholder" width="100%"> | <img src="https://placehold.co/600x340/f0fdf4/166534?text=Waste+Analyzer+Screenshot" alt="Waste Analyzer placeholder" width="100%"> |
-|                                                   screenshot homepage                                                   |                                                      screenshot Waste Analyzer                                                      |
+|                                                  _Screenshot homepage_                                                  |                                                     _Screenshot Waste Analyzer_                                                     |
 
 |                                                       Plant Disease Analyzer                                                        |                                                            Analysis Result                                                            |
 | :---------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------: |
 | <img src="https://placehold.co/600x340/f0fdf4/166534?text=Plant+Analyzer+Screenshot" alt="Plant Analyzer placeholder" width="100%"> | <img src="https://placehold.co/600x340/f0fdf4/166534?text=Analysis+Result+Screenshot" alt="Analysis Result placeholder" width="100%"> |
-|                                                      screenshot Plant Analyzer                                                      |                                                       screenshot hasil analisis                                                       |
+|                                                     _Screenshot Plant Analyzer_                                                     |                                                      _Screenshot hasil analisis_                                                      |
 
 </div>
 
 ## 🎬 Demo Aplikasi
 
-<!-- PLACEHOLDER VIDEO: ganti DEMO_VIDEO_URL.
-Untuk GIF repository, contoh: <img src="docs/demo.gif" alt="SustainAI demo" width="90%">
+<!-- Ganti DEMO_VIDEO_URL dengan URL video demo. Untuk GIF repository:
+<img src="docs/demo.gif" alt="SustainAI demo" width="90%">
 -->
 
 <div align="center">
@@ -141,20 +161,22 @@ Untuk GIF repository, contoh: <img src="docs/demo.gif" alt="SustainAI demo" widt
 
 </div>
 
-## 🧱 Teknologi yang Digunakan
+## 🧱 Teknologi
 
 | Teknologi                                 | Peran                                                |
 | ----------------------------------------- | ---------------------------------------------------- |
-| [Svelte](https://svelte.dev/)             | Pembangunan antarmuka interaktif.                    |
+| [Svelte](https://svelte.dev/)             | Membangun antarmuka pengguna yang interaktif.        |
 | [SvelteKit](https://svelte.dev/docs/kit)  | Full-stack framework, routing, dan server endpoints. |
-| [Tailwind CSS](https://tailwindcss.com/)  | Styling dan UI responsif.                            |
-| [PostgreSQL](https://www.postgresql.org/) | Database relasional.                                 |
-| [Vercel](https://vercel.com/)             | Deployment dan hosting.                              |
-| [Gemini API](https://ai.google.dev/)      | Mesin analisis gambar multimodal berbasis AI.        |
+| [Tailwind CSS](https://tailwindcss.com/)  | Styling dan pembangunan UI responsif.                |
+| [PostgreSQL](https://www.postgresql.org/) | Database relasional untuk menyimpan data aplikasi.   |
+| [Vercel](https://vercel.com/)             | Deployment dan hosting aplikasi.                     |
+| [Gemini API](https://ai.google.dev/)      | Mesin AI multimodal untuk analisis gambar.           |
 
-## 🏗️ Arsitektur Sistem
+## 🏗️ Arsitektur dan Alur Sistem
 
-### 1. Flowchart User Flow Diagram
+Bagian ini menjelaskan perjalanan pengguna, komponen sistem, serta komunikasi antarkomponen. Diagram alur digunakan untuk melihat proses dari sisi pengguna, sedangkan diagram arsitektur dan sequence menjelaskan pemrosesan teknis di baliknya.
+
+### 1. User Flow Diagram
 
 ```mermaid
 flowchart TD
@@ -177,6 +199,7 @@ flowchart TD
     H --> L[Riwayat Saya]
     H --> M[Setting]
 
+
     J --> N[Unggah atau ambil foto sampah]
     K --> O[Unggah atau ambil foto tanaman]
     N --> P[Kirim gambar ke backend SvelteKit]
@@ -195,12 +218,12 @@ flowchart TD
 
     V -- Ya --> Y[Simpan hasil analisis ke PostgreSQL]
     Y --> Z[Kirim hasil analisis ke frontend]
-    Z --> AA[Frontend mengolah JSON dan menampilkan hasil]
+    Z --> AA[Frontend menampilkan hasil analisis]
 
-    AA --> AB{Modul yang dianalisis?}
-    AB -- Sampah --> AC[Ambil dataset referensi bank sampah dari PostgreSQL]
-    AC --> AD[Tampilkan informasi harga dan lokasi bank sampah]
-    AB -- Tanaman --> AE[Tampilkan hasil dan rekomendasi perawatan]
+    AA --> AB{Jenis analisis?}
+    AB -- Sampah --> AC[Ambil dataset referensi bank sampah]
+    AC --> AD[Tampilkan harga dan lokasi bank sampah]
+    AB -- Tanaman --> AE[Tampilkan rekomendasi perawatan]
 
     AD --> AF[Pengguna dapat membuka Riwayat Saya]
     AE --> AF
@@ -208,68 +231,51 @@ flowchart TD
 
 ### 2. Langkah-Langkah User Flow
 
-#### A. Mengakses Aplikasi dan Masuk ke Dashboard
+#### A. Mengakses Aplikasi
 
 1. Pengguna membuka landing page SustainAI.
-2. Untuk menggunakan fitur utama aplikasi, pengguna perlu masuk ke akun terlebih dahulu.
-3. Jika belum memiliki akun, pengguna dapat melakukan registrasi melalui halaman pendaftaran.
-4. Setelah memiliki akun, pengguna melakukan login menggunakan kredensial yang terdaftar.
-5. Jika proses login berhasil, pengguna akan diarahkan ke dashboard.
+2. Untuk menggunakan fitur utama, pengguna perlu masuk ke akun.
+3. Pengguna yang belum memiliki akun dapat melakukan registrasi.
+4. Setelah memiliki akun, pengguna login menggunakan kredensial yang terdaftar.
+5. Jika login berhasil, pengguna diarahkan ke dashboard. Jika gagal, pengguna diminta mencoba kembali.
 
 #### B. Menjelajahi Dashboard
 
-Dashboard menyediakan lima halaman utama yang dapat diakses melalui sidebar:
+Pengguna dapat mengakses lima halaman melalui sidebar:
 
-- **Overview** — Menampilkan ringkasan aktivitas dan informasi kontekstual pengguna, meliputi:
-  - Total Analisis.
-  - Sampah Dianalisis.
-  - Tanaman Dianalisis.
-  - Sampah Berpotensi Didaur Ulang.
-  - Grafik Fluktuasi Harga Sampah Berdasarkan Jenis dalam bentuk diagram garis.
-  - Grafik Komposisi Jenis Sampah yang Dianalisis dalam bentuk diagram lingkaran.
-- **Waste Analyzer** — Halaman untuk mengunggah atau mengambil gambar sampah dan mendapatkan hasil analisis.
+- **Overview** — Menampilkan ringkasan aktivitas, empat indikator utama (Total Analisis, Sampah Dianalisis, Tanaman Dianalisis, dan Sampah Berpotensi Didaur Ulang), grafik fluktuasi harga sampah berdasarkan jenis, serta komposisi jenis sampah yang dianalisis.
+- **Waste Analyzer** — Halaman untuk mengunggah atau mengambil gambar sampah dan memperoleh hasil analisis.
 - **Plant Analyzer** — Halaman untuk mengunggah atau mengambil gambar tanaman guna mengetahui indikasi hama atau penyakit.
-- **Riwayat Saya** — Menampilkan seluruh catatan hasil analisis yang telah tersimpan.
-- **Setting** — Halaman pengaturan akun. Pengguna dapat memperbarui nama, email, foto profil, dan password.
+- **Riwayat Saya** — Menampilkan catatan hasil analisis yang telah tersimpan.
+- **Setting** — Memungkinkan pengguna memperbarui nama, email, foto profil, dan password.
 
-#### C. Melakukan Analisis Sampah atau Tanaman
+#### C. Melakukan Analisis Gambar
 
-1. Pengguna membuka halaman **Waste Analyzer** atau **Plant Analyzer**, sesuai jenis analisis yang ingin dilakukan.
-2. Pengguna mengunggah gambar dari perangkat atau mengambil gambar secara langsung menggunakan kamera.
-3. Frontend mengirimkan gambar ke endpoint backend SvelteKit untuk diproses.
-4. Backend memvalidasi gambar dan menentukan prompt yang sesuai dengan modul analisis yang dipilih.
-5. Backend mengirimkan gambar beserta prompt tersebut ke Gemini API.
-6. Gemini menganalisis gambar dan mengembalikan hasil analisis dalam format JSON.
-7. Backend memeriksa struktur dan isi respons JSON. Jika formatnya tidak sesuai, backend menangani kesalahan tersebut agar aplikasi dapat memberikan respons yang tepat.
-8. Jika respons valid, backend menyimpan hasil analisis ke PostgreSQL sebagai catatan riwayat pengguna.
-9. Backend mengirimkan hasil analisis kepada frontend.
-10. Frontend mengolah data JSON dan menampilkan hasil analisis dalam bentuk antarmuka yang mudah dipahami.
+1. Pengguna membuka **Waste Analyzer** atau **Plant Analyzer** sesuai kebutuhan.
+2. Pengguna mengunggah gambar dari perangkat atau mengambil gambar menggunakan kamera.
+3. Frontend mengirim gambar ke endpoint backend SvelteKit.
+4. Backend memvalidasi gambar dan menentukan prompt berdasarkan modul yang dipilih.
+5. Backend mengirim gambar beserta prompt ke Gemini API.
+6. Gemini menganalisis gambar dan mengembalikan hasil dalam format JSON.
+7. Backend memeriksa struktur respons. Jika respons tidak valid, backend menangani kesalahan dan frontend menampilkan pesan yang sesuai.
+8. Jika respons valid, backend menyimpan hasil analisis ke PostgreSQL sebagai riwayat pengguna.
+9. Backend mengirim hasil analisis kepada frontend.
+10. Frontend mengolah data dan menampilkan hasil sesuai modul yang digunakan.
 
 #### D. Menampilkan Informasi Bank Sampah
 
 1. Setelah analisis sampah berhasil, aplikasi mengambil data referensi bank sampah dari PostgreSQL.
-2. Data tersebut menggunakan dataset yang telah disiapkan, termasuk informasi harga dan lokasi bank sampah.
-3. Aplikasi menampilkan informasi tersebut sebagai referensi agar pengguna memperoleh gambaran mengenai tempat penyaluran sampah yang sesuai.
+2. Dataset dapat berisi informasi harga, lokasi, dan jenis sampah yang diterima.
+3. Aplikasi menampilkan data tersebut sebagai referensi tempat penyaluran sampah.
 
-> **Catatan:** Informasi harga dan lokasi bank sampah pada versi demo bersumber dari dataset yang disiapkan di PostgreSQL, sehingga belum tentu mencerminkan kondisi atau harga terkini.
+> **Catatan:** Informasi harga dan lokasi bank sampah pada versi demo bersumber dari dataset yang disiapkan, sehingga belum tentu mencerminkan kondisi atau harga terkini.
 
-#### E. Melihat Riwayat Analisis
+#### E. Melihat Riwayat dan Mengelola Akun
 
-1. Setiap hasil analisis yang berhasil diproses dan disimpan akan menjadi catatan riwayat pengguna.
-2. Pengguna membuka menu **Riwayat Saya** untuk melihat seluruh catatan analisis yang tersimpan.
-3. Riwayat tersebut mencakup analisis sampah maupun tanaman, sehingga pengguna dapat meninjau kembali hasil analisis sebelumnya.
+- **Riwayat analisis:** Pengguna membuka menu **Riwayat Saya** untuk meninjau kembali hasil analisis sampah maupun tanaman yang tersimpan.
+- **Pengaturan akun:** Pengguna membuka menu **Setting** untuk memperbarui nama, email, foto profil, atau password.
 
-#### F. Mengelola Pengaturan Akun
-
-1. Pengguna membuka menu **Setting** melalui sidebar dashboard.
-2. Pengguna dapat memperbarui informasi akun, seperti nama, email, dan foto profil.
-3. Pengguna juga dapat mengganti password untuk menjaga keamanan akun.
-
----
-
-**Ringkasan:** SustainAI membawa pengguna dari proses masuk ke aplikasi, melakukan analisis gambar sampah atau tanaman dengan bantuan Gemini AI, hingga memperoleh hasil analisis dan rekomendasi. Hasil analisis yang berhasil disimpan ke PostgreSQL dapat dilihat kembali melalui halaman Riwayat Saya, sedangkan data referensi bank sampah membantu pengguna menentukan langkah pengelolaan sampah selanjutnya.
-
-### Diagram Arsitektur
+### 3. Diagram Arsitektur Sistem
 
 ```text
 ┌──────────────────────────────┐
@@ -284,20 +290,21 @@ Dashboard menyediakan lima halaman utama yang dapat diakses melalui sidebar:
 │       FRONTEND (SVELTE)      │
 │ - Image Preview              │
 │ - Input Validation           │
+│ - Render Analysis Result     │
 └──────────────┬───────────────┘
-               │ POST /api/analyze-*
+               │ HTTP Request
                ▼
 ┌──────────────────────────────┐
 │      SVELTEKIT BACKEND       │
 │ - Validate Request           │
-│ - Select Hardcoded Prompt    │
+│ - Select Module Prompt       │
 │ - Prepare Image Payload      │
 └──────────────┬───────────────┘
                │ Prompt + Image
                ▼
 ┌──────────────────────────────┐
 │          GEMINI API          │
-│ - Modal Image Analysis       │
+│ - Multimodal Image Analysis  │
 │ - Generate Structured JSON   │
 └──────────────┬───────────────┘
                │ JSON Response
@@ -313,13 +320,13 @@ Dashboard menyediakan lima halaman utama yang dapat diakses melalui sidebar:
        ┌───────┴────────┐
        │                │
        ▼                ▼
-┌───────────────┐  ┌──────────────────────┐
-│  PostgreSQL   │  │       FRONTEND       │
-│               │  │                      │
-│ Analysis      │  │ Parse JSON Response  │
-│ History       │  │ Render Result UI     │
-│ Records       │  │ Show Recommendations │
-└───────────────┘  └──────────┬───────────┘
+┌───────────────┐  ┌──────────────────────────┐
+│  PostgreSQL   │  │   FRONTEND (SVELTE)      │
+│               │  │                          │
+│ Analysis      │  │ Parse API (JSON) Respons │
+│ History       │  │ Render Analysis UI       │
+│ Records       │  │ Show Recommendations     │
+└───────────────┘  └──────────┬───────────────┘
                               │
                               ▼
                    ┌──────────────────────┐
@@ -341,7 +348,6 @@ Dashboard menyediakan lima halaman utama yang dapat diakses melalui sidebar:
 ┌──────────────────────────────┐
 │      SVELTEKIT BACKEND       │
 │ Retrieve Waste Bank Dataset  │
-│ for Analysis Result          │
 └──────────────┬───────────────┘
                │ Reference Data
                ▼
@@ -354,7 +360,9 @@ Dashboard menyediakan lima halaman utama yang dapat diakses melalui sidebar:
 └──────────────────────────────┘
 ```
 
-### Sequence Diagram — Request hingga Parsing Frontend
+### 4. Sequence Diagram
+
+Diagram berikut menggambarkan komunikasi antara pengguna, frontend, backend, Gemini API, dan PostgreSQL selama proses analisis. Pengambilan dataset bank sampah hanya dilakukan untuk analisis sampah.
 
 ```mermaid
 sequenceDiagram
@@ -369,31 +377,26 @@ sequenceDiagram
     User->>UI: Submit analysis
 
     UI->>API: POST /api/analyze-waste or /api/analyze-plant
-
     API->>API: Validate request
-    API->>API: Select hardcoded prompt
+    API->>API: Select module prompt
     API->>API: Prepare image payload
 
     API->>Gemini: Send prompt + image
     Gemini->>Gemini: Analyze image
     Gemini-->>API: Return structured JSON
-
     API->>API: Parse and validate JSON
 
     alt Valid JSON response
         API->>DB: Save analysis record
         DB-->>API: Confirm record saved
 
-        API->>DB: Query waste bank reference dataset
-        DB-->>API: Return prices, locations, and accepted waste types
+        opt Waste Analyzer
+            API->>DB: Query waste bank reference dataset
+            DB-->>API: Return prices, locations, accepted waste types
+        end
 
-        API-->>UI: Return analysis JSON + reference data
-        UI->>UI: Parse JSON response
-        UI->>UI: Render analysis result
-        UI->>UI: Display recommendations
-
-        UI->>UI: Display waste bank information
-
+        API-->>UI: Return analysis result and relevant reference data
+        UI->>UI: Parse response and render result
         UI-->>User: Show analysis result
 
     else Invalid JSON response
@@ -403,65 +406,15 @@ sequenceDiagram
     end
 
     opt User opens analysis history
-        User->>UI: Request analysis history
+        User->>UI: Open analysis history
         UI->>API: GET /api/history
         API->>DB: Retrieve analysis records
         DB-->>API: Return history records
-        API-->>UI: Return history JSON
-        UI->>UI: Parse and render history
+        API-->>UI: Return history data
+        UI->>UI: Render history
         UI-->>User: Display analysis history
     end
 ```
-
-### Ringkasan Alur Data
-
-1\. Pengguna membuka halaman utama (Landing Page).\
-Pengguna mengunjungi website SustainAI untuk mengenal aplikasi dan melihat fitur-fitur yang tersedia.
-
-2\. Pengguna melakukan registrasi atau login.\
-Jika belum memiliki akun, pengguna dapat membuat akun terlebih dahulu. Jika sudah memiliki akun, pengguna cukup masuk menggunakan informasi login.
-
-3\. Sistem memeriksa proses login.\
-Sistem akan memeriksa apakah informasi login yang dimasukkan benar. Jika salah, pengguna diminta mencoba login kembali. Jika berhasil, pengguna akan diarahkan ke halaman dashboard.
-
-4\. Pengguna masuk ke halaman Dashboard.\
-Setelah berhasil login, pengguna dapat mengakses berbagai fitur SustainAI melalui menu navigasi di sebelah kiri.
-
-5\. Pengguna memilih fitur yang ingin digunakan.\
-Terdapat beberapa menu yang dapat dipilih, yaitu Overview, Waste Analyzer, Plant Analyzer, Riwayat Saya, dan Setting.
-
-6\. Pengguna mengunggah atau mengambil foto.\
-Pada menu Waste Analyzer, pengguna memasukkan foto sampah yang ingin dianalisis. Sementara itu, pada menu Plant Analyzer, pengguna memasukkan foto tanaman yang ingin diperiksa.
-
-7\. Gambar dikirim ke sistem backend.\
-Setelah gambar dipilih, aplikasi akan mengirimkannya ke backend untuk diproses lebih lanjut.
-
-8\. Backend memeriksa gambar dan menentukan jenis analisis.\
-Sistem akan memeriksa gambar yang dikirim dan menentukan instruksi analisis yang sesuai, apakah untuk menganalisis sampah atau tanaman.
-
-9\. Backend mengirim gambar ke Gemini AI.\
-Gambar beserta instruksi analisis dikirim ke Gemini AI agar dapat diperiksa dan dipahami oleh kecerdasan buatan.
-
-10\. Gemini AI menganalisis gambar.\
-Gemini AI akan mengenali objek pada gambar dan menyusun informasi berdasarkan jenis analisis yang diminta.
-
-11\. Gemini AI mengirimkan hasil analisis dalam format JSON.\
-Hasil analisis dikirim kembali ke backend dalam format JSON agar dapat dibaca dan diproses oleh aplikasi.
-
-12\. Backend memeriksa hasil analisis.\
-Sistem akan memastikan bahwa hasil dari Gemini AI memiliki format dan struktur data yang benar. Jika hasilnya tidak valid, aplikasi akan menampilkan pesan kesalahan dan mengarahkan pengguna kembali ke halaman analisis yang sesuai. Jika valid, hasil analisis akan disimpan ke database PostgreSQL.
-
-13\. Aplikasi menampilkan hasil analisis kepada pengguna.\
-Hasil yang sudah berhasil diproses akan dikirim ke frontend dan ditampilkan pada halaman aplikasi.
-
-- Waste Analyzer: Menampilkan informasi sampah, dampak lingkungan, tips daur ulang, serta informasi harga dan lokasi bank sampah.
-- Plant Analyzer: Menampilkan informasi tanaman, kemungkinan hama atau penyakit, gejala, penyebab, serta rekomendasi perawatan dan pencegahan.
-
-Pengguna juga dapat membuka menu Riwayat Saya untuk melihat hasil analisis yang pernah dilakukan.
-
-Gambaran sederhananya: pengguna memasukkan foto → sistem mengirim foto ke Gemini AI → AI menganalisis foto → backend memeriksa dan menyimpan hasil → aplikasi menampilkan hasil analisis kepada pengguna.
-
-**Keamanan:** API key Gemini hanya disimpan di environment variable server, tidak dikirim ke browser atau dimasukkan ke repository.
 
 ## 🛠️ Instalasi dan Konfigurasi
 
@@ -471,7 +424,7 @@ Gambaran sederhananya: pengguna memasukkan foto → sistem mengirim foto ke Gemi
 - npm.
 - Git.
 - PostgreSQL atau layanan PostgreSQL yang dapat diakses.
-- Gemini API key dari Google AI Studio.
+- Gemini API key dari [Google AI Studio](https://aistudio.google.com/).
 
 ### 1. Clone Repository
 
@@ -517,7 +470,7 @@ PUBLIC_APP_URL=http://localhost:5173
 | `DATABASE_URL`                  | Connection string PostgreSQL.                |
 | `PUBLIC_APP_URL`                | URL aplikasi untuk konfigurasi tertentu.     |
 
-Sesuaikan nama variabel dengan source code aktual. Jika kedua modul menggunakan satu API key, konfigurasi dapat disederhanakan.
+Sesuaikan nama variabel dengan implementasi source code. Jika kedua modul menggunakan satu API key, konfigurasi dapat disederhanakan.
 
 Contoh connection string:
 
@@ -525,38 +478,40 @@ Contoh connection string:
 DATABASE_URL="postgresql://USER:PASSWORD@HOST:5432/DATABASE_NAME"
 ```
 
-Jangan gunakan kredensial asli di `.env.example`. Pastikan `.env` masuk ke `.gitignore`.
+**Penting:** Jangan masukkan kredensial asli ke `.env.example`. Pastikan `.env` tercantum di `.gitignore`. API key Gemini harus disimpan sebagai environment variable server dan tidak boleh dikirim ke browser atau di-commit ke repository.
 
 ### 4. Konfigurasi Database
 
-Pastikan PostgreSQL berjalan dan database sudah dibuat. Jika proyek menggunakan migration, jalankan perintah sesuai ORM atau library yang dipakai.
+Pastikan PostgreSQL berjalan dan database telah dibuat. Jika proyek menggunakan migration, jalankan perintah yang sesuai dengan ORM atau library database yang digunakan.
 
 ```bash
 npm run db:migrate
 ```
 
-Perintah migration di atas hanya contoh. Bila harga dan lokasi bank sampah memakai dataset hardcode pada demo, konfigurasi database dapat disesuaikan dengan implementasi aktual.
+Perintah tersebut merupakan contoh dan perlu disesuaikan dengan script yang tersedia di `package.json`. Jika dataset bank sampah disiapkan melalui mekanisme lain, sesuaikan langkah konfigurasi dengan implementasi proyek.
 
 ### 5. Menjalankan Aplikasi
+
+Jalankan development server:
 
 ```bash
 npm run dev
 ```
 
-Buka alamat yang ditampilkan terminal, umumnya:
+Buka alamat yang ditampilkan di terminal, umumnya:
 
 ```text
 http://localhost:5173
 ```
 
-Build production:
+Untuk membuat dan menjalankan build production:
 
 ```bash
 npm run build
 npm run preview
 ```
 
-Periksa juga batas ukuran upload dan penanganan error API.
+Pastikan konfigurasi environment, koneksi database, batas ukuran upload, dan penanganan error API telah disesuaikan sebelum deployment.
 
 ## 🔐 Akun Demonstrasi
 
@@ -564,6 +519,8 @@ Periksa juga batas ukuran upload dan penanganan error API.
 | -------- | --------------------- |
 | Username | `genforce`            |
 | Password | `GENFORCES_JUARA_123` |
+
+> Akun ini hanya untuk keperluan demonstrasi.
 
 ## 👨‍💻 Tim Pengembang
 
