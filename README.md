@@ -154,6 +154,121 @@ Untuk GIF repository, contoh: <img src="docs/demo.gif" alt="SustainAI demo" widt
 
 ## 🏗️ Arsitektur Sistem
 
+### 1. Flowchart User Flow Diagram
+
+```mermaid
+flowchart TD
+    A([Mulai]) --> B[Pengguna membuka Landing Page]
+    B --> C{Sudah memiliki akun?}
+
+    C -- Belum --> D[Registrasi akun]
+    C -- Sudah --> E[Login]
+    D --> E
+
+    E --> F{Login berhasil?}
+    F -- Tidak --> E
+    F -- Ya --> G[Dashboard Pengguna]
+
+    G --> H{Pilih menu}
+    H --> I[Overview]
+    H --> J2[Modul Utama]
+    J2 --> J[Waste Analyzer]
+    J2 --> K[Plant Analyzer]
+    H --> L[Riwayat Saya]
+    H --> M[Setting]
+
+    J --> N[Unggah atau ambil foto sampah]
+    K --> O[Unggah atau ambil foto tanaman]
+    N --> P[Kirim gambar ke backend SvelteKit]
+    O --> P
+
+    P --> Q[Validasi gambar dan pilih prompt sesuai modul]
+    Q --> R[Kirim gambar dan prompt ke Gemini API]
+    R --> S[Gemini menganalisis gambar]
+    S --> T[Gemini mengembalikan hasil dalam format JSON]
+    T --> U[Backend memvalidasi struktur JSON]
+
+    U --> V{Respons JSON valid?}
+    V -- Tidak --> W[Backend menangani respons tidak valid]
+    W --> X[Frontend menampilkan pesan kesalahan]
+    X -- Kembali ke modul <br> Waste / Plant Analyser--> J2
+
+    V -- Ya --> Y[Simpan hasil analisis ke PostgreSQL]
+    Y --> Z[Kirim hasil analisis ke frontend]
+    Z --> AA[Frontend mengolah JSON dan menampilkan hasil]
+
+    AA --> AB{Modul yang dianalisis?}
+    AB -- Sampah --> AC[Ambil dataset referensi bank sampah dari PostgreSQL]
+    AC --> AD[Tampilkan informasi harga dan lokasi bank sampah]
+    AB -- Tanaman --> AE[Tampilkan hasil dan rekomendasi perawatan]
+
+    AD --> AF[Pengguna dapat membuka Riwayat Saya]
+    AE --> AF
+```
+
+### 2. Langkah-Langkah User Flow
+
+#### A. Mengakses Aplikasi dan Masuk ke Dashboard
+
+1. Pengguna membuka landing page SustainAI.
+2. Untuk menggunakan fitur utama aplikasi, pengguna perlu masuk ke akun terlebih dahulu.
+3. Jika belum memiliki akun, pengguna dapat melakukan registrasi melalui halaman pendaftaran.
+4. Setelah memiliki akun, pengguna melakukan login menggunakan kredensial yang terdaftar.
+5. Jika proses login berhasil, pengguna akan diarahkan ke dashboard.
+
+#### B. Menjelajahi Dashboard
+
+Dashboard menyediakan lima halaman utama yang dapat diakses melalui sidebar:
+
+- **Overview** — Menampilkan ringkasan aktivitas dan informasi kontekstual pengguna, meliputi:
+  - Total Analisis.
+  - Sampah Dianalisis.
+  - Tanaman Dianalisis.
+  - Sampah Berpotensi Didaur Ulang.
+  - Grafik Fluktuasi Harga Sampah Berdasarkan Jenis dalam bentuk diagram garis.
+  - Grafik Komposisi Jenis Sampah yang Dianalisis dalam bentuk diagram lingkaran.
+- **Waste Analyzer** — Halaman untuk mengunggah atau mengambil gambar sampah dan mendapatkan hasil analisis.
+- **Plant Analyzer** — Halaman untuk mengunggah atau mengambil gambar tanaman guna mengetahui indikasi hama atau penyakit.
+- **Riwayat Saya** — Menampilkan seluruh catatan hasil analisis yang telah tersimpan.
+- **Setting** — Halaman pengaturan akun. Pengguna dapat memperbarui nama, email, foto profil, dan password.
+
+#### C. Melakukan Analisis Sampah atau Tanaman
+
+1. Pengguna membuka halaman **Waste Analyzer** atau **Plant Analyzer**, sesuai jenis analisis yang ingin dilakukan.
+2. Pengguna mengunggah gambar dari perangkat atau mengambil gambar secara langsung menggunakan kamera.
+3. Frontend mengirimkan gambar ke endpoint backend SvelteKit untuk diproses.
+4. Backend memvalidasi gambar dan menentukan prompt yang sesuai dengan modul analisis yang dipilih.
+5. Backend mengirimkan gambar beserta prompt tersebut ke Gemini API.
+6. Gemini menganalisis gambar dan mengembalikan hasil analisis dalam format JSON.
+7. Backend memeriksa struktur dan isi respons JSON. Jika formatnya tidak sesuai, backend menangani kesalahan tersebut agar aplikasi dapat memberikan respons yang tepat.
+8. Jika respons valid, backend menyimpan hasil analisis ke PostgreSQL sebagai catatan riwayat pengguna.
+9. Backend mengirimkan hasil analisis kepada frontend.
+10. Frontend mengolah data JSON dan menampilkan hasil analisis dalam bentuk antarmuka yang mudah dipahami.
+
+#### D. Menampilkan Informasi Bank Sampah
+
+1. Setelah analisis sampah berhasil, aplikasi mengambil data referensi bank sampah dari PostgreSQL.
+2. Data tersebut menggunakan dataset yang telah disiapkan, termasuk informasi harga dan lokasi bank sampah.
+3. Aplikasi menampilkan informasi tersebut sebagai referensi agar pengguna memperoleh gambaran mengenai tempat penyaluran sampah yang sesuai.
+
+> **Catatan:** Informasi harga dan lokasi bank sampah pada versi demo bersumber dari dataset yang disiapkan di PostgreSQL, sehingga belum tentu mencerminkan kondisi atau harga terkini.
+
+#### E. Melihat Riwayat Analisis
+
+1. Setiap hasil analisis yang berhasil diproses dan disimpan akan menjadi catatan riwayat pengguna.
+2. Pengguna membuka menu **Riwayat Saya** untuk melihat seluruh catatan analisis yang tersimpan.
+3. Riwayat tersebut mencakup analisis sampah maupun tanaman, sehingga pengguna dapat meninjau kembali hasil analisis sebelumnya.
+
+#### F. Mengelola Pengaturan Akun
+
+1. Pengguna membuka menu **Setting** melalui sidebar dashboard.
+2. Pengguna dapat memperbarui informasi akun, seperti nama, email, dan foto profil.
+3. Pengguna juga dapat mengganti password untuk menjaga keamanan akun.
+
+---
+
+**Ringkasan:** SustainAI membawa pengguna dari proses masuk ke aplikasi, melakukan analisis gambar sampah atau tanaman dengan bantuan Gemini AI, hingga memperoleh hasil analisis dan rekomendasi. Hasil analisis yang berhasil disimpan ke PostgreSQL dapat dilihat kembali melalui halaman Riwayat Saya, sedangkan data referensi bank sampah membantu pengguna menentukan langkah pengelolaan sampah selanjutnya.
+
 ### Diagram Arsitektur
 
 ```text
@@ -300,15 +415,51 @@ sequenceDiagram
 
 ### Ringkasan Alur Data
 
-1. Pengguna mengunggah atau mengambil gambar melalui frontend aplikasi.
-2. Gambar dikirim ke endpoint backend SvelteKit untuk diproses.
-3. Backend memvalidasi gambar dan menentukan prompt sesuai modul analisis yang dipilih.
-4. Backend mengirimkan gambar beserta prompt ke Gemini API.
-5. Gemini menganalisis gambar dan mengembalikan hasil dalam format JSON.
-6. Backend memvalidasi struktur JSON yang diterima serta menangani respons yang tidak sesuai format.
-7. Hasil analisis dikirim kembali ke frontend dan disimpan ke database sebagai catatan riwayat analisis.
-8. Frontend mengolah respons JSON dan menampilkan hasil analisis kepada pengguna.
-9. Untuk mendukung fitur rekomendasi, aplikasi mengambil data referensi bank sampah dari PostgreSQL yang berisi dataset demo.
+1\. Pengguna membuka halaman utama (Landing Page).\
+Pengguna mengunjungi website SustainAI untuk mengenal aplikasi dan melihat fitur-fitur yang tersedia.
+
+2\. Pengguna melakukan registrasi atau login.\
+Jika belum memiliki akun, pengguna dapat membuat akun terlebih dahulu. Jika sudah memiliki akun, pengguna cukup masuk menggunakan informasi login.
+
+3\. Sistem memeriksa proses login.\
+Sistem akan memeriksa apakah informasi login yang dimasukkan benar. Jika salah, pengguna diminta mencoba login kembali. Jika berhasil, pengguna akan diarahkan ke halaman dashboard.
+
+4\. Pengguna masuk ke halaman Dashboard.\
+Setelah berhasil login, pengguna dapat mengakses berbagai fitur SustainAI melalui menu navigasi di sebelah kiri.
+
+5\. Pengguna memilih fitur yang ingin digunakan.\
+Terdapat beberapa menu yang dapat dipilih, yaitu Overview, Waste Analyzer, Plant Analyzer, Riwayat Saya, dan Setting.
+
+6\. Pengguna mengunggah atau mengambil foto.\
+Pada menu Waste Analyzer, pengguna memasukkan foto sampah yang ingin dianalisis. Sementara itu, pada menu Plant Analyzer, pengguna memasukkan foto tanaman yang ingin diperiksa.
+
+7\. Gambar dikirim ke sistem backend.\
+Setelah gambar dipilih, aplikasi akan mengirimkannya ke backend untuk diproses lebih lanjut.
+
+8\. Backend memeriksa gambar dan menentukan jenis analisis.\
+Sistem akan memeriksa gambar yang dikirim dan menentukan instruksi analisis yang sesuai, apakah untuk menganalisis sampah atau tanaman.
+
+9\. Backend mengirim gambar ke Gemini AI.\
+Gambar beserta instruksi analisis dikirim ke Gemini AI agar dapat diperiksa dan dipahami oleh kecerdasan buatan.
+
+10\. Gemini AI menganalisis gambar.\
+Gemini AI akan mengenali objek pada gambar dan menyusun informasi berdasarkan jenis analisis yang diminta.
+
+11\. Gemini AI mengirimkan hasil analisis dalam format JSON.\
+Hasil analisis dikirim kembali ke backend dalam format JSON agar dapat dibaca dan diproses oleh aplikasi.
+
+12\. Backend memeriksa hasil analisis.\
+Sistem akan memastikan bahwa hasil dari Gemini AI memiliki format dan struktur data yang benar. Jika hasilnya tidak valid, aplikasi akan menampilkan pesan kesalahan dan mengarahkan pengguna kembali ke halaman analisis yang sesuai. Jika valid, hasil analisis akan disimpan ke database PostgreSQL.
+
+13\. Aplikasi menampilkan hasil analisis kepada pengguna.\
+Hasil yang sudah berhasil diproses akan dikirim ke frontend dan ditampilkan pada halaman aplikasi.
+
+- Waste Analyzer: Menampilkan informasi sampah, dampak lingkungan, tips daur ulang, serta informasi harga dan lokasi bank sampah.
+- Plant Analyzer: Menampilkan informasi tanaman, kemungkinan hama atau penyakit, gejala, penyebab, serta rekomendasi perawatan dan pencegahan.
+
+Pengguna juga dapat membuka menu Riwayat Saya untuk melihat hasil analisis yang pernah dilakukan.
+
+Gambaran sederhananya: pengguna memasukkan foto → sistem mengirim foto ke Gemini AI → AI menganalisis foto → backend memeriksa dan menyimpan hasil → aplikasi menampilkan hasil analisis kepada pengguna.
 
 **Keamanan:** API key Gemini hanya disimpan di environment variable server, tidak dikirim ke browser atau dimasukkan ke repository.
 
