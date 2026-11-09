@@ -172,6 +172,34 @@ Informasi yang ditampilkan pada halaman **Overview** meliputi:
 | [Vercel](https://vercel.com/)             | Deployment dan hosting aplikasi.                     |
 | [Gemini API](https://ai.google.dev/)      | Mesin AI multimodal untuk analisis gambar.           |
 
+## 🗄️ Rancangan Database
+
+Berikut adalah diagram rancangan dan relasi database PostgreSQL yang digunakan oleh SustainAI.
+
+<div align="center">
+
+<a href="https://github.com/christianxavierVibecode/SustainAI/blob/ded322535291ce7e147ab256257439a2bdf1059c/DevReferences/Database/schema.png">
+  <img src="https://raw.githubusercontent.com/christianxavierVibecode/SustainAI/ded322535291ce7e147ab256257439a2bdf1059c/DevReferences/Database/schema.png" alt="Diagram rancangan dan relasi database SustainAI" width="95%">
+</a>
+
+</div>
+
+### Fungsi Tabel
+
+| Tabel                    | Fungsi                                                                                                                                                                                                             |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `users`                  | Menyimpan akun pengguna, termasuk email, password hash, nama, status verifikasi, dan timestamp. Digunakan untuk autentikasi serta pengelolaan akun.                                                                |
+| `waste_categories`       | Menyimpan kategori utama sampah sebagai pengelompokan jenis sampah pada Waste Analyzer.                                                                                                                            |
+| `waste_sub_categories`   | Menyimpan jenis sampah yang lebih spesifik dan relasinya ke kategori utama. Digunakan untuk klasifikasi hasil analisis serta referensi harga.                                                                      |
+| `waste_price`            | Menyimpan riwayat harga untuk setiap subkategori sampah. Data ini menjadi sumber grafik fluktuasi harga dan informasi harga pada fitur Waste Analyzer.                                                             |
+| `analysis_records`       | Menyimpan catatan utama setiap analisis pengguna, seperti jenis modul (sampah/tanaman), status, lokasi file gambar, model AI, hasil JSON, dan waktu analisis. Menjadi sumber Riwayat Saya dan statistik Dashboard. |
+| `analysis_waste_details` | Menyimpan detail khusus hasil Waste Analyzer, seperti subkategori sampah dan informasi hasil analisis yang terkait dengan satu `analysis_records`.                                                                 |
+| `analysis_plant_details` | Menyimpan detail khusus hasil Plant Disease Analyzer, seperti identitas tanaman, indikasi penyakit, gejala, penyebab, dan rekomendasi perawatan yang terkait dengan satu `analysis_records`.                       |
+
+> `analysis_records` berperan sebagai tabel utama riwayat analisis, sedangkan `analysis_waste_details` dan `analysis_plant_details` menyimpan detail sesuai modul yang digunakan.
+
+---
+
 ## 🏗️ Arsitektur dan Alur Sistem
 
 Bagian ini menjelaskan perjalanan pengguna, komponen sistem, serta komunikasi antarkomponen. Diagram alur digunakan untuk melihat proses dari sisi pengguna, sedangkan diagram arsitektur dan sequence menjelaskan pemrosesan teknis di baliknya.
@@ -515,10 +543,10 @@ Pastikan konfigurasi environment, koneksi database, batas ukuran upload, dan pen
 
 ## 🔐 Akun Demonstrasi
 
-| Field    | Credential            |
-| -------- | --------------------- |
-| Username | `genforce`            |
-| Password | `GENFORCES_JUARA_123` |
+| Field    | Credential                      |
+| -------- | ------------------------------- |
+| Username | `christianxavier@genforces.com` |
+| Password | `GENFORCES_JUARA_123`           |
 
 > Akun ini hanya untuk keperluan demonstrasi.
 

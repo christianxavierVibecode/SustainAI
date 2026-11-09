@@ -1,110 +1,109 @@
-# SustainAI — Database Seed Data
+# SustainAI — Database Seed Data (MVP)
 
-Dokumen ini berisi data dummy untuk seluruh tabel pada `schema.sql`. Data bank sampah, alamat, koordinat, dan harga di bawah **hanya data contoh untuk kebutuhan pengembangan/demo**, bukan informasi operasional yang telah diverifikasi.
-
-> **Catatan implementasi:** Gunakan ID contoh secara konsisten saat memasukkan data. UUID pada tabel pengguna dan analisis dapat dibuat saat proses seed dijalankan. Password pada tabel `users` wajib berupa hash hasil algoritma password hashing (misalnya Argon2id atau bcrypt), bukan password teks biasa.
+Data di bawah merupakan data dummy untuk pengembangan/demo, bukan data operasional yang telah diverifikasi. UUID akun dan analisis dapat dibuat saat proses seed dijalankan. `password_hash` wajib berisi hash password (Argon2id/bcrypt), bukan password plaintext.
 
 ## 1. `users`
 
-| id | username | email | password_hash | full_name | avatar_url | email_verified |
-|---|---|---|---|---|---|---|
-| `11111111-1111-4111-8111-111111111111` | genforce | genforce@example.test | `<HASH_PASSWORD_DEMO>` | GenForces Demo | `https://example.test/avatar/genforce.png` | true |
-| `22222222-2222-4222-8222-222222222222` | sustain_user | user@example.test | `<HASH_PASSWORD_USER>` | SustainAI Demo User | NULL | true |
+Kolom mengikuti schema MVP: `id, email, password_hash, full_name, email_verified, created_at, updated_at`.
 
-`created_at` dan `updated_at` menggunakan waktu saat seed dijalankan jika tidak ditentukan.
+| id                                     | email                         | password_hash                                                  | full_name           | email_verified | created_at             | updated_at             |
+| -------------------------------------- | ----------------------------- | -------------------------------------------------------------- | ------------------- | -------------- | ---------------------- | ---------------------- |
+| `abef1065-b725-4998-814a-65832ed042b4` | christianxavier@genforces.com | `$2a$12$.vk8vH6L7VPRgMoEGm1LxuajuxS26xVdEGsPGChM/Rcism4DC5q1i` | GenForces Demo      | true           | 2026-11-01 13:13:47+07 | 2026-11-01 18:13:44+07 |
+| `1b3fac7c-68c6-4595-89cc-08951422f0ae` | user@genforces.com            | `$2a$12$nDZib8pGVuf.f9q/I/JrbOQDGt2hhJOkn2yt/R09LYLL4uQwLvJ.e` | SustainAI Demo User | true           | 2026-11-02 18:13:44+07 | 2026-11-02 18:13:44+07 |
 
 ## 2. `waste_categories`
 
-| id | name | description |
-|---:|---|---|
-| 1 | Plastik | Sampah berbahan dasar plastik yang dikelompokkan berdasarkan jenis resin dan ketebalannya. |
-| 2 | Kertas dan Karton | Sampah berbahan serat kayu yang dapat diolah kembali menjadi bubur kertas. |
-| 3 | Logam | Sampah berbahan besi atau non-besi yang dapat diproses untuk didaur ulang. |
-| 4 | Kaca | Sampah berbahan kaca, baik berupa wadah utuh maupun pecahan. |
-| 5 | Khusus | Sampah yang memerlukan penanganan khusus, seperti minyak goreng bekas. |
+|  id | name              | description                                                                                       |
+| --: | ----------------- | ------------------------------------------------------------------------------------------------- |
+|   1 | Plastik           | Sampah berbahan dasar plastik yang dikelompokkan berdasarkan jenis resin dan ketebalannya.        |
+|   2 | Kertas dan Karton | Sampah berbahan serat kayu yang mudah dilebur kembali menjadi bubur kertas.                       |
+|   3 | Logam             | Sampah berbahan besi atau non-besi yang memiliki nilai jual relatif tinggi untuk peleburan ulang. |
+|   4 | Kaca              | Sampah berbahan kaca, baik dalam bentuk wadah utuh maupun pecahan (beling).                       |
+|   5 | Khusus            | Sampah kategori khusus yang memerlukan penanganan berbeda, seperti minyak goreng bekas.           |
 
 ## 3. `waste_sub_categories`
 
-Harga tidak disimpan di tabel ini. Harga per bank sampah disimpan di `waste_bank_prices` agar setiap bank dapat memiliki harga berbeda.
+Harga tidak lagi disimpan di tabel subkategori. Setiap observasi harga dicatat di `waste_price` dan direferensikan melalui `waste_sub_category_id`.
 
-| id | category_id | name | description |
-|---:|---:|---|---|
-| 1 | 1 | PET / PETE (Kode 1) | Botol plastik bening bekas air mineral atau jus. |
-| 2 | 1 | HDPE (Kode 2) | Plastik tebal dan kaku seperti botol sampo, deterjen, atau jeriken. |
-| 3 | 1 | PP (Kode 5) | Gelas plastik, tutup botol, dan wadah makanan. |
-| 4 | 1 | Plastik Campuran / Kerasan | Mainan plastik, baskom rusak, atau gantungan baju. |
-| 5 | 2 | Kardus (Corrugated) | Kardus paket, kardus mi instan, atau kotak kemasan. |
-| 6 | 2 | Kertas Putih / Arsip | Kertas HVS, dokumen kantor, atau buku tulis bekas. |
-| 7 | 2 | Koran | Surat kabar bekas. |
-| 8 | 2 | Dupleks / Buram | Kertas kemasan obat, kotak makanan, atau majalah berwarna. |
-| 9 | 3 | Besi / Baja | Paku, pagar besi rusak, seng, atau pipa besi. |
-| 10 | 3 | Aluminium | Kaleng minuman, kaleng susu, atau material aluminium. |
-| 11 | 3 | Tembaga & Kuningan | Material tembaga dari kabel atau benda berbahan kuningan. |
-| 12 | 4 | Botol Kaca Utuh | Botol kecap, sirup, atau selai yang tidak pecah. |
-| 13 | 4 | Kaca Pecah (Beling) | Pecahan kaca bening atau berwarna. |
-| 14 | 5 | Minyak Jelantah | Minyak goreng bekas untuk pengolahan lebih lanjut. |
+|  id | category_id | name                       | description                                                               | created_at             |
+| --: | ----------: | -------------------------- | ------------------------------------------------------------------------- | ---------------------- |
+|   1 |           1 | PET / PETE (Kode 1)        | Botol plastik bening/transparan bekas air mineral atau botol jus.         | 2026-11-09 16:17:06+07 |
+|   2 |           1 | HDPE (Kode 2)              | Plastik tebal dan kaku seperti botol sampo, botol deterjen, atau jeriken. | 2026-11-09 16:17:06+07 |
+|   3 |           1 | PP (Kode 5)                | Gelas plastik bening, tutup botol, dan wadah makanan transparan.          | 2026-11-09 16:17:06+07 |
+|   4 |           1 | Plastik Campuran / Kerasan | Mainan plastik bekas, baskom rusak, atau gantungan baju.                  | 2026-11-09 16:17:06+07 |
+|   5 |           2 | Kardus (Corrugated)        | Kotak paket belanja online, kardus mi instan, atau kotak susu.            | 2026-11-09 16:17:06+07 |
+|   6 |           2 | Kertas Putih / Arsip       | Kertas HVS bekas cetak, dokumen kantor, atau buku tulis bekas.            | 2026-11-09 16:17:06+07 |
+|   7 |           2 | Koran                      | Surat kabar bekas.                                                        | 2026-11-09 16:17:06+07 |
+|   8 |           2 | Dupleks / Buram            | Kertas kemasan obat, kotak jajan, atau majalah berwarna.                  | 2026-11-09 16:17:06+07 |
+|   9 |           3 | Besi / Baja                | Paku bekas, pagar besi rusak, seng, dan pipa besi.                        | 2026-11-09 16:17:06+07 |
+|  10 |           3 | Aluminium                  | Kaleng minuman ringan, kaleng susu, atau wadah aluminium foil.            | 2026-11-09 16:17:06+07 |
+|  11 |           3 | Tembaga & Kuningan         | Serabut bagian dalam kabel listrik atau keran air kuningan.               | 2026-11-09 16:17:06+07 |
+|  12 |           4 | Botol Kaca Utuh            | Botol kecap, botol sirup, atau botol selai dalam kondisi tidak pecah.     | 2026-11-09 16:17:06+07 |
+|  13 |           4 | Kaca Pecah (Beling)        | Pecahan kaca bening atau berwarna yang akan dilebur ulang.                | 2026-11-09 16:17:06+07 |
+|  14 |           5 | Minyak Jelantah            | Minyak goreng bekas pakai untuk bahan baku biodiesel (per liter/kg).      | 2026-11-09 16:17:06+07 |
 
-## 4. `waste_banks`
+## 4. `waste_price`
 
-Koordinat berikut merupakan placeholder ilustratif. Ganti dengan koordinat dan alamat bank sampah yang telah diverifikasi sebelum aplikasi digunakan secara publik.
+Untuk kebutuhan visualisasi diagram garis, setiap subkategori memiliki tiga record harga pada minggu yang berbeda. Perubahan harga dan tanggal berikut merupakan data simulasi, bukan riwayat harga aktual.
 
-| id | name | address | city | province | postal_code | latitude | longitude | phone | is_active |
-|---:|---|---|---|---|---|---:|---:|---|---|
-| 1 | Bank Sampah Demo Melati | Jl. Contoh Lingkungan No. 10 | Yogyakarta | DI Yogyakarta | 55111 | -7.7956 | 110.3695 | 080000000001 | true |
-| 2 | Bank Sampah Demo Sejahtera | Jl. Contoh Hijau No. 25 | Yogyakarta | DI Yogyakarta | 55112 | -7.8014 | 110.3647 | 080000000002 | true |
-| 3 | Bank Sampah Demo Lestari | Jl. Contoh Bersih No. 5 | Sleman | DI Yogyakarta | 55281 | -7.7167 | 110.3550 | 080000000003 | true |
+Setiap perubahan harga disimpan sebagai record baru. Oleh karena itu, tabel `waste_price` hanya menggunakan kolom `created_at` sebagai waktu pencatatan dan tidak memerlukan `updated_at`.
 
-`opening_hours` contoh:
+|  id | waste_sub_category_id | price (IDR) | created_at             |
+| --: | --------------------: | ----------: | ---------------------- |
+|   1 |                     1 |        3500 | 2026-08-18 14:17:00+07 |
+|   2 |                     6 |        3000 | 2026-08-19 08:24:00+07 |
+|   3 |                     8 |        1200 | 2026-08-20 12:41:00+07 |
+|   4 |                    13 |         200 | 2026-08-21 16:26:00+07 |
+|   5 |                     4 |        2000 | 2026-08-22 09:58:00+07 |
+|   6 |                     9 |        4500 | 2026-08-23 13:33:00+07 |
+|   7 |                     1 |        3600 | 2026-08-24 10:06:00+07 |
+|   8 |                     7 |        1900 | 2026-08-25 15:14:00+07 |
+|   9 |                    12 |         500 | 2026-08-26 11:52:00+07 |
+|  10 |                     5 |        2400 | 2026-08-27 08:39:00+07 |
+|  11 |                     9 |        4600 | 2026-08-28 14:55:00+07 |
+|  12 |                     2 |        4100 | 2026-08-29 12:27:00+07 |
+|  13 |                    14 |        6100 | 2026-08-30 09:44:00+07 |
+|  14 |                     6 |        3050 | 2026-08-31 16:09:00+07 |
+|  15 |                    11 |       65000 | 2026-09-01 10:31:00+07 |
+|  16 |                     3 |        4600 | 2026-09-02 13:18:00+07 |
+|  17 |                     8 |        1150 | 2026-09-03 08:56:00+07 |
+|  18 |                    13 |         220 | 2026-09-04 15:41:00+07 |
+|  19 |                     4 |        1900 | 2026-09-05 11:07:00+07 |
+|  20 |                    10 |        8900 | 2026-09-06 14:23:00+07 |
+|  21 |                     2 |        4000 | 2026-09-07 09:12:00+07 |
+|  22 |                     7 |        2100 | 2026-09-08 16:34:00+07 |
+|  23 |                    12 |         550 | 2026-09-09 12:03:00+07 |
+|  24 |                     5 |        2500 | 2026-09-10 10:46:00+07 |
+|  25 |                    10 |        9000 | 2026-09-11 15:29:00+07 |
+|  26 |                     3 |        4500 | 2026-09-12 08:17:00+07 |
+|  27 |                    14 |        6000 | 2026-09-13 13:52:00+07 |
+|  28 |                     6 |        3100 | 2026-09-14 11:38:00+07 |
+|  29 |                     8 |        1250 | 2026-09-15 16:11:00+07 |
+|  30 |                    11 |       67000 | 2026-09-16 09:26:00+07 |
+|  31 |                     2 |        4200 | 2026-09-17 14:47:00+07 |
+|  32 |                    13 |         250 | 2026-09-18 10:19:00+07 |
+|  33 |                     4 |        2100 | 2026-09-19 17:05:00+07 |
+|  34 |                     9 |        4700 | 2026-09-20 12:32:00+07 |
+|  35 |                     7 |        2000 | 2026-09-21 08:43:00+07 |
+|  36 |                    12 |         500 | 2026-09-22 15:16:00+07 |
+|  37 |                    10 |        9200 | 2026-09-23 10:54:00+07 |
+|  38 |                     1 |        3700 | 2026-09-24 13:21:00+07 |
+|  39 |                     5 |        2600 | 2026-09-25 09:37:00+07 |
+|  40 |                    14 |        6200 | 2026-09-26 14:08:00+07 |
+|  41 |                     3 |        4300 | 2026-09-27 11:15:00+07 |
+|  42 |                    11 |       66000 | 2026-09-28 16:42:00+07 |
 
-```json
-{
-  "monday": "08:00-15:00",
-  "tuesday": "08:00-15:00",
-  "wednesday": "08:00-15:00",
-  "thursday": "08:00-15:00",
-  "friday": "08:00-11:00",
-  "saturday": "08:00-12:00",
-  "sunday": "closed"
-}
-```
+## 5. `analysis_records`
 
-## 5. `waste_bank_prices`
+Contoh data mengikuti struktur sebelumnya. Hasil JSON tervalidasi Gemini disimpan pada `result`;
 
-Seluruh harga dalam Rupiah (IDR). Unit `kg` berarti harga per kilogram. Nilai ini hanya contoh dataset demo.
+| id                                     | user_id                                | analysis_type | status    | image_path                                                                      | ai_provider   | ai_model         | prompt_version | created_at             |
+| -------------------------------------- | -------------------------------------- | ------------- | --------- | ------------------------------------------------------------------------------- | ------------- | ---------------- | -------------- | ---------------------- |
+| `f1221e2a-0dfe-4b81-b6d0-76e536cfc2df` | `abef1065-b725-4998-814a-65832ed042b4` | waste         | completed | `waste-analysis/2026/f1221e2a-0dfe-4b81-b6d0-76e536cfc2df-waste-1794232269.jpg` | Google Gemini | Gemini 3.6 Flash | waste-v1       | 2026-09-28 16:42:00+07 |
+| `30c5493e-3e47-44ea-bab7-13cfa97536cb` | `abef1065-b725-4998-814a-65832ed042b4` | plant         | completed | `waste-analysis/2026/30c5493e-3e47-44ea-bab7-13cfa97536cb-plant-1794232290.jpg` | Google Gemini | Gemini 3.6 Flash | plant-v1       | 2026-09-29 11:12:00+07 |
+| `49927af5-d976-4fae-9a2d-b216c649a966` | `1b3fac7c-68c6-4595-89cc-08951422f0ae` | waste         | completed | `waste-analysis/2026/49927af5-d976-4fae-9a2d-b216c649a966-plant-1794232290.jpg` | Google Gemini | Gemini 3.6 Flash | waste-v1       | 2026-09-30 13:22:00+07 |
 
-| id | waste_bank_id | sub_category_id | price | unit | is_available | valid_from | source_note |
-|---:|---:|---:|---:|---|---|---|---|
-| 1 | 1 | 1 | 3500 | kg | true | 2026-01-01 | Harga dummy demo |
-| 2 | 1 | 2 | 4000 | kg | true | 2026-01-01 | Harga dummy demo |
-| 3 | 1 | 3 | 4500 | kg | true | 2026-01-01 | Harga dummy demo |
-| 4 | 1 | 5 | 2500 | kg | true | 2026-01-01 | Harga dummy demo |
-| 5 | 1 | 6 | 3000 | kg | true | 2026-01-01 | Harga dummy demo |
-| 6 | 1 | 9 | 4500 | kg | true | 2026-01-01 | Harga dummy demo |
-| 7 | 1 | 10 | 9000 | kg | true | 2026-01-01 | Harga dummy demo |
-| 8 | 1 | 14 | 6000 | liter | true | 2026-01-01 | Harga dummy demo |
-| 9 | 2 | 1 | 3200 | kg | true | 2026-01-01 | Harga dummy demo |
-| 10 | 2 | 4 | 2000 | kg | true | 2026-01-01 | Harga dummy demo |
-| 11 | 2 | 5 | 2700 | kg | true | 2026-01-01 | Harga dummy demo |
-| 12 | 2 | 7 | 2200 | kg | true | 2026-01-01 | Harga dummy demo |
-| 13 | 2 | 10 | 8800 | kg | true | 2026-01-01 | Harga dummy demo |
-| 14 | 3 | 1 | 3600 | kg | true | 2026-01-01 | Harga dummy demo |
-| 15 | 3 | 2 | 4100 | kg | true | 2026-01-01 | Harga dummy demo |
-| 16 | 3 | 8 | 1300 | kg | true | 2026-01-01 | Harga dummy demo |
-| 17 | 3 | 9 | 4600 | kg | true | 2026-01-01 | Harga dummy demo |
-| 18 | 3 | 11 | 65000 | kg | true | 2026-01-01 | Harga dummy demo |
-| 19 | 3 | 12 | 500 | kg | true | 2026-01-01 | Harga dummy demo |
-
-## 6. `analysis_records`
-
-Riwayat analisis menyimpan satu record untuk setiap permintaan analisis, baik modul sampah maupun tanaman. `result` menyimpan JSON tervalidasi dari Gemini. Kolom `image_url` dan `image_storage_key` bersifat opsional sesuai strategi penyimpanan gambar.
-
-| id | user_id | analysis_type | status | image_url | ai_provider | ai_model | prompt_version | analyzed_at |
-|---|---|---|---|---|---|---|---|---|
-| `aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa` | `11111111-1111-4111-8111-111111111111` | waste | completed | `https://example.test/uploads/plastic-bottle.jpg` | Google Gemini | Gemini 3.6 Flash | waste-v1 | 2026-01-10T09:30:00Z |
-| `bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb` | `11111111-1111-4111-8111-111111111111` | plant | completed | `https://example.test/uploads/tomato-leaf.jpg` | Google Gemini | Gemini 3.6 Flash | plant-v1 | 2026-01-11T10:15:00Z |
-| `cccccccc-cccc-4ccc-8ccc-cccccccccccc` | `22222222-2222-4222-8222-222222222222` | waste | completed | `https://example.test/uploads/cardboard.jpg` | Google Gemini | Gemini 3.6 Flash | waste-v1 | 2026-01-12T13:00:00Z |
-
-Contoh nilai `result` untuk record pertama:
+Contoh `result` untuk analisis sampah:
 
 ```json
 {
@@ -116,7 +115,7 @@ Contoh nilai `result` untuk record pertama:
 }
 ```
 
-Contoh nilai `result` untuk record kedua:
+Contoh `result` untuk analisis tanaman:
 
 ```json
 {
@@ -130,46 +129,41 @@ Contoh nilai `result` untuk record kedua:
 }
 ```
 
-## 7. `analysis_waste_details`
+## 6. `analysis_waste_details`
 
-Data ringkas yang dinormalisasi untuk memudahkan filter, agregasi dashboard, dan pencarian kategori. `analysis_id` harus merujuk ke record dengan `analysis_type = waste`.
+| analysis_id                            | sub_category_id | is_recyclable | detected_name     | classification    | environmental_impact                                   | recycling_tips                                                       |
+| -------------------------------------- | --------------: | ------------- | ----------------- | ----------------- | ------------------------------------------------------ | -------------------------------------------------------------------- |
+| `f1221e2a-0dfe-4b81-b6d0-76e536cfc2df` |               1 | true          | Botol plastik PET | Plastik           | Dapat bertahan lama di lingkungan jika tidak dikelola. | Kosongkan, bilas, keringkan, lalu pilah sesuai ketentuan daur ulang. |
+| `49927af5-d976-4fae-9a2d-b216c649a966` |               5 | true          | Kardus bekas      | Kertas dan Karton | Penumpukan kardus dapat menambah volume sampah.        | Pastikan kardus kering, lipat, dan pisahkan dari kontaminan.         |
 
-| analysis_id | sub_category_id | is_recyclable | detected_name | classification | environmental_impact | recycling_tips |
-|---|---:|---|---|---|---|---|
-| `aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa` | 1 | true | Botol plastik PET | Plastik | Dapat bertahan lama di lingkungan jika tidak dikelola. | Kosongkan, bilas, keringkan, lalu pilah sesuai ketentuan daur ulang. |
-| `cccccccc-cccc-4ccc-8ccc-cccccccccccc` | 5 | true | Kardus bekas | Kertas dan Karton | Penumpukan kardus dapat menambah volume sampah. | Pastikan kardus kering, lipat, dan pisahkan dari kontaminan. |
+`analysis_id` harus merujuk ke `analysis_records` dengan `analysis_type = 'waste'`.
 
-## 8. `analysis_plant_details`
+## 7. `analysis_plant_details`
 
-Data ringkas yang dinormalisasi untuk pencarian dan tampilan riwayat. `analysis_id` harus merujuk ke record dengan `analysis_type = plant`.
+| analysis_id                            | plant_name    | detected_pest_disease         | symptoms                             | possible_cause                                               | care_recommendation                                                            | prevention_tips                                                 | plant_impact                                                               |
+| -------------------------------------- | ------------- | ----------------------------- | ------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------------------------ | --------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| `30c5493e-3e47-44ea-bab7-13cfa97536cb` | Tanaman tomat | Indikasi penyakit bercak daun | Terlihat bercak pada permukaan daun. | Kemungkinan infeksi patogen; perlu pemeriksaan lebih lanjut. | Pisahkan daun yang terdampak berat dan hindari membasahi daun saat penyiraman. | Jaga sirkulasi udara dan pantau kondisi tanaman secara berkala. | Gangguan berat dapat mengurangi luas daun sehat dan produktivitas tanaman. |
 
-| analysis_id | plant_name | detected_pest_disease | symptoms | possible_cause | care_recommendation | prevention_tips | plant_impact |
-|---|---|---|---|---|---|---|---|
-| `bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb` | Tanaman tomat | Indikasi penyakit bercak daun | Terlihat bercak pada permukaan daun. | Kemungkinan infeksi patogen; perlu pemeriksaan lebih lanjut. | Pisahkan daun yang terdampak berat dan hindari membasahi daun saat penyiraman. | Jaga sirkulasi udara dan pantau kondisi tanaman secara berkala. | Gangguan berat dapat mengurangi luas daun sehat dan produktivitas tanaman. |
+`analysis_id` harus merujuk ke `analysis_records` dengan `analysis_type = 'plant'`.
 
----
-
-## Relasi Antar Tabel
+## Relasi antar tabel
 
 ```text
 users
-  └── 1 : N ── analysis_records
-                  ├── 1 : 0..1 ── analysis_waste_details
-                  └── 1 : 0..1 ── analysis_plant_details
+  └── 1:N ── analysis_records
+                 ├── 1:0..1 ── analysis_waste_details
+                 └── 1:0..1 ── analysis_plant_details
 
 waste_categories
-  └── 1 : N ── waste_sub_categories
-                  ├── 1 : N ── analysis_waste_details
-                  └── 1 : N ── waste_bank_prices
-                                      └── N : 1 ── waste_banks
+  └── 1:N ── waste_sub_categories
+                 ├── 1:N ── analysis_waste_details
+                 └── 1:N ── waste_price
 ```
 
-## Catatan Penggunaan
+## Catatan MVP
 
-1. `analysis_records` menjadi tabel utama riwayat dan menghubungkan hasil analisis dengan pemilik akun.
-2. `result` bertipe JSONB menjaga respons AI lengkap, sedangkan tabel detail menyimpan kolom yang sering difilter atau diagregasi.
-3. Detail waste dan plant dipisahkan agar kolom kedua jenis analisis tidak bercampur. Hanya tabel detail yang sesuai dengan `analysis_type` yang boleh diisi oleh aplikasi.
-4. `waste_bank_prices` menghubungkan bank sampah dengan subkategori dan memungkinkan harga berbeda antarbank serta perubahan harga dari waktu ke waktu.
-5. Overview dapat menghitung Total Analisis, Sampah Dianalisis, dan Tanaman Dianalisis dari `analysis_records`. Jumlah sampah berpotensi didaur ulang dapat dihitung dari `analysis_waste_details.is_recyclable`.
-6. Grafik komposisi jenis sampah dapat dihitung dari `analysis_waste_details` dan `waste_sub_categories`. Grafik tren harga dapat menggunakan `waste_bank_prices`; untuk grafik historis yang akurat, simpan snapshot harga berkala karena tabel ini hanya menyimpan harga yang berlaku per periode.
-7. Data dummy bank sampah dan harga harus diganti atau diverifikasi sebelum dipakai untuk memberikan rekomendasi nyata kepada pengguna.
+- `analysis_records` adalah tabel induk riwayat dan menghubungkan analisis dengan pemilik akun.
+- `result` menyimpan respons AI lengkap; tabel detail menampung atribut yang perlu difilter/diagregasi.
+- Data detail waste dan plant dipisahkan; isi tabel detail harus sesuai dengan `analysis_type`.
+- `waste_price` adalah data harga umum per subkategori, bukan harga yang ditawarkan oleh bank sampah tertentu.
+- Untuk grafik harga historis, ambil record berdasarkan `waste_sub_category_id` dan urutkan `created_at` secara ascending. Harga baru harus ditambahkan sebagai baris baru, bukan mengubah baris lama.
