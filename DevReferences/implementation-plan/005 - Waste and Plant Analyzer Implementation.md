@@ -304,7 +304,20 @@ Berikan hanya JSON yang valid.
 5. **Frontend UI Components**:
    - `ImageUploadArea.svelte`: Komponen upload drag-and-drop, selector berkas, dan aktivasi kamera web (`getUserMedia`).
    - `AnalysisLoadingModal.svelte`: Feedback visual saat proses analisis AI berjalan.
-   - Halaman `src/routes/dashboard/waste/+page.svelte` (mengacu pada referensi UI `Waste.html`).
+   - `WasteBankMapIframe.svelte`: Komponen peta interaktif untuk menampilkan sebaran lokasi bank sampah terdekat via iframe Google My Maps:
+     ```html
+     <iframe
+       src="https://www.google.com/maps/d/u/0/viewer?mid=1zvmwKLiUlW0xpqzvYB-XkNahcR3DdcA&femb=1&ll=-7.802529142105196%2C110.37516666666666&z=14"
+       width="100%"
+       height="380"
+       style="border:0; border-radius: 0.75rem;"
+       allowfullscreen=""
+       loading="lazy"
+       referrerpolicy="no-referrer-when-downgrade"
+       title="Peta Lokasi Bank Sampah Terdekat"
+     ></iframe>
+     ```
+   - Halaman `src/routes/dashboard/waste/+page.svelte` (mengacu pada referensi UI `Waste.html`, menampilkan hasil analisis sampah, tips daur ulang, harga estimasi, dan kartu iframe peta lokasi bank sampah).
    - Halaman `src/routes/dashboard/plant/+page.svelte` (mengacu pada referensi UI `Plants.html`).
 
 ---
@@ -347,5 +360,5 @@ Berikan hanya JSON yang valid.
 - [ ] File gambar berhasil diunggah ke Supabase Storage dan tercatat path persistennya di kolom `image_path`.
 - [ ] Respons Gemini mematuhi format JSON murni dan seluruh key terisi sesuai kontrak prompt (termasuk penanganan gambar tidak valid).
 - [ ] Hasil analisis tersimpan dengan integritas relasi foreign key pada PostgreSQL (`analysis_records` $\rightarrow$ `analysis_waste_details` / `analysis_plant_details`).
-- [ ] Modul Waste menampilkan informasi referensi harga dari tabel `waste_price`.
+- [ ] Modul Waste menampilkan informasi referensi harga dari tabel `waste_price` dan menyajikan peta lokasi bank sampah interaktif via Google Maps iframe.
 - [ ] Modul Plant menampilkan rekomendasi perawatan, penyebab, dan pencegahan secara terstruktur.
