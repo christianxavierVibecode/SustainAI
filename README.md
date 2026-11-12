@@ -117,15 +117,18 @@ Informasi yang ditampilkan pada halaman **Overview** meliputi:
 
 ## 🚀 Rencana Pengembangan
 
-- Integrasi harga bank sampah secara real-time.
-- Pencarian bank sampah berdasarkan lokasi pengguna dan jarak.
-- Verifikasi berkala terhadap jenis sampah yang diterima dan harga.
-- Pengembangan riwayat analisis sampah dan tanaman.
-- Dashboard statistik aktivitas pengelolaan sampah.
-- Estimasi jejak karbon dengan metodologi dan faktor emisi tervalidasi.
-- Dukungan lebih banyak jenis sampah, tanaman, dan bahasa.
-- Edukasi serta pengingat pemilahan sampah.
-- Umpan balik pengguna untuk mengevaluasi kualitas analisis.
+Pengembangan SustainAI selanjutnya dapat mencakup beberapa fitur berikut (bukan fitur yang akan tersedia pada MVP):
+
+- Integrasi data harga bank sampah secara real-time.
+- Pencarian bank sampah berdasarkan lokasi pengguna dan jarak terdekat.
+- Verifikasi berkala terhadap jenis sampah yang diterima dan harga yang ditawarkan bank sampah.
+- Penyediaan riwayat analisis sampah dan tanaman.
+- Pengembangan dashboard statistik aktivitas pengelolaan sampah.
+- Estimasi jejak karbon menggunakan metodologi dan faktor emisi yang tervalidasi.
+- Perluasan cakupan analisis untuk lebih banyak jenis sampah dan tanaman.
+- Dukungan terhadap berbagai bahasa.
+- Penyediaan edukasi dan pengingat terkait pemilahan sampah.
+- Pengumpulan umpan balik pengguna untuk mengevaluasi dan meningkatkan kualitas hasil analisis.
 
 ## 🖼️ Tampilan Aplikasi
 
