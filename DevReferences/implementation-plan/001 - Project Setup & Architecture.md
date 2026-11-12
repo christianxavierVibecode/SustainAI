@@ -1,9 +1,11 @@
 # Implementation Plan: 001 - Project Setup & Architecture
 
 ## Overview
+
 Mempersiapkan fondasi aplikasi SustainAI menggunakan SvelteKit, Tailwind CSS, TypeScript, serta konfigurasi environment dan tooling pendukung lainnya agar siap untuk pengembangan fitur MVP.
 
 ## Scope & Deliverables
+
 1. **Inisialisasi Project**:
    - Setup project SvelteKit (Skeleton project / TypeScript).
    - Setup Tailwind CSS & PostCSS untuk styling responsif.
@@ -23,6 +25,7 @@ Mempersiapkan fondasi aplikasi SustainAI menggunakan SvelteKit, Tailwind CSS, Ty
    - Konfigurasi Prettier, ESLint, dan TypeScript config.
 
 ## Step-by-Step Implementation
+
 1. Inisialisasi template SvelteKit di root project.
 2. Pasang dependencies inti:
    - Framework & UI: `tailwindcss`, `@tailwindcss/typography`, `postcss`, `autoprefixer`, `lucide-svelte`.
@@ -31,7 +34,8 @@ Mempersiapkan fondasi aplikasi SustainAI menggunakan SvelteKit, Tailwind CSS, Ty
 5. Uji coba development server dengan menjalankan `npm run dev` untuk memastikan build berjalan normal pada `http://localhost:5173`.
 
 ## Verification & Acceptance Criteria
-- [ ] Dev server SvelteKit dapat dijalankan tanpa error (`npm run dev`).
-- [ ] Tailwind CSS terkompilasi dan styling berfungsi dengan baik di browser.
-- [ ] Struktur folder dasar telah tertata rapi sesuai standar SvelteKit.
-- [ ] Variabel environment telah didefinisikan di `.env.example` tanpa membocorkan secret asli.
+
+- [*] Dev server SvelteKit dapat dijalankan tanpa error (`npm run dev`).
+- [*] Tailwind CSS terkompilasi dan styling berfungsi dengan baik di browser.
+- [*] Struktur folder dasar telah tertata rapi sesuai standar SvelteKit.
+- [*] Variabel environment telah didefinisikan di `.env.example` tanpa membocorkan secret asli.
