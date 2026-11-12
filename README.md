@@ -165,14 +165,14 @@ Pengembangan SustainAI selanjutnya dapat mencakup beberapa fitur berikut (bukan 
 
 ## 🧱 Teknologi
 
-| Teknologi                                 | Peran                                                |
-| ----------------------------------------- | ---------------------------------------------------- |
-| [Svelte](https://svelte.dev/)             | Membangun antarmuka pengguna yang interaktif.        |
-| [SvelteKit](https://svelte.dev/docs/kit)  | Full-stack framework, routing, dan server endpoints. |
-| [Tailwind CSS](https://tailwindcss.com/)  | Styling dan pembangunan UI responsif.                |
-| [PostgreSQL](https://www.postgresql.org/) | Database relasional untuk menyimpan data aplikasi.   |
-| [Vercel](https://vercel.com/)             | Deployment dan hosting aplikasi.                     |
-| [Gemini API](https://ai.google.dev/)      | Mesin AI multimodal untuk analisis gambar.           |
+| Teknologi                                 | Peran                                                          |
+| ----------------------------------------- | -------------------------------------------------------------- |
+| [Svelte](https://svelte.dev/)             | Membangun antarmuka pengguna yang interaktif.                  |
+| [SvelteKit](https://svelte.dev/docs/kit)  | Full-stack framework, routing, dan server endpoints.           |
+| [Tailwind CSS](https://tailwindcss.com/)  | Styling dan pembangunan UI responsif.                          |
+| [PostgreSQL](https://www.postgresql.org/) | Database relasional dan storage untuk menyimpan data aplikasi. |
+| [Vercel](https://vercel.com/)             | Deployment dan hosting aplikasi.                               |
+| [Gemini API](https://ai.google.dev/)      | Mesin AI multimodal untuk analisis gambar.                     |
 
 ## 🗄️ Rancangan Database
 
@@ -311,138 +311,137 @@ Pengguna dapat mengakses lima halaman melalui sidebar:
 ┌──────────────────────────────┐
 │             USER             │
 │ Browser / Smartphone         │
-│ Upload or Capture Image      │
-│ View Analysis History        │
+│ - Upload / Kamera Foto       │
+│ - Lihat Riwayat & Analitik   │
 └──────────────┬───────────────┘
-               │ HTTPS: Image + Analyzer Type
+               │ HTTPS: FormData (Image Binary + Analyzer Type)
                ▼
 ┌──────────────────────────────┐
 │       FRONTEND (SVELTE)      │
-│ - Image Preview              │
-│ - Input Validation           │
-│ - Render Analysis Result     │
+│ - Client-side Image Preview  │
+│ - Validasi Tipe & Ukuran     │
+│ - Render Analisis & Rekomend │
 └──────────────┬───────────────┘
-               │ HTTP Request
+               │ HTTP POST /api/analyze/waste atau /api/analyze/plant
                ▼
 ┌──────────────────────────────┐
 │      SVELTEKIT BACKEND       │
-│ - Validate Request           │
-│ - Select Module Prompt       │
-│ - Prepare Image Payload      │
+│ - Validasi Request Server    │
+│ - Pilih Hardcoded Prompt     │
+│ - Generate UUID & Timestamp  │
+│ - Konversi Buffer -> Base64  │
+└───────┬──────────────┬───────┘
+        │              │
+ ┌──────┴──────┐ ┌─────┴─────────────────────────────────┐
+ │ (1) Base64  │ │ (2) Binary Upload (Private Bucket)    │
+ ▼             ▼ ▼                                       ▼
+┌──────────────────────────────┐        ┌───────────────────────────────┐
+│          GEMINI API          │        │    SUPABASE STORAGE BUCKET    │
+│       gemini-3.5-flash       │        │ - Private Storage (Non-Publik)│
+│ - Fast Multimodal Inference  │        │ - Simpan Foto Persisten       │
+│ - Inline Base64 Processing   │        │ - Format uuid-type-time.ext   │
+│ - Kembalikan JSON Terstruktur│        └──────────────┬────────────────┘
+└──────────────┬───────────────┘                       │
+               │ JSON Response                         │ Image Path Relatif
+               ▼                                       ▼
+┌──────────────────────────────────────────────────────────────┐
+│                      SVELTEKIT BACKEND                       │
+│ - Parse & Validasi Struktur JSON Respons AI                  │
+│ - Tangani Kasus Objek/Gambar Tidak Valid                     │
+│ - Simpan Catatan & Path Gambar ke Database                   │
+└──────────────────────────────┬───────────────────────────────┘
+                               │
+                ┌──────────────┴──────────────┐
+                ▼                             ▼
+┌──────────────────────────────┐  ┌──────────────────────────┐
+│          PostgreSQL          │  │     FRONTEND (SVELTE)    │
+│  (Supabase / Native Driver)  │  │                          │
+│ - users (RBAC & Auth)        │  │ Parse Respons API (JSON) │
+│ - analysis_records (JSONB)   │  │ Render Hasil Analisis UI │
+│ - analysis_waste/plant_detail│  │ Tampilkan Rekomendasi    │
+│ - waste_price & categories   │  └──────────┬───────────────┘
+└──────────────┬───────────────┘             │
+               │ Query Referensi Data        ▼
+               │ (Khusus Modul Waste) ┌──────────────────────┐
+               └──────────────┐       │      USER ACTION     │
+                              ▼       │ - Kelola Sampah      │
+┌──────────────────────────────┐      │ - Rawat Tanaman      │
+│     SVELTEKIT BACKEND        │      │ - Riwayat (Signed URL│
+│ Ambil Dataset Harga & Lokasi │      └──────────────────────┘
 └──────────────┬───────────────┘
-               │ Prompt + Image
-               ▼
-┌──────────────────────────────┐
-│          GEMINI API          │
-│ - Multimodal Image Analysis  │
-│ - Generate Structured JSON   │
-└──────────────┬───────────────┘
-               │ JSON Response
-               ▼
-┌──────────────────────────────┐
-│      SVELTEKIT BACKEND       │
-│ - Parse & Validate JSON      │
-│ - Handle Invalid Response    │
-│ - Save Analysis Record       │
-│ - Return API Response        │
-└──────────────┬───────────────┘
-               │
-       ┌───────┴────────┐
-       │                │
-       ▼                ▼
-┌───────────────┐  ┌──────────────────────────┐
-│  PostgreSQL   │  │   FRONTEND (SVELTE)      │
-│               │  │                          │
-│ Analysis      │  │ Parse API (JSON) Respons │
-│ History       │  │ Render Analysis UI       │
-│ Records       │  │ Show Recommendations     │
-└───────────────┘  └──────────┬───────────────┘
-                              │
-                              ▼
-                   ┌──────────────────────┐
-                   │      USER ACTION     │
-                   │ - Manage Waste       │
-                   │ - Care for Plants    │
-                   │ - View History       │
-                   └──────────────────────┘
-
-┌──────────────────────────────┐
-│          PostgreSQL          │
-│      Reference Dataset       │
-│ - Waste Bank Locations       │
-│ - Waste Bank Prices          │
-│ - Accepted Waste Types       │
-└──────────────┬───────────────┘
-               │ Query Reference Data
-               ▼
-┌──────────────────────────────┐
-│      SVELTEKIT BACKEND       │
-│ Retrieve Waste Bank Dataset  │
-└──────────────┬───────────────┘
-               │ Reference Data
+               │ Data Referensi
                ▼
 ┌──────────────────────────────┐
 │       FRONTEND (SVELTE)      │
-│ Display Waste Bank Info      │
-│ - Price                      │
-│ - Location                   │
-│ - Accepted Waste Types       │
+│ Tampilkan Estimasi Harga     │
+│ Bank Sampah & Lokasi         │
 └──────────────────────────────┘
 ```
 
 ### 4. Sequence Diagram
 
-Diagram berikut menggambarkan komunikasi antara pengguna, frontend, backend, Gemini API, dan PostgreSQL selama proses analisis. Pengambilan dataset bank sampah hanya dilakukan untuk analisis sampah.
+Diagram berikut menggambarkan alur komunikasi antara pengguna, frontend, backend SvelteKit, Google Gemini API, Supabase Private Storage, dan PostgreSQL. Proses inferensi AI (Base64) dan penyimpanan persisten gambar (Supabase) dieksekusi secara efisien secara paralel di backend:
 
 ```mermaid
 sequenceDiagram
-    actor User
+    autonumber
+    actor User as Pengguna
     participant UI as Svelte Frontend
     participant API as SvelteKit Backend
-    participant Gemini as Gemini API
+    participant Gemini as Gemini API (gemini-3.5-flash)
+    participant Storage as Supabase Storage (Private)
     participant DB as PostgreSQL
 
-    User->>UI: Upload / capture image
-    UI->>UI: Preview and validate image
-    User->>UI: Submit analysis
+    User->>UI: Ambil foto via kamera atau upload gambar
+    UI->>UI: Preview & validasi ukuran file (< 5MB)
+    User->>UI: Klik "Analisis Sekarang"
 
-    UI->>API: POST /api/analyze-waste or /api/analyze-plant
-    API->>API: Validate request
-    API->>API: Select module prompt
-    API->>API: Prepare image payload
+    UI->>API: POST /api/analyze/waste atau /api/analyze/plant (FormData)
+    API->>API: Validasi MIME & ukuran file
+    API->>API: Generate UUID & Timestamp
+    API->>API: Konversi Buffer -> Inline Base64
 
-    API->>Gemini: Send prompt + image
-    Gemini->>Gemini: Analyze image
-    Gemini-->>API: Return structured JSON
-    API->>API: Parse and validate JSON
-
-    alt Valid JSON response
-        API->>DB: Save analysis record
-        DB-->>API: Confirm record saved
-
-        opt Waste Analyzer
-            API->>DB: Query waste bank reference dataset
-            DB-->>API: Return prices, locations, accepted waste types
-        end
-
-        API-->>UI: Return analysis result and relevant reference data
-        UI->>UI: Parse response and render result
-        UI-->>User: Show analysis result
-
-    else Invalid JSON response
-        API->>API: Handle invalid response
-        API-->>UI: Return error response
-        UI-->>User: Display error message
+    par Eksekusi Paralel (AI Inference & Persistensi Gambar)
+        API->>Gemini: POST generateContent (Prompt + Inline Base64 Data)
+        API->>Storage: Upload binary ke private bucket (Service Role)
     end
 
-    opt User opens analysis history
-        User->>UI: Open analysis history
-        UI->>API: GET /api/history
-        API->>DB: Retrieve analysis records
-        DB-->>API: Return history records
-        API-->>UI: Return history data
-        UI->>UI: Render history
-        UI-->>User: Display analysis history
+    Storage-->>API: Konfirmasi upload sukses & kembalikan image_path
+    Gemini-->>API: Mengembalikan respons teks JSON terstruktur
+    API->>API: Parse & validasi integritas struktur JSON
+
+    alt Respons AI Valid
+        API->>DB: INSERT INTO analysis_records (id, image_path, result JSONB, ...)
+
+        opt Khusus Modul Waste
+            API->>DB: INSERT INTO analysis_waste_details (...)
+            API->>DB: Query referensi harga sampah (waste_price & subkategori)
+            DB-->>API: Return harga & lokasi bank sampah
+        end
+
+        opt Khusus Modul Plant
+            API->>DB: INSERT INTO analysis_plant_details (...)
+        end
+
+        DB-->>API: Konfirmasi commit transaksi
+        API-->>UI: 200 OK (Hasil analisis AI + data referensi)
+        UI-->>User: Tampilkan kartu hasil analisis & rekomendasi tindakan
+
+    else Respons AI Tidak Valid / Gambar Ditolak
+        API->>DB: Catat analysis_records status 'failed'
+        API-->>UI: Return error response
+        UI-->>User: Tampilkan pesan kesalahan yang informatif
+    end
+
+    opt Pengguna Membuka Riwayat Saya (History)
+        User->>UI: Buka menu Riwayat Saya
+        UI->>API: GET /dashboard/history
+        API->>DB: Query riwayat analisis pengguna
+        DB-->>API: Daftar record (memuat image_path)
+        API->>Storage: Generate Signed URL sementara (createSignedUrl, 3600s)
+        Storage-->>API: Return temporary signed image URLs
+        API-->>UI: Data riwayat lengkap + Signed image URLs
+        UI-->>User: Render daftar riwayat dan thumbnail gambar
     end
 ```
 
@@ -482,31 +481,54 @@ cp .env.example .env
 Contoh `.env.example`:
 
 ```dotenv
-# Gemini API Keys
-GEMINI_API_KEY_ANALYZER_MODUL=
+# ==============================================================================
+# Google Gemini API
+# Model Target: gemini-3.5-flash
+# Endpoint: https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent?key=...
+# ==============================================================================
+GEMINI_API_KEY_WASTE_ANALYZER=AIzaSy...
+GEMINI_API_KEY_PLANT_ANALYZER=AIzaSy...
 
-# PostgreSQL
-DATABASE_URL=
+# ==============================================================================
+# Database PostgreSQL (Supabase / Local) via Native Driver
+# ==============================================================================
+DATABASE_URL="postgresql://postgres.[PROJECT-REF]:[PASSWORD]@aws-0-[REGION].pooler.supabase.com:6543/postgres"
 
-# Application
-PUBLIC_APP_URL=http://localhost:5173
+# ==============================================================================
+# Supabase Storage (Private Bucket)
+# Digunakan oleh backend untuk upload binary dan generate signed URLs
+# ==============================================================================
+SUPABASE_URL="https://[PROJECT-REF].supabase.co"
+SUPABASE_SERVICE_ROLE_KEY="eyJhbGciOi..."
+SUPABASE_BUCKET_NAME="sustainai-images"
+SIGNED_URL_EXPIRES_IN=3600
+
+# ==============================================================================
+# Autentikasi & Keamanan (JWT & Demo OTP)
+# ==============================================================================
+JWT_SECRET="super-secret-jwt-key-change-this-in-production"
+DEMO_OTP_CODE="123456"
+
+# ==============================================================================
+# Aplikasi
+# ==============================================================================
+PUBLIC_APP_URL="http://localhost:5173"
 ```
 
-| Variable                        | Kegunaan                                 |
-| ------------------------------- | ---------------------------------------- |
-| `GEMINI_API_KEY_ANALYZER_MODUL` | API key Gemini untuk Modul Analyzer.     |
-| `DATABASE_URL`                  | Connection string PostgreSQL.            |
-| `PUBLIC_APP_URL`                | URL aplikasi untuk konfigurasi tertentu. |
+| Variable                        |  Lingkungan   | Kegunaan & Keterangan                                                                                        |
+| :------------------------------ | :-----------: | :----------------------------------------------------------------------------------------------------------- |
+| `GEMINI_API_KEY_WASTE_ANALYZER` |  Server-side  | API key Gemini untuk analisis modul Waste Analyzer.                                                          |
+| `GEMINI_API_KEY_PLANT_ANALYZER` |  Server-side  | API key Gemini untuk analisis modul Plant Disease Analyzer.                                                  |
+| `DATABASE_URL`                  |  Server-side  | Connection string PostgreSQL (kompatibel dengan Supabase pooler/direct connection).                          |
+| `SUPABASE_URL`                  |  Server-side  | URL project Supabase instance.                                                                               |
+| `SUPABASE_SERVICE_ROLE_KEY`     |  Server-side  | Secret key berprivilese penuh untuk mengunggah ke private storage bucket dan membuat signed URL akses token. |
+| `SUPABASE_BUCKET_NAME`          |  Server-side  | Nama bucket private tempat penyimpanan file gambar (misal: `sustainai-images`).                              |
+| `SIGNED_URL_EXPIRES_IN`         |  Server-side  | Masa berlaku token akses gambar sementara (dalam detik, default 3600 / 1 jam).                               |
+| `JWT_SECRET`                    |  Server-side  | Kunci enkripsi/signing token JWT sesi login pada HTTP-only cookie.                                           |
+| `DEMO_OTP_CODE`                 |  Server-side  | Kode OTP hardcode untuk demonstrasi verifikasi registrasi (`123456`).                                        |
+| `PUBLIC_APP_URL`                | Client/Server | Base URL aplikasi web SvelteKit.                                                                             |
 
-Sesuaikan nama variabel dengan implementasi source code. Jika kedua modul menggunakan satu API key, konfigurasi dapat disederhanakan.
-
-Contoh connection string:
-
-```dotenv
-DATABASE_URL="postgresql://USER:PASSWORD@HOST:5432/DATABASE_NAME"
-```
-
-**Penting:** Jangan masukkan kredensial asli ke `.env.example`. Pastikan `.env` tercantum di `.gitignore`. API key Gemini harus disimpan sebagai environment variable server dan tidak boleh dikirim ke browser atau di-commit ke repository.
+> **Penting:** Semua secret key di atas dikelola murni di sisi server SvelteKit dan tidak pernah dikirim ke browser client demi keamanan maksimal.
 
 ### 4. Konfigurasi Database
 
