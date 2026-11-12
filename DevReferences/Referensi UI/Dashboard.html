@@ -398,7 +398,7 @@
       <header
         class="sticky top-0 z-30 flex flex-wrap items-center justify-between gap-2 px-4 sm:px-6 min-h-[4rem] py-2 lg:py-0 lg:h-16 lg:flex-nowrap w-full bg-surface-card border-b border-border-subtle shadow-sm"
       >
-        <!-- Left side: Search bar & Links -->
+        <!-- Breadcrumbs & Identity -->
         <div class="flex items-center gap-3 lg:gap-8 min-w-0">
           <button
             id="sidebarToggle"
@@ -410,6 +410,20 @@
           >
             <span class="material-symbols-outlined text-[24px]">menu</span>
           </button>
+          <span
+            class="hidden sm:inline text-headline-md font-headline-md font-extrabold text-primary"
+            >SustainAI</span
+          >
+          <span class="hidden sm:inline text-text-muted">/</span>
+          <span
+            class="hidden sm:inline text-label-lg font-label-lg text-text-muted"
+            >Apps</span
+          >
+          <span class="hidden sm:inline text-text-muted">/</span>
+          <span
+            class="truncate text-label-lg font-label-lg text-text-strong font-semibold"
+            >Overview</span
+          >
         </div>
         <!-- Right side: Status, Notifications, Help & Action -->
         <div class="flex items-center gap-2 sm:gap-4">
@@ -1166,10 +1180,10 @@
           </div>
         </section>
         <!-- SECTION 4: REAL-TIME AI SCAN FEED & QUICK CLASSIFIER WIDGET -->
-        <section id="sec-live" class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <section id="sec-live" class="w-full">
           <!-- Table Feed: Recent AI Scans (8 Columns) -->
           <div
-            class="lg:col-span-8 bg-surface-card p-6 rounded-2xl border border-border-subtle shadow-eco-subtle flex flex-col justify-between"
+            class="w-full bg-surface-card p-6 rounded-2xl border border-border-subtle shadow-eco-subtle flex flex-col justify-between"
           >
             <div>
               <div class="flex items-center justify-between mb-4">
