@@ -40,6 +40,15 @@ SustainAI memiliki dua modul utama:
 
 Alur yang ingin dihadirkan SustainAI adalah **identifikasi → pemahaman → rekomendasi → tindakan**. Informasi harga dan lokasi bank sampah pada versi demo dapat menggunakan dataset contoh dan bukan merupakan data real-time.
 
+### 🌍 Sustainable Development Goals (SDGs)
+
+SustainAI dikembangkan sebagai solusi teknologi berbasis *Artificial Intelligence* (AI) yang mendukung pencapaian *Sustainable Development Goals* (SDGs), khususnya:
+
+**SDG 12 — Responsible Consumption and Production**  
+*Konsumsi dan Produksi yang Bertanggung Jawab*
+
+SustainAI berkontribusi dalam mendorong pengelolaan sampah yang lebih bertanggung jawab melalui identifikasi dan klasifikasi sampah, edukasi daur ulang, serta penyediaan informasi referensi harga dan bank sampah. Melalui Waste Analyzer, masyarakat diharapkan dapat memahami potensi pemanfaatan sampah dan mengambil keputusan yang lebih bijak dalam pengelolaan limbah.
+
 ### Filosofi Nama
 
 Nama **SustainAI** menggabungkan kata _Sustain_ (keberlanjutan dan pelestarian lingkungan) dengan _AI_ (_Artificial Intelligence_). Nama ini merepresentasikan pemanfaatan kecerdasan buatan untuk membantu masyarakat mengambil keputusan yang lebih berkelanjutan. SustainAI bukan sekadar pengenal gambar, tetapi juga asisten yang mengarahkan pengguna untuk memahami hasil identifikasi dan menentukan tindakan selanjutnya.
