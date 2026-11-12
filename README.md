@@ -103,7 +103,7 @@ Dashboard menyediakan lima halaman yang dapat diakses melalui sidebar:
 | **Overview**       | Menampilkan ringkasan aktivitas, statistik analisis, dan visualisasi data. |
 | **Waste Analyzer** | Menjalankan analisis gambar sampah.                                        |
 | **Plant Analyzer** | Menjalankan analisis gambar tanaman.                                       |
-| **Riwayat Saya**   | Menampilkan catatan hasil analisis yang tersimpan.                         |
+| **History**        | Menampilkan catatan hasil analisis yang tersimpan.                         |
 | **Setting**        | Mengelola nama, email, foto profil, dan password akun.                     |
 
 Informasi yang ditampilkan pada halaman **Overview** meliputi:
@@ -122,7 +122,6 @@ Pengembangan SustainAI selanjutnya dapat mencakup beberapa fitur berikut (bukan 
 - Integrasi data harga bank sampah secara real-time.
 - Pencarian bank sampah berdasarkan lokasi pengguna dan jarak terdekat.
 - Verifikasi berkala terhadap jenis sampah yang diterima dan harga yang ditawarkan bank sampah.
-- Penyediaan riwayat analisis sampah dan tanaman.
 - Pengembangan dashboard statistik aktivitas pengelolaan sampah.
 - Estimasi jejak karbon menggunakan metodologi dan faktor emisi yang tervalidasi.
 - Perluasan cakupan analisis untuk lebih banyak jenis sampah dan tanaman.
@@ -227,7 +226,7 @@ flowchart TD
     H --> J2[Modul Utama]
     J2 --> J[Waste Analyzer]
     J2 --> K[Plant Analyzer]
-    H --> L[Riwayat Saya]
+    H --> L[History]
     H --> M[Setting]
 
 
@@ -277,7 +276,7 @@ Pengguna dapat mengakses lima halaman melalui sidebar:
 - **Overview** — Menampilkan ringkasan aktivitas, empat indikator utama (Total Analisis, Sampah Dianalisis, Tanaman Dianalisis, dan Sampah Berpotensi Didaur Ulang), grafik fluktuasi harga sampah berdasarkan jenis, serta komposisi jenis sampah yang dianalisis.
 - **Waste Analyzer** — Halaman untuk mengunggah atau mengambil gambar sampah dan memperoleh hasil analisis.
 - **Plant Analyzer** — Halaman untuk mengunggah atau mengambil gambar tanaman guna mengetahui indikasi hama atau penyakit.
-- **Riwayat Saya** — Menampilkan catatan hasil analisis yang telah tersimpan.
+- **History** — Menampilkan catatan hasil analisis yang telah tersimpan.
 - **Setting** — Memungkinkan pengguna memperbarui nama, email, foto profil, dan password.
 
 #### C. Melakukan Analisis Gambar
@@ -303,7 +302,7 @@ Pengguna dapat mengakses lima halaman melalui sidebar:
 
 #### E. Melihat Riwayat dan Mengelola Akun
 
-- **Riwayat analisis:** Pengguna membuka menu **Riwayat Saya** untuk meninjau kembali hasil analisis sampah maupun tanaman yang tersimpan.
+- **Riwayat analisis:** Pengguna membuka menu **History** untuk meninjau kembali hasil analisis sampah maupun tanaman yang tersimpan.
 - **Pengaturan akun:** Pengguna membuka menu **Setting** untuk memperbarui nama, email, foto profil, atau password.
 
 ### 3. Diagram Arsitektur Sistem
@@ -484,8 +483,7 @@ Contoh `.env.example`:
 
 ```dotenv
 # Gemini API Keys
-GEMINI_API_KEY_WASTE_ANALYZER=
-GEMINI_API_KEY_PLANT_ANALYZER=
+GEMINI_API_KEY_ANALYZER_MODUL=
 
 # PostgreSQL
 DATABASE_URL=
@@ -494,12 +492,11 @@ DATABASE_URL=
 PUBLIC_APP_URL=http://localhost:5173
 ```
 
-| Variable                        | Kegunaan                                     |
-| ------------------------------- | -------------------------------------------- |
-| `GEMINI_API_KEY_WASTE_ANALYZER` | API key Gemini untuk Waste Analyzer.         |
-| `GEMINI_API_KEY_PLANT_ANALYZER` | API key Gemini untuk Plant Disease Analyzer. |
-| `DATABASE_URL`                  | Connection string PostgreSQL.                |
-| `PUBLIC_APP_URL`                | URL aplikasi untuk konfigurasi tertentu.     |
+| Variable                        | Kegunaan                                 |
+| ------------------------------- | ---------------------------------------- |
+| `GEMINI_API_KEY_ANALYZER_MODUL` | API key Gemini untuk Modul Analyzer.     |
+| `DATABASE_URL`                  | Connection string PostgreSQL.            |
+| `PUBLIC_APP_URL`                | URL aplikasi untuk konfigurasi tertentu. |
 
 Sesuaikan nama variabel dengan implementasi source code. Jika kedua modul menggunakan satu API key, konfigurasi dapat disederhanakan.
 

@@ -4,7 +4,7 @@ Data di bawah merupakan data dummy untuk pengembangan/demo, bukan data operasion
 
 ## 1. `users`
 
-Kolom mengikuti schema MVP: `id, email, password_hash, full_name, email_verified, created_at, updated_at`.
+Kolom mengikuti schema MVP: `id, email, password_hash, full_name, email_verified, created_at, updated_at`. kolom `id` menggunakan UUID v4
 
 | id                                     | email                         | password_hash                                                  | full_name           | email_verified | created_at             | updated_at             |
 | -------------------------------------- | ----------------------------- | -------------------------------------------------------------- | ------------------- | -------------- | ---------------------- | ---------------------- |
@@ -95,7 +95,7 @@ Setiap perubahan harga disimpan sebagai record baru. Oleh karena itu, tabel `was
 
 ## 5. `analysis_records`
 
-Contoh data mengikuti struktur sebelumnya. Hasil JSON tervalidasi Gemini disimpan pada `result`;
+Contoh data mengikuti struktur sebelumnya. Hasil JSON tervalidasi Gemini disimpan pada `result`, format penamaan pada kolom `image_path` menggunakan format `<<analysis_records.id>>-<<analysis_records.analysis_type>>-<<unix-timestamp>>.<<format gambar>>`;
 
 | id                                     | user_id                                | analysis_type | status    | image_path                                                                      | ai_provider   | ai_model         | prompt_version | created_at             |
 | -------------------------------------- | -------------------------------------- | ------------- | --------- | ------------------------------------------------------------------------------- | ------------- | ---------------- | -------------- | ---------------------- |
