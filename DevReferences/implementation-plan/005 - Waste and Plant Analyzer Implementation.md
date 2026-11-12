@@ -15,10 +15,12 @@ Untuk memproses gambar secara optimal, SustainAI menggunakan **pendekatan hibrid
 1. **Untuk Inferensi Gemini API**: Menggunakan **Inline Data — Base64 (`inline_data`)**.
    - Backend membaca file gambar sebagai Buffer, mengonversinya menjadi Base64 string, lalu menyematkannya langsung pada payload REST JSON ke Gemini API bersama instruksi prompt.
    - _Keunggulan:_ Mengeliminasi ketergantungan urutan (tidak perlu menunggu gambar selesai ter-upload di cloud storage sebelum memanggil AI), memangkas waktu tunggu pengguna, dan menjaga privasi gambar sebelum terkonfirmasi valid.
-2. **Untuk Persistensi & Riwayat (Menu History)**: Diunggah ke **Supabase Storage Bucket** (`sustainai-images`).
-   - Backend mengunggah file binary asli ke bucket Supabase untuk mendapatkan path/URL persisten (`image_path`).
-   - Format penamaan file terstandarisasi: `<<analysis_id>>-<<analysis_type>>-<<unix-timestamp>>.<<ext>>`.
-   - Path disimpan pada kolom `analysis_records.image_path` dan dapat diakses dengan cepat melalui CDN Supabase pada halaman riwayat.
+2. **Untuk Persistensi & Riwayat (Menu History)**: Diunggah ke **Private Supabase Storage Bucket** (`SustainAI-UserPhoto`).
+   - Karena bucket berstatus **private**, file gambar tidak dapat diakses publik secara bebas dan membutuhkan token otentikasi/tanda tangan akses.
+   - Backend mengunggah file binary menggunakan Supabase Service Role Client ke bucket private untuk mendapatkan path/lokasi penyimpanan unik (`image_path`).
+   - Format penamaan file terstandarisasi: `<<analysis_id>>_<<analysis_type>>_<<unix-timestamp>>.<<ext>>`.
+   - Kolom `analysis_records.image_path` hanya menyimpan path relatif di dalam bucket (misalnya: `waste/f1221e2a-0dfe-4b81-b6d0-76e536cfc2df_waste_1794232269.jpg`), bukan URL publik telanjang.
+   - Setiap kali gambar ingin ditampilkan (seperti di menu History atau preview hasil analisis), backend SvelteKit menggunakan method `createSignedUrl` dengan masa berlaku aman (misalnya: 3600 detik / 1 jam) sehingga frontend menerima signed URL bertoken sementara.
 
 ---
 
@@ -310,18 +312,25 @@ Berikan hanya JSON yang valid.
 ## 6. Step-by-Step Implementation
 
 1. **Instalasi Dependencies & Env**:
+
    - `npm install @supabase/supabase-js`
    - Lengkapi `.env`:
+
      ```dotenv
-     GEMINI_API_KEY_ANALYZER_MODUL=...
-     SUPABASE_URL=...
-     SUPABASE_SERVICE_ROLE_KEY=...
-     SUPABASE_BUCKET_NAME=sustainai-images
+     # Gemini AI API Keys
+     GEMINI_API_KEY_WASTE_ANALYZER=...
+     GEMINI_API_KEY_PLANT_ANALYZER=...
+
+     # Supabase Storage (Private Bucket)
+     SUPABASE_URL=https://<project-id>.supabase.co
+     SUPABASE_SERVICE_ROLE_KEY=eyJhbGciOi... # Kunci server-side berprivilese penuh untuk upload & generate signed URL di private bucket
+     SUPABASE_BUCKET_NAME=SustainAI-UserPhoto
      ```
+
 2. **Implementasi Service Server**:
    - Buat `src/lib/server/ai/prompts.ts` menyimpan konstanta string prompt resmi Plant & Waste.
    - Buat `src/lib/server/ai/gemini.ts` untuk pengiriman payload Base64 dan parsing respons JSON.
-   - Buat `src/lib/server/storage.ts` untuk mengunggah file ke Supabase Storage Bucket.
+   - Buat `src/lib/server/storage.ts` menggunakan client Supabase `createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY)` yang menangani upload ke private bucket dan helper `createSignedImageUrl(imagePath, expiresInSeconds)` untuk menghasilkan URL bertoken sementara.
 3. **Penyimpanan Transaksional PostgreSQL**:
    - Buat fungsi penyimpan transaksi atomik di `src/lib/server/db/analysis.ts` untuk tabel `analysis_records` dan tabel rincian modul (`analysis_waste_details` / `analysis_plant_details`).
 4. **Implementasi API Route Handler**:

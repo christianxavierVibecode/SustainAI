@@ -95,13 +95,13 @@ Setiap perubahan harga disimpan sebagai record baru. Oleh karena itu, tabel `was
 
 ## 5. `analysis_records`
 
-Contoh data mengikuti struktur sebelumnya. Hasil JSON tervalidasi Gemini disimpan pada `result`, format penamaan pada kolom `image_path` menggunakan format `<<analysis_records.id>>-<<analysis_records.analysis_type>>-<<unix-timestamp>>.<<format gambar>>`;
+Contoh data mengikuti struktur sebelumnya. Hasil JSON tervalidasi Gemini disimpan pada `result`, format penamaan pada kolom `image_path` menggunakan format `<<analysis_records.id>>_<<analysis_records.analysis_type>>_<<unix-timestamp>>.<<format gambar>>`;
 
 | id                                     | user_id                                | analysis_type | status    | image_path                                                                      | ai_provider   | ai_model         | prompt_version | created_at             |
 | -------------------------------------- | -------------------------------------- | ------------- | --------- | ------------------------------------------------------------------------------- | ------------- | ---------------- | -------------- | ---------------------- |
-| `f1221e2a-0dfe-4b81-b6d0-76e536cfc2df` | `abef1065-b725-4998-814a-65832ed042b4` | waste         | completed | `waste-analysis/2026/f1221e2a-0dfe-4b81-b6d0-76e536cfc2df-waste-1794232269.jpg` | Google Gemini | Gemini 3.6 Flash | waste-v1       | 2026-09-28 16:42:00+07 |
-| `30c5493e-3e47-44ea-bab7-13cfa97536cb` | `abef1065-b725-4998-814a-65832ed042b4` | plant         | completed | `waste-analysis/2026/30c5493e-3e47-44ea-bab7-13cfa97536cb-plant-1794232290.jpg` | Google Gemini | Gemini 3.6 Flash | plant-v1       | 2026-09-29 11:12:00+07 |
-| `49927af5-d976-4fae-9a2d-b216c649a966` | `1b3fac7c-68c6-4595-89cc-08951422f0ae` | waste         | completed | `waste-analysis/2026/49927af5-d976-4fae-9a2d-b216c649a966-plant-1794232290.jpg` | Google Gemini | Gemini 3.6 Flash | waste-v1       | 2026-09-30 13:22:00+07 |
+| `f1221e2a-0dfe-4b81-b6d0-76e536cfc2df` | `abef1065-b725-4998-814a-65832ed042b4` | waste         | completed | `waste-analysis/2026/f1221e2a-0dfe-4b81-b6d0-76e536cfc2df_waste_1794232269.jpg` | Google Gemini | Gemini 3.6 Flash | waste-v1       | 2026-09-28 16:42:00+07 |
+| `30c5493e-3e47-44ea-bab7-13cfa97536cb` | `abef1065-b725-4998-814a-65832ed042b4` | plant         | completed | `waste-analysis/2026/30c5493e-3e47-44ea-bab7-13cfa97536cb_plant_1794232290.jpg` | Google Gemini | Gemini 3.6 Flash | plant-v1       | 2026-09-29 11:12:00+07 |
+| `49927af5-d976-4fae-9a2d-b216c649a966` | `1b3fac7c-68c6-4595-89cc-08951422f0ae` | waste         | completed | `waste-analysis/2026/49927af5-d976-4fae-9a2d-b216c649a966_plant_1794232290.jpg` | Google Gemini | Gemini 3.6 Flash | waste-v1       | 2026-09-30 13:22:00+07 |
 
 Contoh `result` untuk analisis sampah:
 

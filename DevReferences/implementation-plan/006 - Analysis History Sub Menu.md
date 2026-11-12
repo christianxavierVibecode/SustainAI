@@ -64,10 +64,10 @@ WHERE id = $1 AND user_id = $2;
    - Memvalidasi session pengguna (`locals.user`).
    - Menerima query parameter: `type` (`all`, `waste`, `plant`), `search` (keyword pencarian), dan `page` (nomor halaman pagination).
    - Menjalankan parameterized raw SQL query via driver PostgreSQL.
-   - Menghasilkan URL publik untuk `image_path` menggunakan Supabase Storage client / public bucket CDN URL.
+   - Karena bucket Supabase Storage bersifat **Private**, server memanfaatkan helper `createSignedImageUrl(imagePath, 3600)` untuk menghasilkan **Signed URL (Temporary Token)** berdurasi 1 jam secara batch untuk setiap record riwayat yang akan dirender ke browser.
 2. **Delete Action (`+page.server.ts` / API action)**:
    - Form action `deleteRecord` untuk menghapus baris riwayat milik pengguna.
-   - (Opsional/Pendukung) Menghapus file gambar fisik di bucket Supabase Storage agar tidak meninggalkan file yatim (*orphaned files*).
+   - Menghapus file gambar fisik di private bucket Supabase Storage menggunakan client service role agar tidak meninggalkan file yatim (*orphaned files*).
 3. **Frontend UI Implementation (`src/routes/dashboard/history/+page.svelte`)**:
    - Mengadopsi tata letak dan komponen visual dari file referensi UI `DevReferences/Referensi UI/Reports.html`.
    - **Filter Tabs**: Tab pemilih "Semua Analisis", "Sampah (Waste)", dan "Tanaman (Plants)".
@@ -85,8 +85,11 @@ WHERE id = $1 AND user_id = $2;
    - Buat fungsi `getUserAnalysisHistory(userId, options: { type?, search?, limit?, offset? })`.
    - Buat fungsi `getUserHistorySummary(userId)`.
    - Buat fungsi `deleteAnalysisRecord(recordId, userId)`.
-2. **Supabase Storage Image Resolver (`src/lib/server/storage.ts`)**:
-   - Buat fungsi helper `getImagePublicUrl(imagePath: string): string` untuk mengubah `image_path` yang tersimpan di database menjadi URL lengkap Supabase Storage yang dapat langsung di-render oleh tag `<img>`.
+2. **Supabase Storage Private Image Resolver (`src/lib/server/storage.ts`)**:
+   - Karena bucket berstatus **private**, tag `<img>` di browser tidak dapat langsung mengakses URL mentah.
+   - Buat fungsi helper `createSignedImageUrl(imagePath: string, expiresIn: number = 3600): Promise<string>` menggunakan method `supabase.storage.from(bucket).createSignedUrl(imagePath, expiresIn)`.
+   - Pada `+page.server.ts`, daftar item riwayat dipetakan melalui `Promise.all` untuk membubuhkan signed URL bertoken sementara ke dalam objek response yang dikirim ke frontend Svelte.
+   - Buat fungsi `deleteStorageImage(imagePath: string)` untuk menghapus file fisik di private bucket ketika pengguna menghapus riwayat analisis.
 3. **Server Load & Actions (`src/routes/dashboard/history/+page.server.ts`)**:
    - Pasang handler `load` yang membaca URL params (`url.searchParams`) dan memanggil fungsi database secara terisolasi.
    - Pasang form actions `delete` yang memeriksa kepemilikan data (`user_id = locals.user.id`) sebelum eksekusi penghapusan.
