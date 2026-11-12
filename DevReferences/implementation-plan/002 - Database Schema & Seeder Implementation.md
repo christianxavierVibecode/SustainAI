@@ -1,39 +1,45 @@
 # Implementation Plan: 002 - Database Schema & Seeder Implementation
 
 ## Overview
-Menghubungkan aplikasi SvelteKit dengan basis data PostgreSQL, menerapkan struktur tabel sesuai rancangan `schema.sql`, serta mengeksekusi seed data dummy dari `database-seed.md` untuk kebutuhan demonstrasi MVP.
+Menghubungkan aplikasi SvelteKit dengan basis data PostgreSQL menggunakan **database driver langsung (tanpa ORM)**, mengeksekusi DDL script dari `schema.sql` untuk membuat struktur tabel dan index, serta menjalankan script seeder data dummy dari `database-seed.md` menggunakan raw SQL queries.
 
 ## Scope & Deliverables
-1. **Database Client & Konfigurasi**:
-   - Integrasi database driver/ORM PostgreSQL (misal: `postgres` / `pg` connection pool atau Drizzle/Prisma sesuai preferensi stack SvelteKit).
-   - Singleton client database di `src/lib/server/db.ts` dengan memanfaatkan connection string `DATABASE_URL`.
-2. **Eksekusi Migration & Schema**:
-   - Membuat dan mengeksekusi DDL script sesuai `DevReferences/Database/schema.sql`:
+1. **Database Driver & Connection Pool**:
+   - Memilih dan memasang native PostgreSQL driver murni (direkomendasikan driver modern dan performan untuk SvelteKit/Node: `postgres` dari Porsager atau `pg` / `node-postgres`).
+   - Membuat connection pool singleton di `src/lib/server/db.ts` menggunakan connection string `DATABASE_URL`.
+   - Menghindari penggunaan ORM (seperti Prisma, Drizzle, TypeORM, dll.) agar kontrol query raw SQL penuh dan beban runtime minimal.
+2. **Eksekusi Schema Migration (Raw SQL DDL)**:
+   - Membuat script migration/init database (`scripts/migrate.ts` atau `scripts/init-db.js`) yang membaca langsung file `DevReferences/Database/schema.sql` dan mengeksekusinya via driver.
+   - Memastikan semua tabel, relasi foreign key, constraint, dan index terbentuk:
      - `users` (UUID v4, email, password_hash, full_name, email_verified, timestamp)
      - `waste_categories` & `waste_sub_categories`
-     - `waste_price` (riwayat pergerakan harga tanpa overwrite)
-     - `analysis_records` (induk analisis, JSONB result, foreign key user)
+     - `waste_price` (riwayat observasi harga)
+     - `analysis_records` (tipe 'waste'/'plant', result JSONB, foreign key user)
      - `analysis_waste_details` & `analysis_plant_details`
-     - Index pendukung: `idx_analysis_user_date`, `idx_analysis_type_date`, `idx_analysis_result_gin`, dll.
-3. **Database Seeder**:
-   - Membuat script seeder (`scripts/seed.ts` atau script runnable `npm run db:seed`).
+     - GIN index untuk kolom `result` JSONB dan B-tree index pendukung lainnya.
+3. **Database Seeder (Raw SQL DML)**:
+   - Membuat script seeder (`scripts/seed.ts` atau `scripts/seed.js`) yang mengeksekusi parameterized query SQL murni (`INSERT INTO ... VALUES (...)`).
    - Menyuntikkan data dummy teruji dari `DevReferences/Database/database-seed.md`:
-     - 2 Akun pengguna (termasuk demo user `christianxavier@genforces.com` dengan password hash bcrypt).
+     - 2 Akun pengguna (termasuk demo user `christianxavier@genforces.com` dengan password hash).
      - 5 Kategori utama sampah dan 14 subkategori sampah.
-     - 42 Record histori pergerakan harga sampah (`waste_price`) untuk mendukung chart fluktuasi harga.
-     - Record contoh `analysis_records`, `analysis_waste_details`, dan `analysis_plant_details`.
+     - 42 Record histori pergerakan harga sampah (`waste_price`) untuk mendukung grafik analitik fluktuasi harga.
+     - Contoh data riwayat analisis pada `analysis_records`, `analysis_waste_details`, dan `analysis_plant_details`.
+   - Menggunakan query yang aman (idempotent, misal `ON CONFLICT DO NOTHING`) agar seed bisa dijalankan ulang tanpa duplikasi error.
 
 ## Step-by-Step Implementation
-1. Pasang dependency database client (misal `pg` beserta `@types/pg` atau `postgres`) dan helper hash password `bcryptjs`.
-2. Buat koneksi pool database terisolasi di `src/lib/server/db.ts` dengan penanganan error koneksi yang jelas.
-3. Siapkan script migrasi/init DDL yang membaca atau mengeksekusi instruksi dari `schema.sql`.
-4. Siapkan script seeder yang mengonversi data Markdown tabel `database-seed.md` menjadi query INSERT idempotent (menggunakan `ON CONFLICT DO NOTHING` atau reset aman).
-5. Tambahkan shortcut script pada `package.json` (misalnya: `"db:init"` dan `"db:seed"`).
-6. Uji koneksi dan query dasar dari aplikasi SvelteKit untuk memastikan relasi antar tabel valid.
+1. Pasang dependency database driver PostgreSQL murni:
+   - `npm install postgres` (atau `npm install pg` & `@types/pg`) serta `dotenv` (untuk runner script CLI).
+2. Siapkan file singleton client database di `src/lib/server/db.ts` dengan ekspor pool client untuk dipakai oleh server routes/actions SvelteKit.
+3. Siapkan script DDL `scripts/migrate.js` (atau `.ts`) yang membaca file `DevReferences/Database/schema.sql` menggunakan Node `fs.readFileSync` lalu mengeksekusinya langsung melalui driver.
+4. Siapkan script DML `scripts/seed.js` (atau `.ts`) berisi data array terstruktur dari `database-seed.md` yang di-*insert* menggunakan parameterized raw query.
+5. Daftarkan perintah praktis di `package.json`:
+   - `"db:migrate": "node scripts/migrate.js"`
+   - `"db:seed": "node scripts/seed.js"`
+6. Uji coba eksekusi koneksi, migrasi tabel, dan seeding data secara lokal, lalu verifikasi hasil query via driver.
 
 ## Verification & Acceptance Criteria
-- [ ] Koneksi ke PostgreSQL berhasil dilakukan tanpa kebocoran credential.
-- [ ] Seluruh 7 tabel utama dan indeks berhasil terbuat sesuai `schema.sql`.
-- [ ] Script seeder berhasil dijalankan tanpa error.
-- [ ] Akun demo dapat ditemukan di tabel `users` dengan hash password yang valid.
-- [ ] Data relasi kategori, subkategori, dan histori harga 42 record terisi lengkap.
+- [ ] Tidak ada dependensi ORM yang dipasang di proyek; murni menggunakan database driver PostgreSQL.
+- [ ] Koneksi database singleton terisolasi di sisi server (`src/lib/server/db.ts`) dan aman dari eksposur client.
+- [ ] Script `npm run db:migrate` berhasil membuat 7 tabel utama dan seluruh index dari `schema.sql`.
+- [ ] Script `npm run db:seed` berhasil mengeksekusi raw query insert untuk seluruh data dummy (akun demo, kategori/subkategori, 42 baris harga, dan catatan analisis).
+- [ ] Query uji coba via driver berhasil mengambil data akun demo dan data harga sampah tanpa kendala.
