@@ -5,11 +5,14 @@
 -- waste_price is a price-history table: insert a new row for each price observation.
 -- Demo prices are references only and are not real-time/verified prices.
 
+CREATE TYPE user_role_enum AS ENUM ('admin', 'user');
+
 CREATE TABLE users (
     id              UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     email           VARCHAR(255) NOT NULL UNIQUE,
     password_hash   TEXT NOT NULL,
     full_name       VARCHAR(120),
+    user_role       user_role_enum NOT NULL DEFAULT 'user',
     email_verified  BOOLEAN NOT NULL DEFAULT FALSE,
     created_at      TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     updated_at      TIMESTAMPTZ NOT NULL DEFAULT NOW()

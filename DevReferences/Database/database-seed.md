@@ -6,10 +6,10 @@ Data di bawah merupakan data dummy untuk pengembangan/demo, bukan data operasion
 
 Kolom mengikuti schema MVP: `id, email, password_hash, full_name, email_verified, created_at, updated_at`. kolom `id` menggunakan UUID v4
 
-| id                                     | email                         | password_hash                                                  | full_name           | email_verified | created_at             | updated_at             |
-| -------------------------------------- | ----------------------------- | -------------------------------------------------------------- | ------------------- | -------------- | ---------------------- | ---------------------- |
-| `abef1065-b725-4998-814a-65832ed042b4` | christianxavier@genforces.com | `$2a$12$.vk8vH6L7VPRgMoEGm1LxuajuxS26xVdEGsPGChM/Rcism4DC5q1i` | GenForces Demo      | true           | 2026-11-01 13:13:47+07 | 2026-11-01 18:13:44+07 |
-| `1b3fac7c-68c6-4595-89cc-08951422f0ae` | user@genforces.com            | `$2a$12$nDZib8pGVuf.f9q/I/JrbOQDGt2hhJOkn2yt/R09LYLL4uQwLvJ.e` | SustainAI Demo User | true           | 2026-11-02 18:13:44+07 | 2026-11-02 18:13:44+07 |
+| id                                     | email                         | password_hash                                                  | full_name           | user_role | email_verified | created_at             | updated_at             |
+| -------------------------------------- | ----------------------------- | -------------------------------------------------------------- | ------------------- | --------- | -------------- | ---------------------- | ---------------------- |
+| `abef1065-b725-4998-814a-65832ed042b4` | christianxavier@genforces.com | `$2a$12$.vk8vH6L7VPRgMoEGm1LxuajuxS26xVdEGsPGChM/Rcism4DC5q1i` | GenForces Demo      | user      | true           | 2026-11-01 13:13:47+07 | 2026-11-01 18:13:44+07 |
+| `1b3fac7c-68c6-4595-89cc-08951422f0ae` | admin@genforces.com           | `$2a$12$nDZib8pGVuf.f9q/I/JrbOQDGt2hhJOkn2yt/R09LYLL4uQwLvJ.e` | SustainAI Demo User | admin     | true           | 2026-11-02 18:13:44+07 | 2026-11-02 18:13:44+07 |
 
 ## 2. `waste_categories`
 
