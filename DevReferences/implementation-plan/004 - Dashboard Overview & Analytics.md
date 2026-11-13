@@ -125,8 +125,8 @@ Berikut adalah rincian teknis kebutuhan data pada halaman Overview, formula agre
 ---
 
 ## Verification & Acceptance Criteria
-- [ ] Rute `/dashboard/overview` terproteksi dan hanya dapat diakses pengguna terautentikasi.
-- [ ] 4 Kartu metrik menampilkan angka akurat hasil agregasi query database `analysis_records` dan `analysis_waste_details`.
-- [ ] Grafik fluktuasi harga berhasil merender seluruh 42 titik data histori harga dari tabel `waste_price` secara kronologis.
-- [ ] Grafik komposisi kategori sampah menampilkan proporsi persentase yang sesuai dengan record analisis sampah pengguna.
-- [ ] Desain antarmuka responsif di layar mobile maupun desktop serta konsisten dengan tema desain SustainAI.
+- [x] Rute `/dashboard/overview` terproteksi dan hanya dapat diakses pengguna terautentikasi.
+- [x] 4 Kartu metrik menampilkan angka akurat hasil agregasi query database `analysis_records` dan `analysis_waste_details`.
+- [x] Grafik fluktuasi harga berhasil merender seluruh 42 titik data histori harga dari tabel `waste_price` secara kronologis.
+- [x] Grafik komposisi kategori sampah menampilkan proporsi persentase yang sesuai dengan record analisis sampah pengguna.
+- [x] Desain antarmuka responsif di layar mobile maupun desktop serta konsisten dengan tema desain SustainAI.
