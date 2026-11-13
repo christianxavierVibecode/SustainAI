@@ -275,7 +275,7 @@
 	</div>
 
 	<!-- Canvas Container (Line Chart) -->
-	<div class="w-full h-72 sm:h-80 relative">
+	<div class="w-full h-150 sm:h-120 relative">
 		<canvas bind:this={canvasEl}></canvas>
 	</div>
 </div>

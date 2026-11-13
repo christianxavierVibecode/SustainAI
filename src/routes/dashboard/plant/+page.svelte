@@ -75,12 +75,6 @@
 	<!-- ========================================================================= -->
 	<div class="bg-surface-card border border-border-subtle rounded-2xl p-6 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-4">
 		<div class="space-y-1">
-			<div class="flex items-center gap-2">
-				<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-accent-teal-subtle text-accent-teal border border-accent-teal/30">
-					SDG 2 Zero Hunger &amp; Food Security
-				</span>
-				<span class="text-xs text-text-muted">| Diagnosis Hama &amp; Kesehatan Tanaman</span>
-			</div>
 			<h1 class="font-display font-extrabold text-2xl sm:text-3xl text-text-strong tracking-tight">
 				Plant Disease Diagnostics
 			</h1>
