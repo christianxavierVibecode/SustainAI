@@ -355,10 +355,10 @@ Berikan hanya JSON yang valid.
 
 ## 7. Verification & Acceptance Criteria
 
-- [ ] Pengguna dapat mengambil foto langsung via kamera perangkat atau mengunggah berkas gambar lokal (JPG/PNG/WEBP < 5MB).
-- [ ] Backend berhasil mengonversi gambar menjadi Inline Base64 untuk dikirimkan langsung ke Gemini API tanpa menunggu proses storage selesai.
-- [ ] File gambar berhasil diunggah ke Supabase Storage dan tercatat path persistennya di kolom `image_path`.
-- [ ] Respons Gemini mematuhi format JSON murni dan seluruh key terisi sesuai kontrak prompt (termasuk penanganan gambar tidak valid).
-- [ ] Hasil analisis tersimpan dengan integritas relasi foreign key pada PostgreSQL (`analysis_records` $\rightarrow$ `analysis_waste_details` / `analysis_plant_details`).
-- [ ] Modul Waste menampilkan informasi referensi harga dari tabel `waste_price` dan menyajikan peta lokasi bank sampah interaktif via Google Maps iframe.
-- [ ] Modul Plant menampilkan rekomendasi perawatan, penyebab, dan pencegahan secara terstruktur.
+- [x] Pengguna dapat mengambil foto langsung via kamera perangkat atau mengunggah berkas gambar lokal (JPG/PNG/WEBP < 5MB).
+- [x] Backend berhasil mengonversi gambar menjadi Inline Base64 untuk dikirimkan langsung ke Gemini API tanpa menunggu proses storage selesai.
+- [x] File gambar berhasil diunggah ke Supabase Storage dan tercatat path persistennya di kolom `image_path`.
+- [x] Respons Gemini mematuhi format JSON murni dan seluruh key terisi sesuai kontrak prompt (termasuk penanganan gambar tidak valid).
+- [x] Hasil analisis tersimpan dengan integritas relasi foreign key pada PostgreSQL (`analysis_records` $\rightarrow$ `analysis_waste_details` / `analysis_plant_details`).
+- [x] Modul Waste menampilkan informasi referensi harga dari tabel `waste_price` dan menyajikan peta lokasi bank sampah interaktif via Google Maps iframe.
+- [x] Modul Plant menampilkan rekomendasi perawatan, penyebab, dan pencegahan secara terstruktur.
