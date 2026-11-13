@@ -12,7 +12,7 @@
 	// Ambil daftar kategori unik untuk tombol filter
 	let categories = $derived(['Semua', ...Array.from(new Set(data.map((d) => d.category_name)))]);
 
-	// Palet warna ramah lingkungan untuk tiap garis subkategori
+	// Palet warna ramah lingkungan & profesional untuk tiap garis subkategori
 	const colorPalette = [
 		'#006948', // primary green
 		'#0F766E', // accent teal
@@ -21,9 +21,11 @@
 		'#8D4B00', // tertiary orange
 		'#E11D48', // rose
 		'#16A34A', // emerald
-		'#4F46E5', // indigo
+		'#6366F1', // indigo
 		'#0D9488', // dark teal
-		'#65A30D'  // lime
+		'#84CC16', // lime
+		'#EC4899', // pink
+		'#8B5CF6'  // violet
 	];
 
 	function renderChart() {
@@ -35,47 +37,75 @@
 				? data
 				: data.filter((d) => d.category_name === selectedCategory);
 
-		// Urutkan tanggal unik untuk label sumbu X
-		const uniqueDates = Array.from(
-			new Set(
-				filteredData.map((d) =>
-					new Date(d.created_at).toLocaleDateString('id-ID', {
-						month: 'short',
-						day: 'numeric'
-					})
-				)
-			)
+		if (filteredData.length === 0) {
+			if (chartInstance) {
+				chartInstance.destroy();
+				chartInstance = null;
+			}
+			return;
+		}
+
+		// Urutkan data berdasarkan waktu secara kronologis
+		const sortedData = [...filteredData].sort(
+			(a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime()
 		);
 
-		// Dapatkan subkategori unik
-		const uniqueSubCats = Array.from(new Set(filteredData.map((d) => d.sub_category_name)));
+		// Dapatkan daftar label tanggal unik berformat rapi (contoh: "18 Agu")
+		const uniqueDateMap = new Map<string, string>();
+		sortedData.forEach((d) => {
+			const rawDate = d.created_at.split('T')[0];
+			if (!uniqueDateMap.has(rawDate)) {
+				const formatted = new Date(d.created_at).toLocaleDateString('id-ID', {
+					day: 'numeric',
+					month: 'short'
+				});
+				uniqueDateMap.set(rawDate, formatted);
+			}
+		});
 
-		// Siapkan datasets untuk Chart.js
+		const rawDateKeys = Array.from(uniqueDateMap.keys());
+		const labels = Array.from(uniqueDateMap.values());
+
+		// Dapatkan subkategori unik
+		const uniqueSubCats = Array.from(new Set(sortedData.map((d) => d.sub_category_name)));
+
+		// Bangun datasets garis (Line Chart) untuk Chart.js
+		const ctx = canvasEl.getContext('2d');
 		const datasets = uniqueSubCats.map((subCat, idx) => {
 			const color = colorPalette[idx % colorPalette.length];
-			const dataPoints = uniqueDates.map((dateStr) => {
-				const item = filteredData.find(
-					(d) =>
-						d.sub_category_name === subCat &&
-						new Date(d.created_at).toLocaleDateString('id-ID', {
-							month: 'short',
-							day: 'numeric'
-						}) === dateStr
+
+			// Membuat gradien halus di bawah garis jika context 2D tersedia
+			let gradientBackground = color + '15';
+			if (ctx) {
+				const gradient = ctx.createLinearGradient(0, 0, 0, 300);
+				gradient.addColorStop(0, color + '28');
+				gradient.addColorStop(1, color + '00');
+				gradientBackground = gradient as unknown as string;
+			}
+
+			const dataPoints = rawDateKeys.map((dateKey) => {
+				const match = sortedData.find(
+					(d) => d.sub_category_name === subCat && d.created_at.startsWith(dateKey)
 				);
-				return item ? item.price : null;
+				return match ? match.price : null;
 			});
 
 			return {
 				label: subCat,
 				data: dataPoints,
 				borderColor: color,
-				backgroundColor: color + '22',
-				tension: 0.35,
-				fill: false,
+				backgroundColor: gradientBackground,
+				fill: true,
+				tension: 0.35, // kurva garis halus (smooth spline)
 				pointRadius: 4,
-				pointHoverRadius: 6,
+				pointHoverRadius: 7,
 				pointBackgroundColor: color,
-				borderWidth: 2.2,
+				pointHoverBackgroundColor: '#FFFFFF',
+				pointBorderColor: '#FFFFFF',
+				pointHoverBorderColor: color,
+				pointBorderWidth: 2,
+				pointHoverBorderWidth: 2.5,
+				borderWidth: 2.5,
 				spanGaps: true
 			};
 		});
@@ -87,7 +117,7 @@
 		chartInstance = new Chart(canvasEl, {
 			type: 'line',
 			data: {
-				labels: uniqueDates,
+				labels,
 				datasets
 			},
 			options: {
@@ -97,40 +127,98 @@
 					mode: 'index',
 					intersect: false
 				},
+				animation: {
+					duration: 650,
+					easing: 'easeOutQuart'
+				},
 				plugins: {
 					legend: {
 						position: 'top',
+						align: 'end',
 						labels: {
-							boxWidth: 12,
-							font: { family: 'Plus Jakarta Sans', size: 11, weight: 'bold' },
-							color: '#64748B'
+							boxWidth: 10,
+							boxHeight: 10,
+							usePointStyle: true,
+							pointStyle: 'circle',
+							font: {
+								family: 'Plus Jakarta Sans, sans-serif',
+								size: 11,
+								weight: 'bold'
+							},
+							color: '#64748B',
+							padding: 14
 						}
 					},
 					tooltip: {
 						backgroundColor: '#0F172A',
-						titleFont: { family: 'Plus Jakarta Sans', size: 12 },
-						bodyFont: { family: 'Inter', size: 11 },
-						padding: 10,
-						cornerRadius: 8,
+						titleColor: '#F8FAFC',
+						bodyColor: '#E2E8F0',
+						titleFont: {
+							family: 'Plus Jakarta Sans, sans-serif',
+							size: 12,
+							weight: 'bold'
+						},
+						bodyFont: {
+							family: 'Inter, sans-serif',
+							size: 11
+						},
+						padding: {
+							top: 8,
+							bottom: 8,
+							left: 12,
+							right: 12
+						},
+						cornerRadius: 10,
+						borderWidth: 1,
+						borderColor: 'rgba(255, 255, 255, 0.1)',
+						displayColors: true,
+						boxWidth: 8,
+						boxHeight: 8,
+						usePointStyle: true,
 						callbacks: {
-							label: (ctx) => ` ${ctx.dataset.label}: Rp ${(ctx.raw as number)?.toLocaleString('id-ID') || 0} / kg`
+							title: (items) => (items[0] ? `Observasi: ${items[0].label}` : ''),
+							label: (ctx) => {
+								const val = ctx.raw as number | null;
+								if (val === null || val === undefined) return ` ${ctx.dataset.label}: -`;
+								return ` ${ctx.dataset.label}: Rp ${val.toLocaleString('id-ID')} / kg`;
+							}
 						}
 					}
 				},
 				scales: {
 					x: {
-						grid: { display: false },
+						grid: {
+							display: false
+						},
+						border: {
+							display: false
+						},
 						ticks: {
-							font: { family: 'Inter', size: 11 },
-							color: '#64748B'
+							font: {
+								family: 'Inter, sans-serif',
+								size: 11,
+								weight: 500
+							},
+							color: '#64748B',
+							padding: 8
 						}
 					},
 					y: {
-						grid: { color: '#E2E8F0' },
+						grid: {
+							color: '#F1F5F9'
+						},
+						border: {
+							display: false,
+							dash: [4, 4]
+						},
 						ticks: {
-							font: { family: 'Inter', size: 11 },
+							font: {
+								family: 'Inter, sans-serif',
+								size: 11
+							},
 							color: '#64748B',
-							callback: (val) => `Rp ${(Number(val) / 1000).toFixed(0)}k`
+							padding: 8,
+							callback: (val) => `Rp ${(Number(val) / 1000).toLocaleString('id-ID')}k`
 						}
 					}
 				}
@@ -145,9 +233,9 @@
 		};
 	});
 
-	// Re-render chart saat filter berubah
+	// Re-render grafik saat data atau pilihan filter berubah secara reaktif
 	$effect(() => {
-		if (selectedCategory && canvasEl) {
+		if (selectedCategory && canvasEl && data) {
 			renderChart();
 		}
 	});
@@ -158,13 +246,15 @@
 	<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-5">
 		<div>
 			<div class="flex items-center gap-2">
-				<span class="material-symbols-outlined text-primary text-xl">trending_up</span>
+				<div class="w-8 h-8 rounded-lg bg-brand-mint-subtle border border-brand-mint/30 flex items-center justify-center text-primary">
+					<span class="material-symbols-outlined text-[18px]">trending_up</span>
+				</div>
 				<h3 class="font-display font-bold text-base text-text-strong">
 					Tren Fluktuasi Harga Sampah Acuan
 				</h3>
 			</div>
-			<p class="text-xs text-text-muted mt-0.5">
-				Riwayat observasi harga beli komoditas daur ulang (Rp / kg) berdasarkan Bank Sampah.
+			<p class="text-xs text-text-muted mt-1">
+				Grafik garis observasi harga beli komoditas daur ulang (Rp / kg) berdasarkan Bank Sampah mitra.
 			</p>
 		</div>
 
@@ -184,7 +274,7 @@
 		</div>
 	</div>
 
-	<!-- Canvas Container -->
+	<!-- Canvas Container (Line Chart) -->
 	<div class="w-full h-72 sm:h-80 relative">
 		<canvas bind:this={canvasEl}></canvas>
 	</div>

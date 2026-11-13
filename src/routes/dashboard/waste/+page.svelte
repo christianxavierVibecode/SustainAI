@@ -211,7 +211,7 @@
 					<div class="bg-surface-card border border-border-subtle rounded-2xl p-6 shadow-xs space-y-5">
 						<div class="flex flex-col sm:flex-row gap-5 items-start">
 							<!-- Thumbnail Gambar -->
-							<div class="w-full sm:w-44 h-44 rounded-xl overflow-hidden border border-border-subtle bg-slate-900 shrink-0">
+							<div class="w-full sm:w-44 h-full rounded-xl overflow-hidden border border-border-subtle bg-slate-900 shrink-0">
 								<img
 									src={resultImageUrl || previewUrl}
 									alt="Hasil Analisis"

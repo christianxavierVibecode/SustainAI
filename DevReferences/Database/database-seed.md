@@ -6,10 +6,10 @@ Data di bawah merupakan data dummy untuk pengembangan/demo, bukan data operasion
 
 Kolom mengikuti schema MVP: `id, email, password_hash, full_name, email_verified, created_at, updated_at`. kolom `id` menggunakan UUID v4
 
-| id                                     | email                         | password_hash                                                  | full_name           | user_role | email_verified | created_at             | updated_at             |
-| -------------------------------------- | ----------------------------- | -------------------------------------------------------------- | ------------------- | --------- | -------------- | ---------------------- | ---------------------- |
-| `abef1065-b725-4998-814a-65832ed042b4` | user@genforces.com           | `$2b$10$rKbHrfZce9MkU.J63NkJ5.GC.tH5Ef1Auu9zZQInDzY3F2SnP3cnm` | GenForces Demo User | user      | true           | 2026-11-01 13:13:47+07 | 2026-11-01 18:13:44+07 |
-| `1b3fac7c-68c6-4595-89cc-08951422f0ae` | admin@genforces.com          | `$2b$10$3Om8d8PA7xai8B.yoAsOTewHscrL0ZQ0GwMw8fotyTccKhUZgA8EO` | SustainAI Demo Admin | admin     | true           | 2026-11-02 18:13:44+07 | 2026-11-02 18:13:44+07 |
+| id                                     | email               | password_hash                                                  | full_name            | user_role | email_verified | created_at             | updated_at             |
+| -------------------------------------- | ------------------- | -------------------------------------------------------------- | -------------------- | --------- | -------------- | ---------------------- | ---------------------- |
+| `abef1065-b725-4998-814a-65832ed042b4` | user@genforces.com  | `$2b$10$rKbHrfZce9MkU.J63NkJ5.GC.tH5Ef1Auu9zZQInDzY3F2SnP3cnm` | GenForces Demo User  | user      | true           | 2026-11-01 13:13:47+07 | 2026-11-01 18:13:44+07 |
+| `1b3fac7c-68c6-4595-89cc-08951422f0ae` | admin@genforces.com | `$2b$10$3Om8d8PA7xai8B.yoAsOTewHscrL0ZQ0GwMw8fotyTccKhUZgA8EO` | SustainAI Demo Admin | admin     | true           | 2026-11-02 18:13:44+07 | 2026-11-02 18:13:44+07 |
 
 ## 2. `waste_categories`
 
@@ -101,7 +101,7 @@ Contoh data mengikuti struktur sebelumnya. Hasil JSON tervalidasi Gemini disimpa
 | -------------------------------------- | -------------------------------------- | ------------- | --------- | ------------------------------------------------------------------------------- | ------------- | ---------------- | -------------- | ---------------------- |
 | `f1221e2a-0dfe-4b81-b6d0-76e536cfc2df` | `abef1065-b725-4998-814a-65832ed042b4` | waste         | completed | `waste-analysis/2026/f1221e2a-0dfe-4b81-b6d0-76e536cfc2df_waste_1794232269.jpg` | Google Gemini | gemini-3.5-flash | waste-v1       | 2026-09-28 16:42:00+07 |
 | `30c5493e-3e47-44ea-bab7-13cfa97536cb` | `abef1065-b725-4998-814a-65832ed042b4` | plant         | completed | `waste-analysis/2026/30c5493e-3e47-44ea-bab7-13cfa97536cb_plant_1794232290.jpg` | Google Gemini | gemini-3.5-flash | plant-v1       | 2026-09-29 11:12:00+07 |
-| `49927af5-d976-4fae-9a2d-b216c649a966` | `1b3fac7c-68c6-4595-89cc-08951422f0ae` | waste         | completed | `waste-analysis/2026/49927af5-d976-4fae-9a2d-b216c649a966_plant_1794232290.jpg` | Google Gemini | gemini-3.5-flash | waste-v1       | 2026-09-30 13:22:00+07 |
+| `49927af5-d976-4fae-9a2d-b216c649a966` | `abef1065-b725-4998-814a-65832ed042b4` | waste         | completed | `waste-analysis/2026/49927af5-d976-4fae-9a2d-b216c649a966_plant_1794232290.jpg` | Google Gemini | gemini-3.5-flash | waste-v1       | 2026-09-30 13:22:00+07 |
 
 Contoh `result` untuk analisis sampah:
 

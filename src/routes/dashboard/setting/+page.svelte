@@ -171,7 +171,7 @@
 								maxlength="100"
 								bind:value={fullName}
 								placeholder="Masukkan nama lengkap Anda"
-								class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-border-subtle bg-surface-card text-text-strong text-sm focus:outline-hidden focus:border-primary focus:ring-2 focus:ring-brand-mint/20 transition-all"
+								class="w-full pl-12 pr-4 py-2.5 rounded-xl border border-border-subtle bg-surface-card text-text-strong text-sm focus:outline-hidden focus:border-primary focus:ring-2 focus:ring-brand-mint/20 transition-all"
 							/>
 						</div>
 						<p class="text-[11px] text-text-muted mt-1.5">
@@ -193,7 +193,7 @@
 								value={data.profile?.email ?? ''}
 								readonly
 								disabled
-								class="w-full pl-10 pr-28 py-2.5 rounded-xl border border-border-subtle bg-surface-base text-text-muted text-sm cursor-not-allowed select-none opacity-80"
+								class="w-full pl-12 pr-28 py-2.5 rounded-xl border border-border-subtle bg-surface-base text-text-muted text-sm cursor-not-allowed select-none opacity-80"
 							/>
 							<div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
 								<span class="inline-flex items-center gap-1 text-[11px] font-semibold text-primary bg-brand-mint-subtle px-2 py-0.5 rounded-md border border-brand-mint/30">
@@ -289,7 +289,7 @@
 								required
 								bind:value={currentPassword}
 								placeholder="Masukkan sandi lama"
-								class="w-full pl-10 pr-10 py-2.5 rounded-xl border border-border-subtle bg-surface-card text-text-strong text-sm focus:outline-hidden focus:border-primary focus:ring-2 focus:ring-brand-mint/20 transition-all"
+								class="w-full pl-12 pr-10 py-2.5 rounded-xl border border-border-subtle bg-surface-card text-text-strong text-sm focus:outline-hidden focus:border-primary focus:ring-2 focus:ring-brand-mint/20 transition-all"
 							/>
 							<button
 								type="button"
@@ -321,7 +321,7 @@
 								minlength="8"
 								bind:value={newPassword}
 								placeholder="Minimal 8 karakter"
-								class="w-full pl-10 pr-10 py-2.5 rounded-xl border border-border-subtle bg-surface-card text-text-strong text-sm focus:outline-hidden focus:border-primary focus:ring-2 focus:ring-brand-mint/20 transition-all"
+								class="w-full pl-12 pr-10 py-2.5 rounded-xl border border-border-subtle bg-surface-card text-text-strong text-sm focus:outline-hidden focus:border-primary focus:ring-2 focus:ring-brand-mint/20 transition-all"
 							/>
 							<button
 								type="button"
@@ -353,7 +353,7 @@
 								minlength="8"
 								bind:value={confirmPassword}
 								placeholder="Ulangi kata sandi baru"
-								class="w-full pl-10 pr-10 py-2.5 rounded-xl border border-border-subtle bg-surface-card text-text-strong text-sm focus:outline-hidden focus:border-primary focus:ring-2 focus:ring-brand-mint/20 transition-all"
+								class="w-full pl-12 pr-10 py-2.5 rounded-xl border border-border-subtle bg-surface-card text-text-strong text-sm focus:outline-hidden focus:border-primary focus:ring-2 focus:ring-brand-mint/20 transition-all"
 							/>
 							<button
 								type="button"

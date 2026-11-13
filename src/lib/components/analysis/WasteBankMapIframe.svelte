@@ -20,7 +20,7 @@
 	<!-- Google My Maps Iframe Sesuai Spesifikasi Plan 005 -->
 	<div class="w-full rounded-xl overflow-hidden border border-border-subtle shadow-xs bg-surface-base">
 		<iframe
-			src="https://www.google.com/maps/d/u/0/viewer?mid=1zvmwKLiUlW0xpqzvYB-XkNahcR3DdcA&femb=1&ll=-7.802529142105196%2C110.37516666666666&z=14"
+			src="https://www.google.com/maps/d/embed?mid=1zvmwKLiUlW0xpqzvYB-XkNahcR3DdcA&ehbc=2E312F"
 			width="100%"
 			height="380"
 			style="border:0; border-radius: 0.75rem;"

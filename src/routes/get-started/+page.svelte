@@ -91,69 +91,6 @@
 					</p>
 				</div>
 
-				<!-- Bento Grid: 3 Core Analyzers -->
-				<div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
-					<!-- Card 1: Plant Disease Diagnostics -->
-					<div class="bg-surface-card border border-border-subtle rounded-2xl p-5 hover:border-primary transition-all duration-200 group flex flex-col justify-between shadow-xs hover:shadow-md">
-						<div class="space-y-3">
-							<div class="w-10 h-10 rounded-xl bg-brand-mint-subtle flex items-center justify-center text-primary group-hover:scale-105 transition-transform">
-								<span class="material-symbols-outlined text-2xl">potted_plant</span>
-							</div>
-							<div class="inline-block px-2 py-0.5 rounded text-[11px] font-semibold bg-accent-amber-subtle text-accent-amber border border-accent-amber/20">
-								SDG 2 Zero Hunger
-							</div>
-							<h3 class="font-display font-bold text-base text-text-strong">Plant Diagnostics</h3>
-							<p class="text-xs text-text-muted leading-relaxed">
-								Deteksi indikasi dini patogen, bercak daun, dan klorosis menggunakan model visi edge untuk perlindungan hasil panen.
-							</p>
-						</div>
-						<div class="pt-3 mt-3 border-t border-border-subtle flex items-center justify-between text-xs font-semibold text-primary">
-							<span class="text-text-muted font-normal">97.6% Precision</span>
-							<span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
-						</div>
-					</div>
-
-					<!-- Card 2: Waste Classifier -->
-					<div class="bg-surface-card border border-border-subtle rounded-2xl p-5 hover:border-primary transition-all duration-200 group flex flex-col justify-between shadow-xs hover:shadow-md">
-						<div class="space-y-3">
-							<div class="w-10 h-10 rounded-xl bg-info-sky-subtle flex items-center justify-center text-info-sky group-hover:scale-105 transition-transform">
-								<span class="material-symbols-outlined text-2xl">recycling</span>
-							</div>
-							<div class="inline-block px-2 py-0.5 rounded text-[11px] font-semibold bg-brand-mint-subtle text-brand-forest border border-brand-mint/30">
-								SDG 12 Circular
-							</div>
-							<h3 class="font-display font-bold text-base text-text-strong">Waste Classifier</h3>
-							<p class="text-xs text-text-muted leading-relaxed">
-								Pilah sampah organik, daur ulang, dan B3 dengan analisis estimasi nilai ekonomi serta penanganan ramah lingkungan.
-							</p>
-						</div>
-						<div class="pt-3 mt-3 border-t border-border-subtle flex items-center justify-between text-xs font-semibold text-primary">
-							<span class="text-text-muted font-normal">14,850+ kg Diverted</span>
-							<span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
-						</div>
-					</div>
-
-					<!-- Card 3: Environmental Audit -->
-					<div class="bg-surface-card border border-border-subtle rounded-2xl p-5 hover:border-primary transition-all duration-200 group flex flex-col justify-between shadow-xs hover:shadow-md">
-						<div class="space-y-3">
-							<div class="w-10 h-10 rounded-xl bg-surface-card-subtle flex items-center justify-center text-text-strong group-hover:scale-105 transition-transform border border-border-subtle">
-								<span class="material-symbols-outlined text-2xl">insights</span>
-							</div>
-							<div class="inline-block px-2 py-0.5 rounded text-[11px] font-semibold bg-accent-teal-subtle text-accent-teal border border-accent-teal/20">
-								SDG 13 Climate Action
-							</div>
-							<h3 class="font-display font-bold text-base text-text-strong">Carbon &amp; Reports</h3>
-							<p class="text-xs text-text-muted leading-relaxed">
-								Pelaporan agregasi reduksi jejak karbon dan visualisasi audit kepatuhan regulasi lingkungan hidup.
-							</p>
-						</div>
-						<div class="pt-3 mt-3 border-t border-border-subtle flex items-center justify-between text-xs font-semibold text-primary">
-							<span class="text-text-muted font-normal">Real-Time Sync</span>
-							<span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
-						</div>
-					</div>
-				</div>
-
 				<!-- Telemetry Footer Bar -->
 				<div class="bg-surface-card rounded-xl border border-border-subtle p-4 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xs">
 					<div class="flex items-center gap-3">
@@ -302,7 +239,7 @@
 										required
 										placeholder="contoh: christianxavier@genforces.com"
 										value={form?.email || 'christianxavier@genforces.com'}
-										class="w-full h-11 pl-10 pr-3.5 rounded-lg border border-border-subtle bg-surface-card text-text-strong text-xs sm:text-sm focus:border-primary focus:ring-2 focus:ring-brand-mint-subtle transition-all outline-none"
+										class="w-full h-11 pl-12 pr-3.5 rounded-lg border border-border-subtle bg-surface-card text-text-strong text-xs sm:text-sm focus:border-primary focus:ring-2 focus:ring-brand-mint-subtle transition-all outline-none"
 									/>
 								</div>
 							</div>
@@ -313,13 +250,6 @@
 									<label class="block text-xs font-semibold text-text-strong" for="login-password">
 										Kata Sandi
 									</label>
-									<button
-										type="button"
-										onclick={() => alert('Untuk akun demo silakan gunakan password preset demo yang tersedia.')}
-										class="text-xs text-primary hover:text-brand-emerald-dark font-medium transition-colors cursor-pointer"
-									>
-										Lupa sandi?
-									</button>
 								</div>
 								<div class="relative rounded-lg">
 									<div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-text-muted">
@@ -332,7 +262,7 @@
 										required
 										placeholder="••••••••••••"
 										value="UserSustainAI2026!"
-										class="w-full h-11 pl-10 pr-10 rounded-lg border border-border-subtle bg-surface-card text-text-strong text-xs sm:text-sm focus:border-primary focus:ring-2 focus:ring-brand-mint-subtle transition-all outline-none"
+										class="w-full h-11 pl-12 pr-10 rounded-lg border border-border-subtle bg-surface-card text-text-strong text-xs sm:text-sm focus:border-primary focus:ring-2 focus:ring-brand-mint-subtle transition-all outline-none"
 									/>
 								</div>
 							</div>
