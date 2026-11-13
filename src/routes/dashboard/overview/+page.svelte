@@ -165,7 +165,7 @@
 						</h3>
 					</div>
 					<a
-						href="/dashboard/reports"
+						href="/dashboard/history"
 						class="text-xs font-semibold text-primary hover:underline flex items-center gap-1"
 					>
 						<span>Lihat Semua</span>

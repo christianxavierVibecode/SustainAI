@@ -73,3 +73,26 @@ export async function createSignedImageUrl(
 		return null;
 	}
 }
+
+/**
+ * Hapus gambar dari Supabase Storage Private Bucket
+ */
+export async function deleteStorageImage(imagePath: string): Promise<boolean> {
+	if (!imagePath) return false;
+
+	try {
+		const { error } = await supabaseAdmin.storage
+			.from(SUPABASE_BUCKET_NAME)
+			.remove([imagePath]);
+
+		if (error) {
+			console.error('[Storage Delete Error]:', error);
+			return false;
+		}
+
+		return true;
+	} catch (err) {
+		console.error('[Storage Delete Exception]:', err);
+		return false;
+	}
+}

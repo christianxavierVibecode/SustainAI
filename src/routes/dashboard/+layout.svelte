@@ -19,7 +19,7 @@
 		{ label: 'Overview', href: '/dashboard/overview', icon: 'dashboard' },
 		{ label: 'Waste Classifier', href: '/dashboard/waste', icon: 'delete' },
 		{ label: 'Plant Disease', href: '/dashboard/plant', icon: 'potted_plant' },
-		{ label: 'Riwayat Analisis', href: '/dashboard/reports', icon: 'bar_chart' },
+		{ label: 'Riwayat Analisis', href: '/dashboard/history', icon: 'bar_chart' },
 		{ label: 'Pengaturan Akun', href: '/dashboard/setting', icon: 'settings' }
 	];
 

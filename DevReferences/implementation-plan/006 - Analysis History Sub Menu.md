@@ -101,9 +101,9 @@ WHERE id = $1 AND user_id = $2;
 ---
 
 ## 5. Verification & Acceptance Criteria
-- [ ] Pengguna hanya dapat melihat catatan analisis milik akun mereka sendiri (`user_id = locals.user.id`).
-- [ ] Thumbnail gambar dari Supabase Storage berhasil dimuat dengan benar pada kartu riwayat.
-- [ ] Filter tab berfungsi memisahkan riwayat analisis Sampah dan Tanaman.
-- [ ] Pencarian kata kunci berhasil memfilter riwayat berdasarkan nama tanaman/sampah secara responsif.
-- [ ] Mengklik salah satu riwayat membuka modal detail yang menyajikan seluruh rincian hasil AI (dampak, tips daur ulang, atau rekomendasi perawatan).
-- [ ] Fitur hapus riwayat berhasil menghapus record dari PostgreSQL dan memperbarui tampilan tanpa merusak data lain.
+- [x] Pengguna hanya dapat melihat catatan analisis milik akun mereka sendiri (`user_id = locals.user.id`).
+- [x] Thumbnail gambar dari Supabase Storage berhasil dimuat dengan benar pada kartu riwayat.
+- [x] Filter tab berfungsi memisahkan riwayat analisis Sampah dan Tanaman.
+- [x] Pencarian kata kunci berhasil memfilter riwayat berdasarkan nama tanaman/sampah secara responsif.
+- [x] Mengklik salah satu riwayat membuka modal detail yang menyajikan seluruh rincian hasil AI (dampak, tips daur ulang, atau rekomendasi perawatan).
+- [x] Fitur hapus riwayat berhasil menghapus record dari PostgreSQL dan memperbarui tampilan tanpa merusak data lain.
