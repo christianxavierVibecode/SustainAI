@@ -79,10 +79,10 @@ Fungsi `createSignedImageUrl(imagePath)` tetap dipertahankan sementara sebagai w
 ---
 
 ## 5. Verification & Acceptance Criteria
-- [ ] Bucket Supabase Storage disetel ke mode publik dan dapat diakses tanpa token rahasia/sementara.
-- [ ] Fungsi `getPublicImageUrl` mengembalikan URL publik berformat `https://.../storage/v1/object/public/...`.
-- [ ] Halaman `/dashboard/history` memuat gambar thumbnail secara instan tanpa latensi pembuatan signed URL per item.
-- [ ] Endpoint `/api/analyze/waste` dan `/api/analyze/plant` mengembalikan `imageUrl` CDN publik setelah gambar berhasil diunggah.
-- [ ] Gambar dapat di-cache oleh browser pengguna dengan header caching yang efisien.
-- [ ] Aksi penghapusan riwayat analisis tetap berhasil menghapus berkas gambar dari storage publik via service role key.
-- [ ] Seluruh pengujian kode (`npm run check` & `npm run build`) berhasil 100%.
+- [x] Bucket Supabase Storage disetel ke mode publik dan dapat diakses tanpa token rahasia/sementara.
+- [x] Fungsi `getPublicImageUrl` mengembalikan URL publik berformat `https://.../storage/v1/object/public/...`.
+- [x] Halaman `/dashboard/history` memuat gambar thumbnail secara instan tanpa latensi pembuatan signed URL per item.
+- [x] Endpoint `/api/analyze/waste` dan `/api/analyze/plant` mengembalikan `imageUrl` CDN publik setelah gambar berhasil diunggah.
+- [x] Gambar dapat di-cache oleh browser pengguna dengan header caching yang efisien.
+- [x] Aksi penghapusan riwayat analisis tetap berhasil menghapus berkas gambar dari storage publik via service role key.
+- [x] Seluruh pengujian kode (`npm run check` & `npm run build`) berhasil 100%.

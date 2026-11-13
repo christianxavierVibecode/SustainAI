@@ -79,7 +79,7 @@
         <div class="flex items-center gap-3">
           <a
             class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 bg-primary hover:bg-brand-emerald-dark active:scale-95 text-white font-semibold text-sm rounded-btn transition-all duration-150 shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-border-focus"
-            href="#fitur"
+            href="/get-started"
           >
             <span>Mulai Analisis</span>
             <span class="material-symbols-outlined text-[18px]"
@@ -129,7 +129,7 @@
           <div class="pt-2">
             <a
               class="mobile-nav-link w-full flex items-center justify-center gap-2 px-5 py-3 bg-primary hover:bg-brand-emerald-dark active:scale-95 text-white font-semibold text-sm rounded-btn transition-all shadow-sm"
-              href="#fitur"
+              href="/get-started"
             >
               <span>Mulai Analisis</span>
               <span class="material-symbols-outlined text-[18px]"
@@ -206,7 +206,7 @@
               >
                 <a
                   class="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-primary hover:bg-brand-emerald-dark active:scale-95 text-white font-semibold text-base rounded-btn transition-all duration-150 shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-border-focus"
-                  href="#fitur"
+                  href="/get-started"
                 >
                   <span>Mulai Analisis</span>
                   <span class="material-symbols-outlined text-[20px]"
@@ -284,7 +284,7 @@
                     <img
                       alt="SustainAI Robot Mascot &amp; Recycling Bin"
                       class="w-full h-auto aspect-square object-contain transform transition-transform duration-300 hover:scale-[1.02]"
-                      src="https://lh3.googleusercontent.com/aida/ALJJyrC3ooSaeXmEXtKxm8NnZZp2vtE2fQoDS8aSTWv8t53Ix2V5ogeLjTZ-cN0T-SjtLStXODdRg-dhabRG2SYvbwfW8AuiZFSIxHbEkF9WcvbrspSoCcoyxm2s81qrXi74RXNcEvEd-v_1_OXrcnX4DKrCKgr0LnB8aVrmb61dBlLw2nEFFhwPIKNiSBs_hwtq2sePt4P9qtRfeu36gX-z4qqFdxN56w6koFOa2CffpjGCew"
+                      src="/SustainAI-Icon-transparant.webp"
                     />
                   </div>
                   <!-- Floating Eco Tag -->
@@ -319,7 +319,7 @@
                       class="w-2.5 h-2.5 rounded-full bg-border-focus"
                     ></span>
                     <span
-                      class="text-xs font-semibold text-text-strong font-display"
+                      class="text-xs font-semibold text-text-strong font-display ml-3"
                       >Multimodal AI Ready</span
                     >
                   </div>
@@ -755,7 +755,7 @@
                       >check_circle</span
                     >
                     <span
-                      >Image-based waste identification cepat &amp; akurat</span
+                      >Image-based waste identification cepat</span
                     >
                   </li>
                   <li class="flex items-center gap-2.5">
@@ -1182,20 +1182,14 @@
               Development Goals (SDGs).
             </p>
           </div>
-          <!-- 3 SDG Cards with Hierarchy -->
+          <!-- SDG Cards with Hierarchy -->
           <div
-            class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch"
+            class="grid grid-cols-1 gap-6 lg:gap-8 items-stretch"
           >
             <!-- Primary Focus — SDG 12 (Larger & Prominent) -->
             <div
               class="lg:col-span-6 bg-surface-card border-2 border-primary/30 rounded-card p-7 sm:p-8 shadow-eco-hover relative flex flex-col justify-between"
             >
-              <div
-                class="absolute -top-3.5 left-7 bg-primary text-white text-[11px] font-bold px-3 py-1 rounded-full uppercase tracking-wider flex items-center gap-1.5"
-              >
-                <span class="material-symbols-outlined text-[14px]">star</span>
-                <span>Fokus Utama (Primary Focus)</span>
-              </div>
               <div>
                 <div class="flex items-center justify-between mb-6 pt-2">
                   <div class="flex items-center gap-3">
@@ -1239,94 +1233,6 @@
                   >eco</span
                 >
                 <span>Waste Analyzer sebagai pendorong ekonomi sirkular</span>
-              </div>
-            </div>
-            <!-- Supporting Focus — SDG 13 -->
-            <div
-              class="lg:col-span-3 bg-surface-card border border-border-subtle rounded-card p-6 sm:p-7 shadow-eco-subtle hover:shadow-eco-hover transition-all duration-200 flex flex-col justify-between"
-            >
-              <div>
-                <div class="flex items-center gap-3 mb-5">
-                  <div
-                    class="w-10 h-10 rounded-tile bg-info-sky-subtle text-info-sky font-display font-extrabold text-base flex items-center justify-center border border-info-sky/20"
-                  >
-                    13
-                  </div>
-                  <div>
-                    <span
-                      class="text-[11px] font-semibold text-info-sky uppercase tracking-wider"
-                      >SDG 13</span
-                    >
-                    <h3
-                      class="font-display font-bold text-base text-text-strong"
-                    >
-                      Climate Action
-                    </h3>
-                  </div>
-                </div>
-                <p class="text-xs font-semibold text-text-strong mb-2">
-                  Penanganan Perubahan Iklim
-                </p>
-                <p
-                  class="text-xs text-text-muted leading-relaxed font-normal mb-4"
-                >
-                  Mendukung kesadaran lingkungan lewat edukasi pengurangan
-                  timbunan sampah di TPA serta potensi penurunan jejak emisi gas
-                  metana di masa mendatang.
-                </p>
-              </div>
-              <div
-                class="pt-3 border-t border-border-subtle text-[11px] text-text-muted flex items-center gap-1.5 font-medium"
-              >
-                <span
-                  class="material-symbols-outlined text-[16px] text-info-sky"
-                  >cloud_sync</span
-                >
-                <span>Edukasi dampak emisi limbah</span>
-              </div>
-            </div>
-            <!-- Supporting Focus — SDG 15 -->
-            <div
-              class="lg:col-span-3 bg-surface-card border border-border-subtle rounded-card p-6 sm:p-7 shadow-eco-subtle hover:shadow-eco-hover transition-all duration-200 flex flex-col justify-between"
-            >
-              <div>
-                <div class="flex items-center gap-3 mb-5">
-                  <div
-                    class="w-10 h-10 rounded-tile bg-accent-teal-subtle text-accent-teal font-display font-extrabold text-base flex items-center justify-center border border-accent-teal/20"
-                  >
-                    15
-                  </div>
-                  <div>
-                    <span
-                      class="text-[11px] font-semibold text-accent-teal uppercase tracking-wider"
-                      >SDG 15</span
-                    >
-                    <h3
-                      class="font-display font-bold text-base text-text-strong"
-                    >
-                      Life on Land
-                    </h3>
-                  </div>
-                </div>
-                <p class="text-xs font-semibold text-text-strong mb-2">
-                  Ekosistem Daratan
-                </p>
-                <p
-                  class="text-xs text-text-muted leading-relaxed font-normal mb-4"
-                >
-                  Plant Disease Analyzer membantu masyarakat dan petani
-                  mengenali gangguan kesehatan tanaman dan menerapkan perawatan
-                  ramah lingkungan.
-                </p>
-              </div>
-              <div
-                class="pt-3 border-t border-border-subtle text-[11px] text-text-muted flex items-center gap-1.5 font-medium"
-              >
-                <span
-                  class="material-symbols-outlined text-[16px] text-accent-teal"
-                  >yard</span
-                >
-                <span>Proteksi flora &amp; hortikultura</span>
               </div>
             </div>
           </div>
@@ -1394,7 +1300,7 @@
               >
                 <a
                   class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-primary hover:bg-brand-mint-subtle active:scale-95 font-bold text-base rounded-btn transition-all duration-150 shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-mint"
-                  href="#fitur"
+                  href="/get-started"
                 >
                   <span>Mulai Analisis Sekarang</span>
                   <span class="material-symbols-outlined text-[20px]"
@@ -1453,7 +1359,7 @@
               <span class="material-symbols-outlined text-[14px] text-primary"
                 >terminal</span
               >
-              <span>Developed by Tim GenForces</span>
+              <span>Developed by GenForces</span>
             </div>
           </div>
           <!-- Navigation Column -->

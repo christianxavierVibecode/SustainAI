@@ -5,7 +5,7 @@ import {
 	getUserHistorySummary,
 	deleteAnalysisRecord
 } from '$lib/server/db/history';
-import { createSignedImageUrl, deleteStorageImage } from '$lib/server/storage';
+import { getPublicImageUrl, deleteStorageImage } from '$lib/server/storage';
 
 const PAGE_SIZE = 9;
 
@@ -35,16 +35,11 @@ export const load: PageServerLoad = async ({ locals, url }) => {
 		getUserHistorySummary(userId, searchQuery)
 	]);
 
-	// Resolusi Signed URL gambar di private Supabase bucket secara paralel
-	const history = await Promise.all(
-		rawHistory.map(async (item) => {
-			const signedUrl = await createSignedImageUrl(item.image_path, 3600);
-			return {
-				...item,
-				signed_image_url: signedUrl
-			};
-		})
-	);
+	// Resolusi Public CDN URL gambar langsung secara sinkron tanpa network latency
+	const history = rawHistory.map((item) => ({
+		...item,
+		signed_image_url: getPublicImageUrl(item.image_path)
+	}));
 
 	// Hitung total halaman berdasarkan filter tipe aktif
 	let totalCountForPagination = summary.total_records;

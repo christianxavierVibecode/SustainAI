@@ -2,7 +2,7 @@ import { json } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
 import crypto from 'node:crypto';
 import { analyzeWasteImage } from '$lib/server/ai/gemini';
-import { uploadAnalysisImage, createSignedImageUrl } from '$lib/server/storage';
+import { uploadAnalysisImage, getPublicImageUrl } from '$lib/server/storage';
 import { findWastePriceReference, saveWasteAnalysisTransaction } from '$lib/server/db/analysis';
 
 const ALLOWED_MIME_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
@@ -69,15 +69,15 @@ export const POST: RequestHandler = async ({ request, locals }) => {
 			);
 		}
 
-		// 6. Dapatkan signed URL gambar untuk preview langsung
-		const signedImageUrl = await createSignedImageUrl(storagePath, 3600);
+		// 6. Dapatkan Public CDN URL gambar untuk preview langsung (instan & ter-cache)
+		const publicImageUrl = getPublicImageUrl(storagePath);
 
 		return json({
 			success: true,
 			analysisId,
 			result: geminiResult,
 			priceReference: priceRef,
-			imageUrl: signedImageUrl || `data:${file.type};base64,${base64Image}`,
+			imageUrl: publicImageUrl || `data:${file.type};base64,${base64Image}`,
 			storagePath: uploadResult.path
 		});
 	} catch (err: unknown) {

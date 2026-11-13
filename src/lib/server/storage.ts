@@ -19,8 +19,8 @@ export const supabaseAdmin = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KE
 });
 
 /**
- * Upload gambar analisis ke Private Supabase Storage Bucket
- * Format imagePath: waste/uuid_waste_timestamp.ext atau plant/uuid_plant_timestamp.ext
+ * Upload gambar analisis ke Public Supabase Storage Bucket (CDN Caching aktif)
+ * Format imagePath: waste-analysis/uuid_waste_timestamp.ext atau plant-analysis/uuid_plant_timestamp.ext
  */
 export async function uploadAnalysisImage(
 	fileBuffer: Buffer,
@@ -49,33 +49,31 @@ export async function uploadAnalysisImage(
 }
 
 /**
- * Buat Signed URL berbatas waktu (default 3600 detik = 1 jam) untuk mengakses gambar di Private Bucket
+ * Ambil Public CDN URL permanen untuk gambar di Public Supabase Storage Bucket
+ * Cepat, sinkron, tanpa network round-trip, dan memanfaatkan Cloudflare/Supabase Edge CDN Cache
  */
-export async function createSignedImageUrl(
-	imagePath: string,
-	expiresInSeconds: number = 3600
-): Promise<string | null> {
+export function getPublicImageUrl(imagePath: string): string | null {
 	if (!imagePath) return null;
 
-	try {
-		const { data, error } = await supabaseAdmin.storage
-			.from(SUPABASE_BUCKET_NAME)
-			.createSignedUrl(imagePath, expiresInSeconds);
+	const { data } = supabaseAdmin.storage
+		.from(SUPABASE_BUCKET_NAME)
+		.getPublicUrl(imagePath);
 
-		if (error) {
-			console.error('[Storage SignedUrl Error]:', error);
-			return null;
-		}
-
-		return data?.signedUrl || null;
-	} catch (err) {
-		console.error('[Storage SignedUrl Exception]:', err);
-		return null;
-	}
+	return data?.publicUrl || null;
 }
 
 /**
- * Hapus gambar dari Supabase Storage Private Bucket
+ * Helper kompatibilitas lama: mengembalikan Public CDN URL
+ */
+export async function createSignedImageUrl(
+	imagePath: string,
+	_expiresInSeconds: number = 3600
+): Promise<string | null> {
+	return getPublicImageUrl(imagePath);
+}
+
+/**
+ * Hapus gambar dari Public Supabase Storage Bucket
  */
 export async function deleteStorageImage(imagePath: string): Promise<boolean> {
 	if (!imagePath) return false;

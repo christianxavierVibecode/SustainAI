@@ -188,8 +188,32 @@
 		</main>
 
 		<!-- FOOTER DASHBOARD -->
-		<footer class="w-full py-4 px-6 text-center text-xs text-text-muted border-t border-border-subtle bg-surface-card mt-auto">
-			<span>&copy; 2026 SustainAI. Platform Analisis Keberlanjutan &amp; Nilai Ekonomi Daur Ulang.</span>
-		</footer>
+		<footer
+        class="w-full bg-surface-card border-t border-border-subtle py-6 px-4 sm:px-6 lg:px-8 mt-auto"
+      >
+        <div
+          class="max-w-[1360px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-text-muted"
+        >
+          <div class="flex items-center gap-2">
+            <img
+              src="/SustainAI-Icon.webp"
+              alt="SustainAI"
+              class="w-4 h-4 object-contain"
+            />
+            <span class="font-semibold text-text-strong"
+              >SustainAI Platform</span
+            >
+            <span>&bull;</span>
+            <span>Logicodix2026 Hackathon</span>
+          </div>
+
+          <div
+            class="flex flex-col md:flex-row flex-wrap items-center gap-4 text-[11px]"
+          >
+            <span class="hidden md:inline">&bull;</span>
+            <span>Developed by <strong>Team GenForces</strong></span>
+          </div>
+        </div>
+      </footer>
 	</div>
 </div>
