@@ -342,16 +342,16 @@ Pengguna dapat mengakses lima halaman melalui sidebar:
 └───────┬──────────────┬───────┘
         │              │
  ┌──────┴──────┐ ┌─────┴─────────────────────────────────┐
- │ (1) Base64  │ │ (2) Binary Upload (Private Bucket)    │
+ │ (1) Base64  │ │ (2) Binary Upload (Public CDN Bucket) │
  ▼             ▼ ▼                                       ▼
 ┌──────────────────────────────┐        ┌───────────────────────────────┐
 │          GEMINI API          │        │    SUPABASE STORAGE BUCKET    │
-│       gemini-3.5-flash       │        │ - Private Storage (Non-Publik)│
+│       gemini-3.5-flash       │        │ - Public CDN Storage (Cached) │
 │ - Fast Multimodal Inference  │        │ - Simpan Foto Persisten       │
 │ - Inline Base64 Processing   │        │ - Format uuid-type-time.ext   │
 │ - Kembalikan JSON Terstruktur│        └──────────────┬────────────────┘
 └──────────────┬───────────────┘                       │
-               │ JSON Response                         │ Image Path Relatif
+               │ JSON Response                         │ Image Path Relatif / Public URL
                ▼                                       ▼
 ┌──────────────────────────────────────────────────────────────┐
 │                      SVELTEKIT BACKEND                       │
@@ -389,7 +389,7 @@ Pengguna dapat mengakses lima halaman melalui sidebar:
 
 ### 4. Sequence Diagram
 
-Diagram berikut menggambarkan alur komunikasi antara pengguna, frontend, backend SvelteKit, Google Gemini API, Supabase Private Storage, dan PostgreSQL. Proses inferensi AI (Base64) dan penyimpanan persisten gambar (Supabase) dieksekusi secara efisien secara paralel di backend:
+Diagram berikut menggambarkan alur komunikasi antara pengguna, frontend, backend SvelteKit, Google Gemini API, Supabase Storage (Public Bucket dengan Akselerasi CDN), dan PostgreSQL. Proses inferensi AI (Base64) dan penyimpanan persisten gambar dieksekusi secara efisien secara paralel di backend:
 
 ```mermaid
 sequenceDiagram
@@ -398,7 +398,7 @@ sequenceDiagram
     participant UI as Svelte Frontend
     participant API as SvelteKit Backend
     participant Gemini as Gemini API (gemini-3.5-flash)
-    participant Storage as Supabase Storage (Private)
+    participant Storage as Supabase Storage (Public CDN)
     participant DB as PostgreSQL
 
     User->>UI: Ambil foto via kamera atau upload gambar
@@ -412,7 +412,7 @@ sequenceDiagram
 
     par Eksekusi Paralel (AI Inference & Persistensi Gambar)
         API->>Gemini: POST generateContent (Prompt + Inline Base64 Data)
-        API->>Storage: Upload binary ke private bucket (Service Role)
+        API->>Storage: Upload binary ke public CDN bucket (Service Role)
     end
 
     Storage-->>API: Konfirmasi upload sukses & kembalikan image_path
@@ -433,7 +433,7 @@ sequenceDiagram
         end
 
         DB-->>API: Konfirmasi commit transaksi
-        API-->>UI: 200 OK (Hasil analisis AI + data referensi)
+        API-->>UI: 200 OK (Hasil analisis AI + data referensi + Public CDN Image URL)
         UI-->>User: Tampilkan kartu hasil analisis & rekomendasi tindakan
 
     else Respons AI Tidak Valid / Gambar Ditolak
@@ -447,10 +447,9 @@ sequenceDiagram
         UI->>API: GET /dashboard/history
         API->>DB: Query riwayat analisis pengguna
         DB-->>API: Daftar record (memuat image_path)
-        API->>Storage: Generate Signed URL sementara (createSignedUrl, 3600s)
-        Storage-->>API: Return temporary signed image URLs
-        API-->>UI: Data riwayat lengkap + Signed image URLs
-        UI-->>User: Render daftar riwayat dan thumbnail gambar
+        API->>API: Konversi image_path ke Public CDN URL (Instan tanpa round-trip)
+        API-->>UI: Data riwayat lengkap + Public CDN Image URLs
+        UI-->>User: Render daftar riwayat dan thumbnail gambar ter-cache cepat
     end
 ```
 
@@ -504,13 +503,12 @@ GEMINI_API_KEY_PLANT_ANALYZER=AIzaSy...
 DATABASE_URL="postgresql://postgres.[PROJECT-REF]:[PASSWORD]@aws-0-[REGION].pooler.supabase.com:6543/postgres"
 
 # ==============================================================================
-# Supabase Storage (Private Bucket)
-# Digunakan oleh backend untuk upload binary dan generate signed URLs
+# Supabase Storage (Public CDN Bucket)
+# Digunakan untuk persistensi foto analisis berakselerasi CDN & caching cepat
 # ==============================================================================
 SUPABASE_URL="https://[PROJECT-REF].supabase.co"
 SUPABASE_SERVICE_ROLE_KEY="eyJhbGciOi..."
-SUPABASE_BUCKET_NAME="sustainai-images"
-SIGNED_URL_EXPIRES_IN=3600
+SUPABASE_BUCKET_NAME="SustainAI-UserPhoto"
 
 # ==============================================================================
 # Autentikasi & Keamanan (JWT & Demo OTP)
@@ -530,9 +528,8 @@ PUBLIC_APP_URL="http://localhost:5173"
 | `GEMINI_API_KEY_PLANT_ANALYZER` |  Server-side  | API key Gemini untuk analisis modul Plant Disease Analyzer.                                                  |
 | `DATABASE_URL`                  |  Server-side  | Connection string PostgreSQL (kompatibel dengan Supabase pooler/direct connection).                          |
 | `SUPABASE_URL`                  |  Server-side  | URL project Supabase instance.                                                                               |
-| `SUPABASE_SERVICE_ROLE_KEY`     |  Server-side  | Secret key berprivilese penuh untuk mengunggah ke private storage bucket dan membuat signed URL akses token. |
-| `SUPABASE_BUCKET_NAME`          |  Server-side  | Nama bucket private tempat penyimpanan file gambar (misal: `sustainai-images`).                              |
-| `SIGNED_URL_EXPIRES_IN`         |  Server-side  | Masa berlaku token akses gambar sementara (dalam detik, default 3600 / 1 jam).                               |
+| `SUPABASE_SERVICE_ROLE_KEY`     |  Server-side  | Secret key berprivilese penuh untuk mengunggah dan menghapus objek storage di Supabase.                       |
+| `SUPABASE_BUCKET_NAME`          |  Server-side  | Nama bucket public storage tempat penyimpanan file gambar (misal: `SustainAI-UserPhoto`).                    |
 | `JWT_SECRET`                    |  Server-side  | Kunci enkripsi/signing token JWT sesi login pada HTTP-only cookie.                                           |
 | `DEMO_OTP_CODE`                 |  Server-side  | Kode OTP hardcode untuk demonstrasi verifikasi registrasi (`123456`).                                        |
 | `PUBLIC_APP_URL`                | Client/Server | Base URL aplikasi web SvelteKit.                                                                             |

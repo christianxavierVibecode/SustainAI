@@ -101,7 +101,7 @@ Contoh data mengikuti struktur sebelumnya. Hasil JSON tervalidasi Gemini disimpa
 | -------------------------------------- | -------------------------------------- | ------------- | --------- | -------------------------------------------------------------------------- | ------------- | ---------------- | -------------- | ---------------------- |
 | `f1221e2a-0dfe-4b81-b6d0-76e536cfc2df` | `abef1065-b725-4998-814a-65832ed042b4` | waste         | completed | `waste-analysis/f1221e2a-0dfe-4b81-b6d0-76e536cfc2df_waste_1794232269.jpg` | Google Gemini | gemini-3.5-flash | waste-v1       | 2026-09-28 16:42:00+07 |
 | `30c5493e-3e47-44ea-bab7-13cfa97536cb` | `abef1065-b725-4998-814a-65832ed042b4` | plant         | completed | `plant-analysis/30c5493e-3e47-44ea-bab7-13cfa97536cb_plant_1794232290.jpg` | Google Gemini | gemini-3.5-flash | plant-v1       | 2026-09-29 11:12:00+07 |
-| `49927af5-d976-4fae-9a2d-b216c649a966` | `abef1065-b725-4998-814a-65832ed042b4` | waste         | completed | `waste-analysis/49927af5-d976-4fae-9a2d-b216c649a966_plant_1794232290.jpg` | Google Gemini | gemini-3.5-flash | waste-v1       | 2026-09-30 13:22:00+07 |
+| `49927af5-d976-4fae-9a2d-b216c649a966` | `abef1065-b725-4998-814a-65832ed042b4` | waste         | completed | `waste-analysis/49927af5-d976-4fae-9a2d-b216c649a966_waste_1794232290.jpg` | Google Gemini | gemini-3.5-flash | waste-v1       | 2026-09-30 13:22:00+07 |
 
 Contoh `result` untuk analisis sampah:
 
