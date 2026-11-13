@@ -1,4 +1,8 @@
 import pg from 'pg';
+import dotenv from 'dotenv';
+
+// Muat variabel environment dari file .env (jika belum dimuat oleh runtime)
+dotenv.config();
 
 const { Pool } = pg;
 
