@@ -26,6 +26,20 @@ async function runSeed() {
 	try {
 		await client.query('BEGIN');
 
+		// 0. Bersihkan seluruh data tabel aplikasi terlebih dahulu
+		console.log('-> Membersihkan seluruh data lama di tabel aplikasi...');
+		await client.query(`
+			TRUNCATE TABLE 
+				analysis_plant_details,
+				analysis_waste_details,
+				analysis_records,
+				waste_price,
+				waste_sub_categories,
+				waste_categories,
+				users
+			RESTART IDENTITY CASCADE;
+		`);
+
 		// 1. Seed users
 		console.log('-> Seeding users...');
 		const users = [
@@ -164,8 +178,6 @@ async function runSeed() {
 			[42, 11, 42000, '2026-09-28 16:42:00+07']
 		];
 
-		// Bersihkan atau timpa waste_price dummy untuk demo konsisten
-		await client.query('DELETE FROM waste_price WHERE id <= 42');
 		for (const p of wastePrices) {
 			await client.query(
 				`INSERT INTO waste_price (id, waste_sub_category_id, price, created_at)
