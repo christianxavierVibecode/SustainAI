@@ -310,7 +310,7 @@
 	<aside
 		id="adminSidebar"
 		aria-label="Admin Navigation"
-		class="fixed left-0 top-0 bottom-0 z-50 w-64 bg-surface-card border-r border-border-subtle flex flex-col justify-between py-6 px-4 shadow-xs overflow-y-auto transition-transform duration-300 ease-out {isMobileSidebarOpen
+		class="fixed left-0 top-0 bottom-0 z-50 sm:w-64 w-70 bg-surface-card border-r border-border-subtle flex flex-col justify-between py-6 px-4 shadow-xs overflow-y-auto transition-transform duration-300 ease-out {isMobileSidebarOpen
 			? 'translate-x-0'
 			: '-translate-x-full lg:translate-x-0'}"
 	>
@@ -382,14 +382,6 @@
 					<span class="ml-auto w-1.5 h-4 rounded-full bg-primary"></span>
 				</a>
 
-				<a
-					href="/dashboard/overview"
-					onclick={closeSidebar}
-					class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-text-muted hover:text-text-strong hover:bg-surface-base transition-all cursor-pointer"
-				>
-					<span class="material-symbols-outlined text-[20px]">dashboard</span>
-					<span class="text-xs">Dashboard User</span>
-				</a>
 			</nav>
 		</div>
 
@@ -468,16 +460,6 @@
 					<span class="material-symbols-outlined text-[18px]">add</span>
 					<span class="hidden sm:inline">Tambah Harga</span>
 				</button>
-
-				<!-- Logout CTA di Header -->
-				<a
-					href="/logout"
-					title="Keluar dari akun admin"
-					class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold text-danger-rose hover:bg-danger-rose-subtle transition-all cursor-pointer border border-border-subtle"
-				>
-					<span class="material-symbols-outlined text-[16px]">logout</span>
-					<span class="hidden sm:inline">Keluar</span>
-				</a>
 
 				<div
 					class="w-8 h-8 rounded-full bg-accent-amber-subtle border border-accent-amber/30 flex items-center justify-center text-accent-amber font-bold text-xs"
@@ -592,7 +574,7 @@
 						type="text"
 						bind:value={searchInput}
 						placeholder="Cari nama komoditas..."
-						class="w-full pl-9 pr-8 py-2 rounded-xl border border-border-subtle bg-surface-base text-xs text-text-strong placeholder:text-text-muted focus:outline-hidden focus:border-primary focus:ring-1 focus:ring-primary transition-all"
+						class="w-full pl-12 pr-8 py-3 rounded-xl border border-border-subtle bg-surface-base text-xs text-text-strong placeholder:text-text-muted focus:outline-hidden focus:border-primary focus:ring-1 focus:ring-primary transition-all"
 					/>
 					{#if searchInput}
 						<button
@@ -820,7 +802,7 @@
 				<!-- 1. LIVE SEARCH CUSTOM INPUT: KOMODITAS SAMPAH                -->
 				<!-- ============================================================= -->
 				<div class="relative">
-					<div class="flex items-center justify-between mb-1.5">
+					<div class="flex items-center justify-between mb-3">
 						<label for="subcategory_search_input" class="block font-bold text-text-strong uppercase tracking-wider text-[11px]">
 							Komoditas Sampah (Subkategori)
 						</label>
@@ -845,7 +827,7 @@
 								highlightedIndex = 0;
 							}}
 							onkeydown={handleSubCategoryKeydown}
-							class="w-full pl-9 pr-9 py-2.5 rounded-xl border border-border-subtle bg-surface-base text-text-strong text-xs font-medium focus:outline-hidden focus:border-primary focus:ring-2 focus:ring-brand-mint/20 transition-all"
+							class="w-full pl-12 pr-9 py-3 mb-2 rounded-xl border border-border-subtle bg-surface-base text-text-strong text-xs font-medium focus:outline-hidden focus:border-primary focus:ring-2 focus:ring-brand-mint/20 transition-all"
 						/>
 						<button
 							type="button"
@@ -936,7 +918,7 @@
 							/ kg
 						</span>
 					</div>
-					<p class="text-[11px] text-text-muted mt-1">
+					<p class="text-[11px] text-text-muted mt-3">
 						Nominal otomatis diformat ribuan dengan pemisah titik (misal: <strong>3.500</strong>).
 					</p>
 				</div>
