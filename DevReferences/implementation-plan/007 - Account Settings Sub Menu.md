@@ -97,9 +97,9 @@ WHERE id = $2;
 ---
 
 ## 5. Verification & Acceptance Criteria
-- [ ] Pengguna yang membuka `/dashboard/setting` dapat melihat data nama dan email mereka secara akurat.
-- [ ] Pengguna dapat memperbarui nama lengkap, dan data langsung ter-update di basis data PostgreSQL (`updated_at` terbarui).
-- [ ] Input password saat ini yang salah ditolak dengan pesan error yang jelas dan ramah pengguna.
-- [ ] Password baru berhasil di-hash dengan aman menggunakan `bcryptjs` dan disimpan ke database.
-- [ ] Setelah password berhasil diubah, pengguna dapat login kembali menggunakan kredensial baru tersebut.
-- [ ] Antarmuka responsif dan konsisten dengan komponen desain tema SustainAI.
+- [x] Pengguna yang membuka `/dashboard/setting` dapat melihat data nama dan email mereka secara akurat.
+- [x] Pengguna dapat memperbarui nama lengkap, dan data langsung ter-update di basis data PostgreSQL (`updated_at` terbarui).
+- [x] Input password saat ini yang salah ditolak dengan pesan error yang jelas dan ramah pengguna.
+- [x] Password baru berhasil di-hash dengan aman menggunakan `bcryptjs` dan disimpan ke database.
+- [x] Setelah password berhasil diubah, pengguna dapat login kembali menggunakan kredensial baru tersebut.
+- [x] Antarmuka responsif dan konsisten dengan komponen desain tema SustainAI.

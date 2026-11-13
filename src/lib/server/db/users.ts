@@ -96,3 +96,27 @@ export async function updateUserProfile(
 	if (res.rows.length === 0) return null;
 	return res.rows[0] as UserRecord;
 }
+
+/**
+ * Ambil profil lengkap pengguna berdasarkan ID
+ */
+export async function getUserProfileById(userId: string): Promise<UserRecord | null> {
+	return findUserById(userId);
+}
+
+/**
+ * Update password pengguna
+ */
+export async function updateUserPassword(
+	userId: string,
+	newHashedPassword: string
+): Promise<boolean> {
+	const res = await query(
+		`UPDATE users 
+     SET password_hash = $2, updated_at = NOW() 
+     WHERE id = $1`,
+		[userId, newHashedPassword]
+	);
+
+	return (res.rowCount ?? 0) > 0;
+}
