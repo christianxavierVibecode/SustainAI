@@ -79,14 +79,14 @@ Halaman autentikasi utama (Login & Register) disatukan dalam satu antarmuka resp
 
 ## Verification & Acceptance Criteria
 
-- [ ] Kolom `user_role` bertipe enum `user_role_enum` terbaca dan terisi dengan benar pada query database.
-- [ ] Halaman `/get-started` dapat diakses dan menampilkan tab toggle untuk beralih antara form login dan register tanpa reload halaman.
-- [ ] User baru yang mendaftar via form register pada `/get-started` otomatis memiliki `user_role = 'user'`.
-- [ ] Alur verifikasi OTP menampilkan kode demo `123456` beserta banner informasi petunjuk pengujian.
-- [ ] Input kode `123456` berhasil memverifikasi akun (`email_verified = true`). Kode selain itu ditolak.
-- [ ] Login menggunakan akun demo user mengarahkan ke dashboard pengguna (`/dashboard/overview`).
-- [ ] Login menggunakan akun demo admin mengarahkan ke panel admin (`/admin`).
-- [ ] Route guard di `hooks.server.ts` mencegah user biasa mengakses panel `/admin` dan mencegah admin mengakses modul dashboard user biasa.
-- [ ] Pengguna yang sudah login otomatis dialihkan dari `/get-started` ke dashboard masing-masing.
-- [ ] Logout membersihkan session cookie dan membatalkan akses ke route terproteksi.
+- [x] Kolom `user_role` bertipe enum `user_role_enum` terbaca dan terisi dengan benar pada query database.
+- [x] Halaman `/get-started` dapat diakses dan menampilkan tab toggle untuk beralih antara form login dan register tanpa reload halaman.
+- [x] User baru yang mendaftar via form register pada `/get-started` otomatis memiliki `user_role = 'user'`.
+- [x] Alur verifikasi OTP menampilkan kode demo `123456` beserta banner informasi petunjuk pengujian.
+- [x] Input kode `123456` berhasil memverifikasi akun (`email_verified = true`). Kode selain itu ditolak.
+- [x] Login menggunakan akun demo user mengarahkan ke dashboard pengguna (`/dashboard/overview`).
+- [x] Login menggunakan akun demo admin mengarahkan ke panel admin (`/admin`).
+- [x] Route guard di `hooks.server.ts` mencegah user biasa mengakses panel `/admin` dan mencegah admin mengakses modul dashboard user biasa.
+- [x] Pengguna yang sudah login otomatis dialihkan dari `/get-started` ke dashboard masing-masing.
+- [x] Logout membersihkan session cookie dan membatalkan akses ke route terproteksi.
 
