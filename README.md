@@ -574,12 +574,12 @@ Pastikan konfigurasi environment, koneksi database, batas ukuran upload, dan pen
 
 ## 🔐 Akun Demonstrasi
 
-| Field    | Credential                      |
-| -------- | ------------------------------- |
-| Username | `christianxavier@genforces.com` |
-| Password | `GENFORCES_JUARA_123`           |
+| Role | Email / Username | Password | Deskripsi |
+| ---- | ---------------- | -------- | --------- |
+| **User Biasa** | `user@genforces.com` | `12345678` | Akses modul dashboard pengguna (`/dashboard/overview`) |
+| **Admin** | `admin@genforces.com` | `87654321` | Akses panel administrasi harga sampah (`/admin`) |
 
-> Akun ini hanya untuk keperluan demonstrasi.
+> Akun ini disiapkan otomatis melalui database seeder (`npm run db:seed`) untuk keperluan demonstrasi dan pengujian MVP. Kredensial demo ini juga dapat diisi otomatis via tombol preset pada halaman `/get-started`.
 
 ## 👨‍💻 Tim Pengembang
 

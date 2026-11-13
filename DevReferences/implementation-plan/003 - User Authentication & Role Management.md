@@ -34,7 +34,7 @@ Halaman autentikasi utama (Login & Register) disatukan dalam satu antarmuka resp
 
 1. **Database Schema & Seeder Alignment**:
    - Memastikan aplikasi memanfaatkan kolom `user_role` dengan tipe enum `user_role_enum` pada tabel `users`.
-   - Menyelaraskan script seeder agar akun demo memuat pengguna `user` (`christianxavier@genforces.com`) dan admin `admin` (`admin@genforces.com`) sesuai dengan `DevReferences/Database/database-seed.md`.
+   - Menyelaraskan script seeder agar akun demo memuat pengguna `user` (`user@genforces.com` / `12345678`) dan admin `admin` (`admin@genforces.com` / `87654321`) sesuai dengan `DevReferences/Database/database-seed.md`.
 2. **Backend Authentication Layer**:
    - Helper JWT di `src/lib/server/auth.ts`: fungsi `signToken(payload)`, `verifyToken(token)`, dan penanganan cookie (payload menyertakan `id`, `email`, dan `user_role`).
    - Password hashing helper: fungsi `hashPassword(plain)` dan `comparePassword(plain, hashed)` via `bcryptjs`.

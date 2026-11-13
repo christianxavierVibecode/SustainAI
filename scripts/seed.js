@@ -31,9 +31,9 @@ async function runSeed() {
 		const users = [
 			{
 				id: 'abef1065-b725-4998-814a-65832ed042b4',
-				email: 'christianxavier@genforces.com',
-				password_hash: '$2a$12$.vk8vH6L7VPRgMoEGm1LxuajuxS26xVdEGsPGChM/Rcism4DC5q1i',
-				full_name: 'GenForces Demo',
+				email: 'user@genforces.com',
+				password_hash: '$2b$10$rKbHrfZce9MkU.J63NkJ5.GC.tH5Ef1Auu9zZQInDzY3F2SnP3cnm',
+				full_name: 'GenForces Demo User',
 				user_role: 'user',
 				email_verified: true,
 				created_at: '2026-11-01 13:13:47+07',
@@ -42,8 +42,8 @@ async function runSeed() {
 			{
 				id: '1b3fac7c-68c6-4595-89cc-08951422f0ae',
 				email: 'admin@genforces.com',
-				password_hash: '$2a$12$nDZib8pGVuf.f9q/I/JrbOQDGt2hhJOkn2yt/R09LYLL4uQwLvJ.e',
-				full_name: 'SustainAI Demo User',
+				password_hash: '$2b$10$3Om8d8PA7xai8B.yoAsOTewHscrL0ZQ0GwMw8fotyTccKhUZgA8EO',
+				full_name: 'SustainAI Demo Admin',
 				user_role: 'admin',
 				email_verified: true,
 				created_at: '2026-11-02 18:13:44+07',

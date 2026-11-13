@@ -24,14 +24,14 @@
 		const passwordInput = document.getElementById('login-password') as HTMLInputElement | null;
 
 		if (persona === 'auditor') {
-			if (emailInput) emailInput.value = 'christianxavier@genforces.com';
-			if (passwordInput) passwordInput.value = 'UserSustainAI2026!';
+			if (emailInput) emailInput.value = 'user@genforces.com';
+			if (passwordInput) passwordInput.value = '12345678';
 		} else if (persona === 'agronomist') {
 			if (emailInput) emailInput.value = 'admin@genforces.com';
-			if (passwordInput) passwordInput.value = 'AdminSustainAI2026!';
+			if (passwordInput) passwordInput.value = '87654321';
 		} else {
 			if (emailInput) emailInput.value = 'demo.esg@sustainai.io';
-			if (passwordInput) passwordInput.value = 'SustainAI2026!';
+			if (passwordInput) passwordInput.value = '12345678';
 		}
 	}
 </script>
