@@ -126,12 +126,12 @@ WHERE id = $1;
 ---
 
 ## 5. Verification & Acceptance Criteria
-- [ ] Hanya pengguna dengan `user_role = 'admin'` yang dapat mengakses rute `/admin` dan menjalankan aksi CRUD.
-- [ ] Pengguna biasa (`user_role = 'user'`) atau pengunjung tanpa autentikasi otomatis ditolak dan diarahkan ke rute yang sesuai.
-- [ ] Admin dapat melihat daftar observasi harga terpaginasi lengkap dengan relasi nama kategori dan subkategori.
-- [ ] Admin dapat memfilter data berdasarkan kategori dan mencari berdasarkan nama komoditas.
-- [ ] Admin berhasil menambahkan data harga baru ke tabel `waste_price`.
-- [ ] Admin berhasil mengedit harga maupun tanggal observasi dari record yang dipilih.
-- [ ] Admin berhasil menghapus record harga dengan konfirmasi yang aman.
-- [ ] Form action memiliki penanganan validasi input yang kuat (nominal harga tidak boleh negatif/kosong, subkategori harus valid).
-- [ ] Seluruh perubahan data langsung tercermin pada basis data PostgreSQL dan grafik tren harga di dashboard pengguna.
+- [x] Hanya pengguna dengan `user_role = 'admin'` yang dapat mengakses rute `/admin` dan menjalankan aksi CRUD.
+- [x] Pengguna biasa (`user_role = 'user'`) atau pengunjung tanpa autentikasi otomatis ditolak dan diarahkan ke rute yang sesuai.
+- [x] Admin dapat melihat daftar observasi harga terpaginasi lengkap dengan relasi nama kategori dan subkategori.
+- [x] Admin dapat memfilter data berdasarkan kategori dan mencari berdasarkan nama komoditas.
+- [x] Admin berhasil menambahkan data harga baru ke tabel `waste_price`.
+- [x] Admin berhasil mengedit harga maupun tanggal observasi dari record yang dipilih.
+- [x] Admin berhasil menghapus record harga dengan konfirmasi yang aman.
+- [x] Form action memiliki penanganan validasi input yang kuat (nominal harga tidak boleh negatif/kosong, subkategori harus valid).
+- [x] Seluruh perubahan data langsung tercermin pada basis data PostgreSQL dan grafik tren harga di dashboard pengguna.
