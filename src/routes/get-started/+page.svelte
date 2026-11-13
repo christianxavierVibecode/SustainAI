@@ -18,7 +18,7 @@
 	let isSubmitting = $state(false);
 
 	// Autofill persona demo credentials
-	function selectPersona(persona: 'auditor' | 'agronomist' | 'esg') {
+	function selectPersona(persona: 'auditor' | 'agronomist') {
 		activePersona = persona;
 		const emailInput = document.getElementById('login-email') as HTMLInputElement | null;
 		const passwordInput = document.getElementById('login-password') as HTMLInputElement | null;
@@ -29,9 +29,6 @@
 		} else if (persona === 'agronomist') {
 			if (emailInput) emailInput.value = 'admin@genforces.com';
 			if (passwordInput) passwordInput.value = '87654321';
-		} else {
-			if (emailInput) emailInput.value = 'demo.esg@sustainai.io';
-			if (passwordInput) passwordInput.value = '12345678';
 		}
 	}
 </script>
@@ -170,7 +167,7 @@
 					{#if mode === 'login'}
 						<div class="mb-5">
 							<div class="block text-xs font-medium text-text-muted mb-2">Preset Akun Demo (Klik untuk Autofill):</div>
-							<div class="grid grid-cols-3 gap-2">
+							<div class="grid grid-cols-2 gap-2">
 								<button
 									type="button"
 									onclick={() => selectPersona('auditor')}
@@ -193,16 +190,6 @@
 									<span class="truncate w-full">Demo Admin</span>
 								</button>
 
-								<button
-									type="button"
-									onclick={() => selectPersona('esg')}
-									class="text-center py-2 px-1 rounded-xl transition-all text-xs font-semibold flex flex-col items-center gap-1 cursor-pointer border {activePersona === 'esg'
-										? 'border-primary bg-brand-mint-subtle text-brand-forest shadow-xs'
-										: 'border-border-subtle bg-surface-card text-text-muted hover:border-primary/50'}"
-								>
-									<span class="material-symbols-outlined text-base">eco</span>
-									<span class="truncate w-full">Eco Guest</span>
-								</button>
 							</div>
 						</div>
 					{/if}
@@ -237,8 +224,8 @@
 										name="email"
 										type="email"
 										required
-										placeholder="contoh: christianxavier@genforces.com"
-										value={form?.email || 'christianxavier@genforces.com'}
+										placeholder="contoh: user@genforces.com"
+										value=""
 										class="w-full h-11 pl-12 pr-3.5 rounded-lg border border-border-subtle bg-surface-card text-text-strong text-xs sm:text-sm focus:border-primary focus:ring-2 focus:ring-brand-mint-subtle transition-all outline-none"
 									/>
 								</div>
@@ -261,7 +248,7 @@
 										type="password"
 										required
 										placeholder="••••••••••••"
-										value="UserSustainAI2026!"
+										value=""
 										class="w-full h-11 pl-12 pr-10 rounded-lg border border-border-subtle bg-surface-card text-text-strong text-xs sm:text-sm focus:border-primary focus:ring-2 focus:ring-brand-mint-subtle transition-all outline-none"
 									/>
 								</div>
@@ -314,7 +301,7 @@
 										required
 										placeholder="Nama Anda"
 										value={form?.fullName || ''}
-										class="w-full h-11 pl-10 pr-3.5 rounded-lg border border-border-subtle bg-surface-card text-text-strong text-xs sm:text-sm focus:border-primary focus:ring-2 focus:ring-brand-mint-subtle transition-all outline-none"
+										class="w-full h-11 pl-12 pr-3.5 rounded-lg border border-border-subtle bg-surface-card text-text-strong text-xs sm:text-sm focus:border-primary focus:ring-2 focus:ring-brand-mint-subtle transition-all outline-none"
 									/>
 								</div>
 							</div>
@@ -335,7 +322,7 @@
 										required
 										placeholder="email.anda@domain.com"
 										value={form?.email || ''}
-										class="w-full h-11 pl-10 pr-3.5 rounded-lg border border-border-subtle bg-surface-card text-text-strong text-xs sm:text-sm focus:border-primary focus:ring-2 focus:ring-brand-mint-subtle transition-all outline-none"
+										class="w-full h-11 pl-12 pr-3.5 rounded-lg border border-border-subtle bg-surface-card text-text-strong text-xs sm:text-sm focus:border-primary focus:ring-2 focus:ring-brand-mint-subtle transition-all outline-none"
 									/>
 								</div>
 							</div>
@@ -356,7 +343,7 @@
 										required
 										minlength="6"
 										placeholder="Minimal 6 karakter"
-										class="w-full h-11 pl-10 pr-10 rounded-lg border border-border-subtle bg-surface-card text-text-strong text-xs sm:text-sm focus:border-primary focus:ring-2 focus:ring-brand-mint-subtle transition-all outline-none"
+										class="w-full h-11 pl-12 pr-10 rounded-lg border border-border-subtle bg-surface-card text-text-strong text-xs sm:text-sm focus:border-primary focus:ring-2 focus:ring-brand-mint-subtle transition-all outline-none"
 									/>
 								</div>
 							</div>
@@ -377,7 +364,7 @@
 										required
 										minlength="6"
 										placeholder="Ulangi kata sandi"
-										class="w-full h-11 pl-10 pr-3.5 rounded-lg border border-border-subtle bg-surface-card text-text-strong text-xs sm:text-sm focus:border-primary focus:ring-2 focus:ring-brand-mint-subtle transition-all outline-none"
+										class="w-full h-11 pl-12 pr-3.5 rounded-lg border border-border-subtle bg-surface-card text-text-strong text-xs sm:text-sm focus:border-primary focus:ring-2 focus:ring-brand-mint-subtle transition-all outline-none"
 									/>
 								</div>
 							</div>
