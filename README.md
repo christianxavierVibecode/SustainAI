@@ -13,7 +13,7 @@ Platform asisten keberlanjutan berbasis AI untuk membantu masyarakat mengenali s
 
 <!-- Ganti DEMO_URL dengan URL aplikasi yang telah dipublikasikan -->
 
-<a href="DEMO_URL"><img src="DevReferences/Tampilan Aplikasi/1. Landing Page - Hero.PNG" alt="SustainAI Demo" width="90%"></a>
+<a href="https://youtu.be/sdnMh_Qu42I"><img src="DevReferences/Tampilan Aplikasi/1. Landing Page - Hero.PNG" alt="SustainAI Demo" width="90%"></a>
 
 <p>
 <a href="#-tampilan-aplikasi">🖼️ Application Preview</a> ·
@@ -169,9 +169,9 @@ Pengembangan SustainAI selanjutnya dapat mencakup beberapa fitur berikut (bukan 
 
 <div align="center">
 
-[![SustainAI Demo Video](https://img.youtube.com/vi/wwIt5ZvROrs/maxresdefault.jpg)](https://www.youtube.com/watch?v=wwIt5ZvROrs)
+[![SustainAI Demo Video](https://img.youtube.com/vi/sdnMh_Qu42I/maxresdefault.jpg)](https://youtu.be/sdnMh_Qu42I)
 
-**[▶️ Tonton Demo Aplikasi di YouTube](https://www.youtube.com/watch?v=wwIt5ZvROrs)**
+**[▶️ Tonton Demo Aplikasi di YouTube](https://youtu.be/sdnMh_Qu42I)**
 
 </div>
 
