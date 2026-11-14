@@ -169,7 +169,6 @@
 								required
 								minlength="2"
 								maxlength="100"
-								autocomplete="off"
 								bind:value={fullName}
 								placeholder="Masukkan nama lengkap Anda"
 								class="w-full pl-12 pr-4 py-2.5 rounded-xl border border-border-subtle bg-surface-card text-text-strong text-sm focus:outline-hidden focus:border-primary focus:ring-2 focus:ring-brand-mint/20 transition-all"

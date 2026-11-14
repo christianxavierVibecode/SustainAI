@@ -1,22 +1,21 @@
 <div align="center">
 
 <!-- Ganti placeholder dengan logo resmi SustainAI -->
-<img src="https://placehold.co/180x180/16a34a/ffffff?text=SustainAI" alt="SustainAI Logo" width="180">
+<img src="DevReferences/Tampilan Aplikasi/SustainAI-Icon-transparant.webp" alt="SustainAI Logo" width="180">
 
 # 🌿 SustainAI
 
 ### AI-Powered Waste & Plant Analyzer
 
-**From Recognition to Sustainable Action**
+**From Recognition to Sustainable Action** · _SustainAI, Empowering For Sustainability_
 
 Platform asisten keberlanjutan berbasis AI untuk membantu masyarakat mengenali sampah, memahami indikasi penyakit tanaman, dan mengambil tindakan yang lebih ramah lingkungan.
 
 <!-- Ganti DEMO_URL dengan URL aplikasi yang telah dipublikasikan -->
 
-<a href="DEMO_URL"><img src="https://placehold.co/960x540/14532d/ffffff?text=SustainAI+Application+Demo" alt="SustainAI Demo" width="90%"></a>
+<a href="DEMO_URL"><img src="DevReferences/Tampilan Aplikasi/1. Landing Page - Hero.PNG" alt="SustainAI Demo" width="90%"></a>
 
 <p>
-<a href="DEMO_URL">🌐 Live Demo</a> ·
 <a href="#-tampilan-aplikasi">🖼️ Application Preview</a> ·
 <a href="#-instalasi-dan-konfigurasi">🛠️ Installation</a>
 </p>
@@ -42,10 +41,10 @@ Alur yang ingin dihadirkan SustainAI adalah **identifikasi → pemahaman → rek
 
 ### 🌍 Sustainable Development Goals (SDGs)
 
-SustainAI dikembangkan sebagai solusi teknologi berbasis *Artificial Intelligence* (AI) yang mendukung pencapaian *Sustainable Development Goals* (SDGs), khususnya:
+SustainAI dikembangkan sebagai solusi teknologi berbasis _Artificial Intelligence_ (AI) yang mendukung pencapaian _Sustainable Development Goals_ (SDGs), khususnya:
 
 **SDG 12 — Responsible Consumption and Production**  
-*Konsumsi dan Produksi yang Bertanggung Jawab*
+_Konsumsi dan Produksi yang Bertanggung Jawab_
 
 SustainAI berkontribusi dalam mendorong pengelolaan sampah yang lebih bertanggung jawab melalui identifikasi dan klasifikasi sampah, edukasi daur ulang, serta penyediaan informasi referensi harga dan bank sampah. Melalui Waste Analyzer, masyarakat diharapkan dapat memahami potensi pemanfaatan sampah dan mengambil keputusan yang lebih bijak dalam pengelolaan limbah.
 
@@ -140,35 +139,39 @@ Pengembangan SustainAI selanjutnya dapat mencakup beberapa fitur berikut (bukan 
 
 ## 🖼️ Tampilan Aplikasi
 
-<!-- Ganti gambar placeholder dengan screenshot aktual, misalnya:
-<img src="docs/images/homepage.png" alt="SustainAI Homepage" width="85%">
--->
+<!-- Screenshot aktual aplikasi SustainAI -->
 
 <div align="center">
 
-|                                                        Homepage                                                         |                                                           Waste Analyzer                                                            |
-| :---------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------: |
-| <img src="https://placehold.co/600x340/f0fdf4/166534?text=Homepage+Screenshot" alt="Homepage placeholder" width="100%"> | <img src="https://placehold.co/600x340/f0fdf4/166534?text=Waste+Analyzer+Screenshot" alt="Waste Analyzer placeholder" width="100%"> |
-|                                                  _Screenshot homepage_                                                  |                                                     _Screenshot Waste Analyzer_                                                     |
+|                             Tampilan Halaman Utama Aplikasi / Landing Page                             |                                               Tampilan Hasil Analisis Tanaman (Gambar Valid)                                               |
+| :----------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------: |
+| <img src="DevReferences/Tampilan Aplikasi/1. Landing Page - Hero.PNG" alt="Landing Page" width="100%"> | <img src="DevReferences/Tampilan Aplikasi/2. Dashboard - Plant Analyzer - Response Avaible.PNG" alt="Plant Analyzer - Valid" width="100%"> |
+|                            _Tampilan Halaman Utama Aplikasi / Landing Page_                            |                             _Tampilan Hasil Analisis Tanaman ketika user menginput gambar tanaman yang valid_                              |
 
-|                                                       Plant Disease Analyzer                                                        |                                                            Analysis Result                                                            |
-| :---------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------: |
-| <img src="https://placehold.co/600x340/f0fdf4/166534?text=Plant+Analyzer+Screenshot" alt="Plant Analyzer placeholder" width="100%"> | <img src="https://placehold.co/600x340/f0fdf4/166534?text=Analysis+Result+Screenshot" alt="Analysis Result placeholder" width="100%"> |
-|                                                     _Screenshot Plant Analyzer_                                                     |                                                      _Screenshot hasil analisis_                                                      |
+|                                                Tampilan Hasil Analisis Tanaman (Gambar Tidak Valid)                                                |                                               Tampilan Hasil Analisis Sampah (Gambar Valid)                                                |
+| :------------------------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------: |
+| <img src="DevReferences/Tampilan Aplikasi/2. Dashboard - Plant Analyzer - Response Not Avaible.PNG" alt="Plant Analyzer - Not Valid" width="100%"> | <img src="DevReferences/Tampilan Aplikasi/3. Dashboard - Waste Analyzer - Response Avaible.PNG" alt="Waste Analyzer - Valid" width="100%"> |
+|                              _Tampilan Hasil Analisis Tanaman ketika user menginput gambar tanaman yang tidak valid_                               |                              _Tampilan Hasil Analisis Sampah ketika user menginput gambar sampah yang valid_                               |
+
+|                                                Tampilan Hasil Analisis Sampah (Gambar Tidak Valid)                                                 |                                      Tampilan Halaman Overview Dashboard                                      |
+| :------------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: |
+| <img src="DevReferences/Tampilan Aplikasi/3. Dashboard - Waste Analyzer - Response Not Avaible.PNG" alt="Waste Analyzer - Not Valid" width="100%"> | <img src="DevReferences/Tampilan Aplikasi/4. Dashboard - Overview.PNG" alt="Dashboard Overview" width="100%"> |
+|                               _Tampilan Hasil Analisis Sampah ketika user menginput gambar sampah yang tidak valid_                                |                                     _Tampilan Halaman Overview Dashboard_                                     |
+
+|                                       Tampilan Halaman History Hasil Analisis                                       |
+| :-----------------------------------------------------------------------------------------------------------------: |
+| <img src="DevReferences/Tampilan Aplikasi/5. Dashboard - History Analyzer.PNG" alt="History Analyzer" width="100%"> |
+|                                      _Tampilan Halaman history hasil Analisis_                                      |
 
 </div>
 
 ## 🎬 Demo Aplikasi
 
-<!-- Ganti DEMO_VIDEO_URL dengan URL video demo. Untuk GIF repository:
-<img src="docs/demo.gif" alt="SustainAI demo" width="90%">
--->
-
 <div align="center">
 
-[![SustainAI Demo](https://placehold.co/960x540/14532d/ffffff?text=Click+to+Watch+SustainAI+Demo)](DEMO_VIDEO_URL)
+[![SustainAI Demo Video](https://img.youtube.com/vi/wwIt5ZvROrs/maxresdefault.jpg)](https://www.youtube.com/watch?v=wwIt5ZvROrs)
 
-**[▶️ Tonton Demo Aplikasi](DEMO_VIDEO_URL)**
+**[▶️ Tonton Demo Aplikasi di YouTube](https://www.youtube.com/watch?v=wwIt5ZvROrs)**
 
 </div>
 
@@ -522,17 +525,17 @@ DEMO_OTP_CODE="123456"
 PUBLIC_APP_URL="http://localhost:5173"
 ```
 
-| Variable                        |  Lingkungan   | Kegunaan & Keterangan                                                                                        |
-| :------------------------------ | :-----------: | :----------------------------------------------------------------------------------------------------------- |
-| `GEMINI_API_KEY_WASTE_ANALYZER` |  Server-side  | API key Gemini untuk analisis modul Waste Analyzer.                                                          |
-| `GEMINI_API_KEY_PLANT_ANALYZER` |  Server-side  | API key Gemini untuk analisis modul Plant Disease Analyzer.                                                  |
-| `DATABASE_URL`                  |  Server-side  | Connection string PostgreSQL (kompatibel dengan Supabase pooler/direct connection).                          |
-| `SUPABASE_URL`                  |  Server-side  | URL project Supabase instance.                                                                               |
-| `SUPABASE_SERVICE_ROLE_KEY`     |  Server-side  | Secret key berprivilese penuh untuk mengunggah dan menghapus objek storage di Supabase.                       |
-| `SUPABASE_BUCKET_NAME`          |  Server-side  | Nama bucket public storage tempat penyimpanan file gambar (misal: `SustainAI-UserPhoto`).                    |
-| `JWT_SECRET`                    |  Server-side  | Kunci enkripsi/signing token JWT sesi login pada HTTP-only cookie.                                           |
-| `DEMO_OTP_CODE`                 |  Server-side  | Kode OTP hardcode untuk demonstrasi verifikasi registrasi (`123456`).                                        |
-| `PUBLIC_APP_URL`                | Client/Server | Base URL aplikasi web SvelteKit.                                                                             |
+| Variable                        |  Lingkungan   | Kegunaan & Keterangan                                                                     |
+| :------------------------------ | :-----------: | :---------------------------------------------------------------------------------------- |
+| `GEMINI_API_KEY_WASTE_ANALYZER` |  Server-side  | API key Gemini untuk analisis modul Waste Analyzer.                                       |
+| `GEMINI_API_KEY_PLANT_ANALYZER` |  Server-side  | API key Gemini untuk analisis modul Plant Disease Analyzer.                               |
+| `DATABASE_URL`                  |  Server-side  | Connection string PostgreSQL (kompatibel dengan Supabase pooler/direct connection).       |
+| `SUPABASE_URL`                  |  Server-side  | URL project Supabase instance.                                                            |
+| `SUPABASE_SERVICE_ROLE_KEY`     |  Server-side  | Secret key berprivilese penuh untuk mengunggah dan menghapus objek storage di Supabase.   |
+| `SUPABASE_BUCKET_NAME`          |  Server-side  | Nama bucket public storage tempat penyimpanan file gambar (misal: `SustainAI-UserPhoto`). |
+| `JWT_SECRET`                    |  Server-side  | Kunci enkripsi/signing token JWT sesi login pada HTTP-only cookie.                        |
+| `DEMO_OTP_CODE`                 |  Server-side  | Kode OTP hardcode untuk demonstrasi verifikasi registrasi (`123456`).                     |
+| `PUBLIC_APP_URL`                | Client/Server | Base URL aplikasi web SvelteKit.                                                          |
 
 > **Penting:** Semua secret key di atas dikelola murni di sisi server SvelteKit dan tidak pernah dikirim ke browser client demi keamanan maksimal.
 
@@ -571,10 +574,10 @@ Pastikan konfigurasi environment, koneksi database, batas ukuran upload, dan pen
 
 ## 🔐 Akun Demonstrasi
 
-| Role | Email / Username | Password | Deskripsi |
-| ---- | ---------------- | -------- | --------- |
-| **User Biasa** | `user@genforces.com` | `12345678` | Akses modul dashboard pengguna (`/dashboard/overview`) |
-| **Admin** | `admin@genforces.com` | `87654321` | Akses panel administrasi harga sampah (`/admin`) |
+| Role           | Email / Username      | Password   | Deskripsi                                              |
+| -------------- | --------------------- | ---------- | ------------------------------------------------------ |
+| **User Biasa** | `user@genforces.com`  | `12345678` | Akses modul dashboard pengguna (`/dashboard/overview`) |
+| **Admin**      | `admin@genforces.com` | `87654321` | Akses panel administrasi harga sampah (`/admin`)       |
 
 > Akun ini disiapkan otomatis melalui database seeder (`npm run db:seed`) untuk keperluan demonstrasi dan pengujian MVP. Kredensial demo ini juga dapat diisi otomatis via tombol preset pada halaman `/get-started`.
 
