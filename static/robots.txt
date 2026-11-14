@@ -1,3 +1,19 @@
-# allow crawling everything by default
 User-agent: *
-Disallow:
+
+# Izinkan halaman publik
+Allow: /
+Allow: /home
+Allow: /get-started
+Allow: /login
+Allow: /register
+
+# Blokir halaman yang memerlukan autentikasi (dashboard & admin)
+Disallow: /dashboard/
+Disallow: /admin/
+Disallow: /get-started/verify-otp
+
+# Blokir endpoint API internal
+Disallow: /api/
+
+# Sitemap
+Sitemap: https://sustainai-nine.vercel.app/sitemap.xml
