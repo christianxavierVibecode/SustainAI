@@ -48,21 +48,16 @@
 				</div>
 				<div class="flex flex-col">
 					<span class="font-display font-extrabold text-xl text-primary leading-tight tracking-tight">SustainAI</span>
-					<span class="text-[11px] font-medium text-text-muted tracking-wide leading-none">Intelligence Platform • UN SDG Aligned</span>
+					<span class="text-[11px] font-medium text-text-muted tracking-wide leading-none">Intelligence Platform</span>
 				</div>
 			</a>
 
 			<!-- System Operational Status & Back to Home Link -->
 			<div class="flex items-center gap-4">
-				<div class="hidden sm:flex items-center gap-2 px-3 py-1 rounded-full bg-surface-base border border-border-subtle text-text-muted text-xs font-medium">
-					<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
-					<span>Operational Telemetry Active</span>
-				</div>
 				<a
 					href="/"
-					class="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-text-muted hover:text-primary transition-colors px-3 py-1.5 rounded-lg hover:bg-surface-base"
+					class="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-text-muted text-white hover:text-primary transition-colors px-3 py-1.5 rounded-lg hover:bg-primary/40 bg-primary rounded-md"
 				>
-					<span class="material-symbols-outlined text-[18px]">arrow_back</span>
 					<span>Ke Beranda</span>
 				</a>
 			</div>
@@ -73,37 +68,21 @@
 	<main class="flex-1 max-w-7xl w-full mx-auto px-4 lg:px-8 py-8 lg:py-12 flex items-center">
 		<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 w-full items-stretch">
 			<!-- LEFT COLUMN: Mission Vision & SDG Modules -->
-			<section class="lg:col-span-7 flex flex-col justify-between space-y-6">
+			<section class="hidden md:inline lg:col-span-7 flex flex-col justify-between space-y-6">
 				<!-- Hero Introduction -->
 				<div class="space-y-4">
 					<div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-mint-subtle border border-primary/20 text-brand-forest">
 						<span class="material-symbols-outlined text-base">verified</span>
-						<span class="font-label-md text-xs sm:text-sm font-semibold">Verified Environmental Telemetry &amp; ML Auditing</span>
+						<span class="font-label-md text-xs sm:text-sm font-semibold">Smart Environmental Monitoring &amp; AI Integrity.</span>
 					</div>
 					<h1 class="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl text-text-strong tracking-tight leading-tight">
 						AI-Powered Solutions for <span class="text-primary underline decoration-brand-mint decoration-wavy decoration-2">Global Sustainable</span> Development
 					</h1>
 					<p class="text-base text-text-muted max-w-2xl leading-relaxed">
-						Arsitektur kecerdasan multimodal terpadu untuk klasifikasi pengelolaan sampah presisi, diagnosis kesehatan tanaman agrikultur, dan audit aksi keberlanjutan berbasis SDG 12 &amp; SDG 2.
+						Arsitektur kecerdasan multimodal terpadu untuk klasifikasi pengelolaan sampah presisi, diagnosis kesehatan tanaman agrikultur, dan audit aksi keberlanjutan berbasis SDG 12.
 					</p>
 				</div>
 
-				<!-- Telemetry Footer Bar -->
-				<div class="bg-surface-card rounded-xl border border-border-subtle p-4 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xs">
-					<div class="flex items-center gap-3">
-						<div class="w-9 h-9 rounded-lg bg-surface-base border border-border-subtle flex items-center justify-center text-primary">
-							<span class="material-symbols-outlined text-lg">monitoring</span>
-						</div>
-						<div>
-							<p class="text-[11px] uppercase tracking-wider text-text-muted font-semibold">Live Impact Telemetry</p>
-							<p class="text-xs sm:text-sm font-bold text-text-strong">14,850+ kg sampah teralihkan • 97.6% akurasi model visi</p>
-						</div>
-					</div>
-					<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-brand-mint-subtle text-brand-forest border border-brand-mint/30">
-						<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
-						SDG Framework Validated
-					</span>
-				</div>
 			</section>
 
 			<!-- RIGHT COLUMN: Authentication & Portal Login / Register Section -->
@@ -300,6 +279,7 @@
 										type="text"
 										required
 										placeholder="Nama Anda"
+										autocomplete="off"
 										value={form?.fullName || ''}
 										class="w-full h-11 pl-12 pr-3.5 rounded-lg border border-border-subtle bg-surface-card text-text-strong text-xs sm:text-sm focus:border-primary focus:ring-2 focus:ring-brand-mint-subtle transition-all outline-none"
 									/>
