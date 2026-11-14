@@ -269,7 +269,6 @@ flowchart TD
 
     AD --> AF[Pengguna dapat membuka Riwayat Saya]
     AE --> AF
-```
 
 ### 2. Langkah-Langkah User Flow
 
